@@ -1,0 +1,41 @@
+
+	<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Formularz z plikami</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="F12.js"></script>
+	<script type="text/javascript" src="Prawy_mysz.js"></script>
+	
+</head>
+<body>
+<p>
+			</p>
+		<h3><a th:href="@{/P@anel_Administ@tora}">Panel Admina(do ukrycia)</a></h3>
+		<h3><a th:href="@{/rejestracja}">Rejestracja</a></h3>
+		<h3><a th:href="@{/login}">Login</a></h3>
+		<h3><a th:href="@{/lista}">Lista plików</a></h3>
+		<h3><a th:href="@{/wysylanie}">Wysylanie plików</a></h3>
+		<h3><a th:href="@{/usuwanie}">Usuwanie plików</a></h3>
+			<p>
+				Witaj <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+			</p>
+	<h1>Formularz z plikami</h1>
+	<form id="my-form">
+	
+		
+		<label for="file">Plik:</label>
+		<input type="file" id="file" name="file" required>
+		
+		<button type="submit">Wyślij</button>
+	</form>
+	
+		<script type="text/javascript" src="wysylanie.js"></script>
+	
+</body>
+</html>
