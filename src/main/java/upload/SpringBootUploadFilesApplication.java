@@ -7,20 +7,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import upload.service.FilesStorageService;
+import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @SpringBootApplication
 public class SpringBootUploadFilesApplication implements CommandLineRunner {
-  @Resource
-  FilesStorageService storageService;
+	@Resource
+	UsługaPrzechowywaniaPlikow storageService;
 
-  public static void main(String[] args) {
-    SpringApplication.run(SpringBootUploadFilesApplication.class, args);
-  }
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootUploadFilesApplication.class, args);
+	}
 
-  @Override
-  public void run(String... arg) throws Exception {
-//    storageService.deleteAll();
-	  //storageService.init();
-  }
+	@Override
+	public void run(String... arg) throws Exception {
+
+	}
 }

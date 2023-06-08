@@ -1,7 +1,5 @@
 package upload.logowanie;
 
-
-
 import java.io.IOException;
 
 import java.net.MalformedURLException;
@@ -19,8 +17,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import java.util.stream.Stream;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -52,41 +48,24 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import org.springframework.web.multipart.MultipartFile;
 
-
-
-import upload.service.FilesStorageService;
-
-
+import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
 
-
-public class AppController implements FilesStorageService {
-
-
+public class AppController implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired
 
 	private UserRepository userRepo;
 
-
-
 	@GetMapping("/")
 
 	public String viewHomePage() {
 
-		
-		
-		
-
-		
 		return "index";
 
 	}
-	
-	
 
-	
 	@GetMapping("/glowna")
 
 	public String HomePage() {
@@ -97,23 +76,18 @@ public class AppController implements FilesStorageService {
 
 		try {
 
-
-
 			Files.createDirectories(username_folder);
 
 		} catch (IOException e) {
 
-			throw new RuntimeException("Could not initialize folder for upload!");
+			throw new RuntimeException("Nie utworzono folderu");
 
 		}
-		
-		
-		
-		
+
 		return "glowna";
 
 	}
-	
+
 	public Path getUserFolder() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -121,18 +95,11 @@ public class AppController implements FilesStorageService {
 
 		System.out.println(username);
 
-
-
 		var username_folder = Paths.get("wysylane_pliki/", username);
-		
-		return username_folder;
-		
-	}
-	
-	
-	//private String username_folder;
-	//private Path root = Paths.get("uploads");
 
+		return username_folder;
+
+	}
 
 	@GetMapping("/rejestracja")
 
@@ -140,13 +107,9 @@ public class AppController implements FilesStorageService {
 
 		model.addAttribute("user", new User());
 
-
-
 		return "rejestracja";
 
 	}
-
-
 
 	@PostMapping("/proces_rejestracji")
 
@@ -158,17 +121,11 @@ public class AppController implements FilesStorageService {
 
 		user.setPassword(encodedPassword);
 
-
-
 		userRepo.save(user);
-
-
 
 		return "pomyslna_rejestracja";
 
 	}
-
-
 
 	@GetMapping("/Panel_Administatora")
 
@@ -178,98 +135,53 @@ public class AppController implements FilesStorageService {
 
 		model.addAttribute("listUsers", listUsers);
 
-
-
 		return "Panel_Administatora";
 
 	}
-
-
 
 	@GetMapping("/login")
 
 	public String viewLoginPage() {
 
-
-
-		
 		return "index";
 
 	}
-
-
 
 	@GetMapping("/wysylanie")
 
 	public String wysylanie() {
 
-
-
 		return "wysylanie";
 
 	}
-
-
 
 	@GetMapping("/lista")
 
 	public String lista() {
 
-
-
 		return "lista";
 
 	}
-
-
 
 	@GetMapping("/usuwanie")
 
 	public String usuwanie() {
 
-
-
 		return "usuwanie";
 
 	}
-
 
 	@GetMapping("/error")
 
 	public String blad() {
 
-		
-
-
-
 		return "error";
 
 	}
-	
-
-//	@Override
-
-//	public void init() {
-
-
-
-//		try {
-
-
-
-//			Files.createDirectories(root);
-
-//		} catch (IOException e) {
-
-//			throw new RuntimeException("Could not initialize folder for upload!");
-
-//		}
-
-//	}
 
 	@Override
 
-	public void save(MultipartFile file) {
+	public void zapisz(MultipartFile file) {
 		var username_folder = getUserFolder();
 		try {
 
@@ -279,11 +191,9 @@ public class AppController implements FilesStorageService {
 
 			if (e instanceof FileAlreadyExistsException) {
 
-				throw new RuntimeException("A file of that name already exists.");
+				throw new RuntimeException("Taki plik już istnieje");
 
 			}
-
-
 
 			throw new RuntimeException(e.getMessage());
 
@@ -291,11 +201,9 @@ public class AppController implements FilesStorageService {
 
 	}
 
-
-
 	@Override
 
-	public Resource load(String filename) {
+	public Resource wyslij(String filename) {
 		var username_folder = getUserFolder();
 		try {
 
@@ -303,31 +211,27 @@ public class AppController implements FilesStorageService {
 
 			Resource resource = new UrlResource(file.toUri());
 
-
-
 			if (resource.exists() || resource.isReadable()) {
 
 				return resource;
 
 			} else {
 
-				throw new RuntimeException("Could not read the file!");
+				throw new RuntimeException("Nie udalo sie wrzucic pliku.");
 
 			}
 
 		} catch (MalformedURLException e) {
 
-			throw new RuntimeException("Error: " + e.getMessage());
+			throw new RuntimeException("Blad: " + e.getMessage());
 
 		}
 
 	}
 
-
-
 	@Override
 
-	public boolean delete(String filename) {
+	public boolean usun(String filename) {
 		var username_folder = getUserFolder();
 		try {
 
@@ -337,39 +241,26 @@ public class AppController implements FilesStorageService {
 
 		} catch (IOException e) {
 
-			throw new RuntimeException("Error: " + e.getMessage());
+			throw new RuntimeException("Blad: " + e.getMessage());
 
 		}
 
 	}
 
-
-
 	@Override
 
-	public void deleteAll() {
-		var username_folder = getUserFolder();
-
-		FileSystemUtils.deleteRecursively(username_folder.toFile());
-
-	}
-
-
-
-	@Override
-
-	public Stream<Path> loadAll() {
+	public Stream<Path> wczytaj() {
 		var username_folder = getUserFolder();
 		try {
 
-			return Files.walk(username_folder, 1).filter(path -> !path.equals(username_folder)).map(username_folder::relativize);
+			return Files.walk(username_folder, 1).filter(path -> !path.equals(username_folder))
+					.map(username_folder::relativize);
 
 		} catch (IOException e) {
 
-			throw new RuntimeException("Could not load the files!");
+			throw new RuntimeException("Nie udalo sie zaladowac plikow");
 
 		}
 
 	}
 }
-

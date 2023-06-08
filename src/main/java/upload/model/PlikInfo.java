@@ -1,20 +1,20 @@
 package upload.model;
 
-public class FileInfo {
-  private String name;
+public class PlikInfo {
+  private String nazwa;
   private String url;
 
-  public FileInfo(String name, String url) {
-    this.name = name;
+  public PlikInfo(String nazwa, String url) {
+    this.nazwa = nazwa;
     this.url = url;
   }
 
   public String getName() {
-    return this.name;
+    return this.nazwa;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setName(String nazwa) {
+    this.nazwa = nazwa;
   }
 
   public String getUrl() {
