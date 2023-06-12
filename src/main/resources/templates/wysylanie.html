@@ -18,7 +18,7 @@
 <body>
 	<p></p>
 	<h3>
-		<a th:href="@{/P@anel_Administ@tora}">Panel Admina(do ukrycia)</a>
+		<a th:href="@{/Panel_Administatora}">Panel Admina(do ukrycia)</a>
 	</h3>
 	<h3>
 		<a th:href="@{/rejestracja}">Rejestracja</a>
@@ -36,7 +36,7 @@
 		<a th:href="@{/usuwanie}">Usuwanie plików</a>
 	</h3>
 	<p>
-		Witaj <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+		Witaj <b>[[${#request.userPrincipal.principal.ImieNazwisko}]]</b>
 	</p>
 	<h1>Formularz z plikami</h1>
 	<form id="my-form">

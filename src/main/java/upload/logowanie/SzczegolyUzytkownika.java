@@ -5,12 +5,12 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class CustomUserDetails implements UserDetails {
+public class SzczegolyUzytkownika implements UserDetails {
 
-	private User user;
-	
-	public CustomUserDetails(User user) {
-		this.user = user;
+	private Uzytkownik uzytkownik;
+
+	public SzczegolyUzytkownika(Uzytkownik uzytkownik) {
+		this.uzytkownik = uzytkownik;
 	}
 
 	@Override
@@ -20,12 +20,12 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return user.getPassword();
+		return uzytkownik.getHaslo();
 	}
 
 	@Override
 	public String getUsername() {
-		return user.getUsername();
+		return uzytkownik.getUsername();
 	}
 
 	@Override
@@ -47,14 +47,9 @@ public class CustomUserDetails implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
-	public String getFullName() {
-		return user.getFirstName() + " " + user.getLastName();
+
+	public String getImieNazwisko() {
+		return uzytkownik.getImie() + " " + uzytkownik.getNazwisko();
 	}
-	
-
-
-	
-	
 
 }

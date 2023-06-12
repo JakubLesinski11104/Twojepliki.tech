@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import java.net.MalformedURLException;
 
-import java.net.URI;
-
 import java.nio.file.FileAlreadyExistsException;
 
 import java.nio.file.Files;
@@ -24,8 +22,6 @@ import org.springframework.core.io.Resource;
 
 import org.springframework.core.io.UrlResource;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-
 import org.springframework.security.core.Authentication;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,15 +32,9 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 
-import org.springframework.util.FileSystemUtils;
-
 import org.springframework.web.bind.annotation.GetMapping;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,15 +42,15 @@ import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
 
-public class AppController implements UsługaPrzechowywaniaPlikow {
+public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired
 
-	private UserRepository userRepo;
+	private RepozytoriumLogowania loginRepo;
 
 	@GetMapping("/")
 
-	public String viewHomePage() {
+	public String StronaLogowania() {
 
 		return "index";
 
@@ -68,11 +58,9 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 
 	@GetMapping("/glowna")
 
-	public String HomePage() {
+	public String StronaGlowna() {
 
-		var username_folder = getUserFolder();
-
-		System.out.println(username_folder);
+		var username_folder = getFolderUzytkownika();
 
 		try {
 
@@ -88,12 +76,11 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 
 	}
 
-	public Path getUserFolder() {
+	public Path getFolderUzytkownika() {
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		String username = auth.getName();
-
-		System.out.println(username);
 
 		var username_folder = Paths.get("wysylane_pliki/", username);
 
@@ -103,9 +90,9 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 
 	@GetMapping("/rejestracja")
 
-	public String showRegistrationForm(Model model) {
+	public String Rejestracja(Model model) {
 
-		model.addAttribute("user", new User());
+		model.addAttribute("uzytkownik", new Uzytkownik());
 
 		return "rejestracja";
 
@@ -113,15 +100,15 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 
 	@PostMapping("/proces_rejestracji")
 
-	public String processRegister(User user) {
+	public String ProcesRejestracji(Uzytkownik uzytkownik) {
 
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		BCryptPasswordEncoder EnkoderHasla = new BCryptPasswordEncoder();
 
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		String ZakodowaneHaslo = EnkoderHasla.encode(uzytkownik.getHaslo());
 
-		user.setPassword(encodedPassword);
+		uzytkownik.setHaslo(ZakodowaneHaslo);
 
-		userRepo.save(user);
+		loginRepo.save(uzytkownik);
 
 		return "pomyslna_rejestracja";
 
@@ -129,11 +116,11 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 
 	@GetMapping("/Panel_Administatora")
 
-	public String listUsers(Model model) {
+	public String ListaUzytkownikow(Model model) {
 
-		List<User> listUsers = userRepo.findAll();
+		List<Uzytkownik> listaUzytkownik = loginRepo.findAll();
 
-		model.addAttribute("listUsers", listUsers);
+		model.addAttribute("listaUzytkownik", listaUzytkownik);
 
 		return "Panel_Administatora";
 
@@ -141,7 +128,7 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 
 	@GetMapping("/login")
 
-	public String viewLoginPage() {
+	public String login() {
 
 		return "index";
 
@@ -182,7 +169,8 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 	@Override
 
 	public void zapisz(MultipartFile file) {
-		var username_folder = getUserFolder();
+
+		var username_folder = getFolderUzytkownika();
 		try {
 
 			Files.copy(file.getInputStream(), username_folder.resolve(file.getOriginalFilename()));
@@ -204,7 +192,8 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 	@Override
 
 	public Resource wyslij(String filename) {
-		var username_folder = getUserFolder();
+
+		var username_folder = getFolderUzytkownika();
 		try {
 
 			Path file = username_folder.resolve(filename);
@@ -232,7 +221,8 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 	@Override
 
 	public boolean usun(String filename) {
-		var username_folder = getUserFolder();
+
+		var username_folder = getFolderUzytkownika();
 		try {
 
 			Path file = username_folder.resolve(filename);
@@ -250,7 +240,8 @@ public class AppController implements UsługaPrzechowywaniaPlikow {
 	@Override
 
 	public Stream<Path> wczytaj() {
-		var username_folder = getUserFolder();
+
+		var username_folder = getFolderUzytkownika();
 		try {
 
 			return Files.walk(username_folder, 1).filter(path -> !path.equals(username_folder))

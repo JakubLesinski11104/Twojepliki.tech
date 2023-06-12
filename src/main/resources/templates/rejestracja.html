@@ -16,7 +16,7 @@
 <body>
 
 	<h3>
-		<a th:href="@{/P@anel_Administ@tora}">Panel Admina(do ukrycia)</a>
+		<a th:href="@{/Panel_Administatora}">Panel Admina(do ukrycia)</a>
 	</h3>
 	<h3>
 		<a th:href="@{/rejestracja}">Rejestracja</a>
@@ -38,7 +38,7 @@
 			<h1>Rejestracja konta</h1>
 		</div>
 
-		<form th:action="@{/proces_rejestracji}" th:object="${user}"
+		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}"
 			method="post" style="max-width: 600px; margin: 0 auto;">
 			<div class="m-3">
 				<div class="form-group row">
@@ -60,7 +60,7 @@
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Password: </label>
 					<div class="col-8">
-						<input type="password" th:field="*{password}" class="form-control"
+						<input type="password" th:field="*{haslo}" class="form-control"
 							required minlength="6" maxlength="10" />
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 				<div class="form-group row">
 					<label class="col-4 col-form-label">First Name: </label>
 					<div class="col-8">
-						<input type="text" th:field="*{firstName}" class="form-control"
+						<input type="text" th:field="*{imie}" class="form-control"
 							required minlength="2" maxlength="20" />
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Last Name: </label>
 					<div class="col-8">
-						<input type="text" th:field="*{lastName}" class="form-control"
+						<input type="text" th:field="*{nazwisko}" class="form-control"
 							required minlength="2" maxlength="20" />
 					</div>
 				</div>

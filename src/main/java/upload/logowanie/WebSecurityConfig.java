@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new CustomUserDetailsService();
+		return new UslugaDaneUzytkownika();
 	}
 
 	@Bean
@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
+	
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
