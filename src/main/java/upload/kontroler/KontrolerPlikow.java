@@ -28,7 +28,7 @@ public class KontrolerPlikow {
 
 	@Autowired
 	UsługaPrzechowywaniaPlikow usługa_przechowywania;
-
+	
 	@PostMapping("/wyslij")
 	public ResponseEntity<KomunikatOdpowiedzi> wyslijPlik(@RequestParam("file") MultipartFile file) {
 		String message = "";
@@ -43,7 +43,7 @@ public class KontrolerPlikow {
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new KomunikatOdpowiedzi(message));
 		}
 	}
-
+	
 	@GetMapping("/pliki")
 	public ResponseEntity<List<PlikInfo>> getListaPlikow() {
 		List<PlikInfo> fileInfos = usługa_przechowywania.wczytaj().map(path -> {
@@ -56,7 +56,7 @@ public class KontrolerPlikow {
 
 		return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
 	}
-
+	
 	@GetMapping("/pliki/{filename:.+}")
 	public ResponseEntity<Resource> getPlik(@PathVariable String filename) {
 		Resource file = usługa_przechowywania.wyslij(filename);
@@ -64,7 +64,7 @@ public class KontrolerPlikow {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
 	}
-
+	
 	@DeleteMapping("/pliki/{filename:.+}")
 	public ResponseEntity<KomunikatOdpowiedzi> usunPlik(@PathVariable String filename) {
 		String message = "";

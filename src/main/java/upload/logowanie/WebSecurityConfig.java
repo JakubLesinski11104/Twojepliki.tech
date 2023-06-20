@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -43,10 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authenticationProvider());
 	}
 
+	
+	
 	@Override
 	
 	protected void configure(HttpSecurity http) throws Exception {
-
+		
 		http.authorizeRequests()
 
 				.antMatchers("/js/**", "/css/**").permitAll()
@@ -67,6 +70,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll().and().logout().logoutSuccessUrl("/").permitAll();
 
 		http.csrf().disable();
+		http.cors().disable();
+		
 	}
-
+	
+  
 }

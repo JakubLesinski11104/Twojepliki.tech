@@ -1,6 +1,7 @@
 const url = "http://localhost:8080/pliki";
 
 async function fetchData() {
+	
 	const response = await fetch(url);
 	const data = await response.json();
 	const table = document.getElementById("data");

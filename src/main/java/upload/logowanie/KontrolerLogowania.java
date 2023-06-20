@@ -31,17 +31,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
-
+@CrossOrigin("http://localhost:8080")
 public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired
@@ -135,7 +136,6 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 	}
 
 	@GetMapping("/wysylanie")
-
 	public String wysylanie() {
 
 		return "wysylanie";
@@ -143,7 +143,6 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 	}
 
 	@GetMapping("/lista")
-
 	public String lista() {
 
 		return "lista";
@@ -151,7 +150,6 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 	}
 
 	@GetMapping("/usuwanie")
-
 	public String usuwanie() {
 
 		return "usuwanie";
