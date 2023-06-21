@@ -43,6 +43,8 @@ import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
 @CrossOrigin("http://localhost:8080")
+//Linux
+//@CrossOrigin("http://141.148.241.107:8080")
 public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired

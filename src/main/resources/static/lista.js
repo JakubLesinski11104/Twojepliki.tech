@@ -1,4 +1,5 @@
 const url = "http://localhost:8080/pliki";
+//const url = "http://141.148.241.107:8080/pliki";
 
 async function fetchData() {
 	
