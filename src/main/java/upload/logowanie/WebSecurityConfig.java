@@ -54,13 +54,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.antMatchers("/js/**", "/css/**").permitAll()
 
+				.antMatchers("/lis_wys_us").authenticated()
+				
 				.antMatchers("/Panel_Administtora").authenticated()
 
-				.antMatchers("/wysylanie").authenticated().antMatchers("/lista").authenticated()
+				.antMatchers("/wysylanie").authenticated().
+				
+				antMatchers("/lista").authenticated()
+				
 				.antMatchers("/usuwanie").authenticated()
+				
+				.antMatchers("/kontakt").authenticated()
 
-				.antMatchers("/pliki").authenticated().antMatchers("/wyslij").authenticated().antMatchers("/pliki/")
-				.authenticated()
+				.antMatchers("/pliki").authenticated()
+				
+				.antMatchers("/wyslij").authenticated()
+				
+				.antMatchers("/pliki/").authenticated()
 
 				.antMatchers("/glowna").authenticated()
 

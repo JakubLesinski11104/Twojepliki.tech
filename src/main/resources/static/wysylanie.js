@@ -4,8 +4,8 @@ form.addEventListener("submit", async (event) => {
 	event.preventDefault();
 
 	const formData = new FormData(form);
-	const url = "http://localhost:8080/wyslij";
-	//const url = "http://141.148.241.107:8080/wyslij";
+	const url = "http://localhost:9000/wyslij";
+	//const url = "http://141.148.241.107:9000/wyslij";
 
 	try {
 		const response = await fetch(url, {

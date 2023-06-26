@@ -1,11 +1,11 @@
-const form = document.getElementById("my-form");
+const form = document.getElementById("usuwanie");
 
 form.addEventListener("submit", async (event) => {
 	event.preventDefault();
 
 	const fileId = document.getElementById("file-id").value;
-	const url = `http://localhost:8080/pliki/${fileId}`;
-	//const url = `http://141.148.241.107:8080/pliki/${fileId}`;
+	const url = `http://localhost:9000/pliki/${fileId}`;
+	//const url = `http://141.148.241.107:9000/pliki/${fileId}`;
 
 	try {
 		const response = await fetch(url, {

@@ -23,9 +23,9 @@ import upload.odpowiedz.KomunikatOdpowiedzi;
 import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
-@CrossOrigin("http://localhost:8080")
+@CrossOrigin("http://localhost:9000")
 //Linux
-//@CrossOrigin("http://141.148.241.107:8080")
+//@CrossOrigin("http://141.148.241.107:9000")
 public class KontrolerPlikow {
 
 	@Autowired

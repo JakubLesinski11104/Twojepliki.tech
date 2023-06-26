@@ -42,9 +42,9 @@ import org.springframework.web.multipart.MultipartFile;
 import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
-@CrossOrigin("http://localhost:8080")
+@CrossOrigin("http://localhost:9000")
 //Linux
-//@CrossOrigin("http://141.148.241.107:8080")
+//@CrossOrigin("http://141.148.241.107:9000")
 public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired
@@ -158,6 +158,20 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	}
 
+	@GetMapping("/kontakt")
+	public String kontakt() {
+
+		return "kontakt";
+
+	}
+	
+	@GetMapping("/lis_wys_us")
+	public String lis_wys_us() {
+
+		return "lis_wys_us";
+
+	}
+	
 	@GetMapping("/error")
 
 	public String blad() {
