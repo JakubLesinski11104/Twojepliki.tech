@@ -5,7 +5,9 @@ form.addEventListener("submit", async (event) => {
 
 	const fileId = document.getElementById("file-id").value;
 	const url = `http://localhost:9000/pliki/${fileId}`;
+	//const url = `https://localhost:443/pliki/${fileId}`;
 	//const url = `http://141.148.241.107:9000/pliki/${fileId}`;
+	//const url = `https://141.148.241.107:443/pliki/${fileId}`;
 
 	try {
 		const response = await fetch(url, {
