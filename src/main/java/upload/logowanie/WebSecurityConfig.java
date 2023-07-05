@@ -66,6 +66,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				
 				.antMatchers("/kontakt").authenticated()
 
+				.antMatchers("/kontakt/JL").authenticated()
+				
+				.antMatchers("/kontakt/JP").authenticated()
+				
 				.antMatchers("/pliki").authenticated()
 				
 				.antMatchers("/wyslij").authenticated()

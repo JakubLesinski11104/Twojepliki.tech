@@ -167,6 +167,20 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	}
 	
+	@GetMapping("/kontakt/JL")
+	public String kontakt_JL() {
+
+		return "JL";
+
+	}
+	
+	@GetMapping("/kontakt/JP")
+	public String kontakt_JP() {
+
+		return "JP";
+
+	}
+	
 	@GetMapping("/lis_wys_us")
 	public String lis_wys_us() {
 
