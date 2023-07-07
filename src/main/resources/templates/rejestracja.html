@@ -45,7 +45,7 @@
 					<label class="col-4 col-form-label">E-mail: </label>
 					<div class="col-8">
 						<input type="email" th:field="*{email}" class="form-control"
-							required />
+							required maxlength="20" />
 					</div>
 				</div>
 
@@ -53,36 +53,36 @@
 					<label class="col-4 col-form-label">Username </label>
 					<div class="col-8">
 						<input type="text" th:field="*{username}" class="form-control"
-							pattern="[a-zA-Z0-9]+" required />
+							pattern="[a-zA-Z0-9]+" required maxlength="20" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Password: </label>
+					<label class="col-4 col-form-label">Haslo: </label>
 					<div class="col-8">
 						<input type="password" th:field="*{haslo}" class="form-control"
-							required minlength="6" maxlength="10" />
+							required minlength="6" maxlength="20" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-4 col-form-label">First Name: </label>
+					<label class="col-4 col-form-label">Imie: </label>
 					<div class="col-8">
 						<input type="text" th:field="*{imie}" class="form-control"
-							required minlength="2" maxlength="20" />
+							required maxlength="15" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Last Name: </label>
+					<label class="col-4 col-form-label">Nazwisko: </label>
 					<div class="col-8">
 						<input type="text" th:field="*{nazwisko}" class="form-control"
-							required minlength="2" maxlength="20" />
+							required maxlength="20" />
 					</div>
 				</div>
 
 				<div>
-					<button type="submit" class="btn btn-primary">Sign Up</button>
+					<button type="submit" class="btn btn-primary">Zarejestruj</button>
 				</div>
 			</div>
 		</form>

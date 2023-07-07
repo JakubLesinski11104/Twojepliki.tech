@@ -16,7 +16,7 @@
 <script type="text/javascript" src="Prawy_mysz.js"></script>
 </head>
 <body>
-	
+
 	<h3>
 		<a th:href="@{/rejestracja}">Rejestracja</a>
 	</h3>
@@ -35,23 +35,21 @@
 	<p>
 		Witaj <b>[[${#request.userPrincipal.principal.ImieNazwisko}]]</b>
 	</p>
-	<h1>Dane z API</h1>
+	<h1>Wrzucone pliki przez:
+		[[${#request.userPrincipal.principal.username}]]</h1>
 
 	<table>
 		<thead>
 			<tr>
-				<th>name</th>
+				<th>Nazwa pliku</th>
 				<th>Pobierz</th>
 				<th>url</th>
-
-
 			</tr>
 		</thead>
 		<tbody id="data">
 
 		</tbody>
 	</table>
-
 
 	<script type="text/javascript" src="lista.js"></script>
 

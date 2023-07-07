@@ -1,11 +1,11 @@
-const form = document.getElementById("my-form");
+const form = document.getElementById("wysylanie");
 
 form.addEventListener("submit", async (event) => {
 	event.preventDefault();
 
 	const formData = new FormData(form);
-	const url = "http://localhost:9000/wyslij";
-	//const url = "https://localhost:443/wyslij";
+	//const url = "http://localhost:9000/wyslij";
+	const url = "https://localhost:443/wyslij";
 	//const url = "http://141.148.241.107:9000/wyslij";
 	//const url = "https://141.148.241.107:443/wyslij";
 

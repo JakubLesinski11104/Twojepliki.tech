@@ -44,36 +44,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authenticationProvider());
 	}
 
-	
-	
 	@Override
-	
+
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		http.authorizeRequests()
 
 				.antMatchers("/js/**", "/css/**").permitAll()
 
 				.antMatchers("/lis_wys_us").authenticated()
-				
+
 				.antMatchers("/Panel_Administtora").authenticated()
 
 				.antMatchers("/wysylanie").authenticated().
-				
-				antMatchers("/lista").authenticated()
-				
-				.antMatchers("/usuwanie").authenticated()
-				
-				.antMatchers("/kontakt").authenticated()
 
-				.antMatchers("/kontakt/JL").authenticated()
-				
-				.antMatchers("/kontakt/JP").authenticated()
-				
+				antMatchers("/lista").authenticated()
+
+				.antMatchers("/usuwanie").authenticated()
+
 				.antMatchers("/pliki").authenticated()
-				
+
 				.antMatchers("/wyslij").authenticated()
-				
+
 				.antMatchers("/pliki/").authenticated()
 
 				.antMatchers("/glowna").authenticated()
@@ -85,8 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable();
 		http.cors().disable();
-		
+
 	}
-	
-  
+
 }

@@ -15,16 +15,16 @@ public class Uzytkownik {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, unique = true, length = 45)
+	@Column(nullable = false, unique = true, length = 20)
 	private String email;
 
-	@Column(name = "username", nullable = false, unique = true, length = 45)
+	@Column(name = "username", nullable = false, unique = true, length = 20)
 	private String username;
 
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, length = 20)
 	private String haslo;
 
-	@Column(name = "imie", nullable = false, length = 20)
+	@Column(name = "imie", nullable = false, length = 15)
 	private String imie;
 
 	@Column(name = "nazwisko", nullable = false, length = 20)

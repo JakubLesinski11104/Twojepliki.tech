@@ -16,12 +16,15 @@ import java.util.List;
 
 import java.util.stream.Stream;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.core.io.Resource;
 
 import org.springframework.core.io.UrlResource;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,19 +34,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
-@CrossOrigin("http://localhost:9000")
-//@CrossOrigin("https://localhost:443")
+//@CrossOrigin("http://localhost:9000")
+@CrossOrigin("https://localhost:443")
 //Linux
 //@CrossOrigin("https://141.148.241.107:9000")
 //@CrossOrigin("https://141.148.241.107:443")
@@ -166,34 +173,55 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 		return "kontakt";
 
 	}
-	
+
 	@GetMapping("/kontakt/JL")
 	public String kontakt_JL() {
 
 		return "JL";
 
 	}
-	
+
 	@GetMapping("/kontakt/JP")
 	public String kontakt_JP() {
 
 		return "JP";
 
 	}
-	
+
 	@GetMapping("/lis_wys_us")
 	public String lis_wys_us() {
 
 		return "lis_wys_us";
 
 	}
-	
+
 	@GetMapping("/error")
+	public String handleError(HttpServletRequest request) {
 
-	public String blad() {
+		String errorPage = "error";
 
-		return "error";
+		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
+		if (status != null) {
+			Integer statusCode = Integer.valueOf(status.toString());
+
+			if (statusCode == HttpStatus.NOT_FOUND.value()) {
+				errorPage = "error/404";
+
+			} else if (statusCode == HttpStatus.FORBIDDEN.value()) {
+				errorPage = "error/403";
+
+			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+
+				errorPage = "error/500";
+
+			}
+		}
+		return errorPage;
+	}
+
+	public String getErrorPath() {
+		return "/error";
 	}
 
 	@Override

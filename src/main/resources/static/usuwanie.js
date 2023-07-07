@@ -1,11 +1,11 @@
-const form = document.getElementById("usuwanie");
+const button = document.getElementById("przycisk_usun");
 
-form.addEventListener("submit", async (event) => {
+button.addEventListener("click", async (event) => {
 	event.preventDefault();
 
 	const fileId = document.getElementById("file-id").value;
-	const url = `http://localhost:9000/pliki/${fileId}`;
-	//const url = `https://localhost:443/pliki/${fileId}`;
+	//const url = `http://localhost:9000/pliki/${fileId}`;
+	const url = `https://localhost:443/pliki/${fileId}`;
 	//const url = `http://141.148.241.107:9000/pliki/${fileId}`;
 	//const url = `https://141.148.241.107:443/pliki/${fileId}`;
 

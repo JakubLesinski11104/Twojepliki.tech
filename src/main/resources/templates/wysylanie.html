@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -38,9 +37,8 @@
 	<p>
 		Witaj <b>[[${#request.userPrincipal.principal.ImieNazwisko}]]</b>
 	</p>
-	<h1>Formularz z plikami</h1>
-	<form id="my-form">
-
+	<h1>Wrzuć plik!</h1>
+	<form id="wysylanie">
 
 		<label for="file">Plik:</label> <input type="file" id="file"
 			name="file" required>

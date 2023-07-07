@@ -19,33 +19,28 @@
 		<h3>
 			<a th:href="@{/glowna}">Wróć do strony głównej</a>
 		</h3>
-		
+
 	</div>
-
-
-<h1>Dane z API</h1>
-
+	<h1>Wrzucone pliki przez:
+		[[${#request.userPrincipal.principal.username}]]</h1>
 	<table>
 		<thead>
 			<tr>
-				<th>name</th>
+				<th>Nazwa</th>
 				<th>Pobierz</th>
 				<th>url</th>
-
-
 			</tr>
 		</thead>
 		<tbody id="data">
-
 		</tbody>
 	</table>
 
 
 	<script type="text/javascript" src="lista.js"></script>
-	
-	<br/>
-	<h1>Formularz z plikami</h1>
-	<form id="my-form">
+
+	<br />
+	<h1>Wrzuć plik!</h1>
+	<form id="wysylanie">
 
 
 		<label for="file">Plik:</label> <input type="file" id="file"
@@ -55,14 +50,16 @@
 	</form>
 
 	<script type="text/javascript" src="wysylanie.js"></script>
-	
-	
-	<br/>
+
+
+	<br />
+	<h1>Usuń pliki:Wrzucone przez:
+		[[${#request.userPrincipal.principal.username}]]</h1>
 	<form id="usuwanie">
 		<label for="file-id">ID pliku:</label> <input type="text" id="file-id"
 			name="file-id" required>
 
-		<button type="submit">Usuń</button>
+		<button type="submit" id="przycisk_usun">Usuń</button>
 	</form>
 
 	<script type="text/javascript" src="usuwanie.js"></script>

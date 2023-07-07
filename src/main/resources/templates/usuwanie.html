@@ -36,14 +36,14 @@
 	<p>
 		Witaj <b>[[${#request.userPrincipal.principal.ImieNazwisko}]]</b>
 	</p>
-	<h1>Usuwanie plików z API</h1>
 
-
+	<h1>Usuń pliki:Wrzucone przez:
+		[[${#request.userPrincipal.principal.username}]]</h1>
 	<form id="usuwanie">
 		<label for="file-id">ID pliku:</label> <input type="text" id="file-id"
 			name="file-id" required>
 
-		<button type="submit">Usuń</button>
+		<button type="submit" id="przycisk_usun">Usuń</button>
 	</form>
 
 	<script type="text/javascript" src="usuwanie.js"></script>
