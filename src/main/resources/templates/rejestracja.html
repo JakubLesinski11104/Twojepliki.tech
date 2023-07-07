@@ -63,6 +63,10 @@
 						<input type="password" th:field="*{haslo}" class="form-control"
 							required minlength="6" maxlength="20" />
 					</div>
+					
+  <button onclick="generateAndDisplayPassword()">Nie masz pomysłu na haslo? Wygeneruj je!</button>
+  <input type="text" id="passwordField" readonly>
+ <script type="text/javascript" src="gen_haslo.js"></script>
 				</div>
 
 				<div class="form-group row">
@@ -87,5 +91,7 @@
 			</div>
 		</form>
 	</div>
+	
+	
 </body>
 </html>
