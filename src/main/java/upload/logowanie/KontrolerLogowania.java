@@ -49,10 +49,8 @@ import org.springframework.web.multipart.MultipartFile;
 import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
-//@CrossOrigin("http://localhost:9000")
 @CrossOrigin("https://localhost:443")
 //Linux
-//@CrossOrigin("https://141.148.241.107:9000")
 //@CrossOrigin("https://141.148.241.107:443")
 public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
@@ -94,7 +92,7 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 		String username = auth.getName();
 
-		var username_folder = Paths.get("wysylane_pliki/", username);
+		var username_folder = Paths.get("Wyslane_pliki", username);
 
 		return username_folder;
 
@@ -146,20 +144,6 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	}
 
-	@GetMapping("/wysylanie")
-	public String wysylanie() {
-
-		return "wysylanie";
-
-	}
-
-	@GetMapping("/lista")
-	public String lista() {
-
-		return "lista";
-
-	}
-
 	@GetMapping("/usuwanie")
 	public String usuwanie() {
 
@@ -188,17 +172,17 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	}
 
-	@GetMapping("/lis_wys_us")
-	public String lis_wys_us() {
+	@GetMapping("/katalog")
+	public String katalog() {
 
-		return "lis_wys_us";
+		return "katalog";
 
 	}
 
 	@GetMapping("/error")
-	public String handleError(HttpServletRequest request) {
+	public String error(HttpServletRequest request) {
 
-		String errorPage = "error";
+		String Strona_error = "error";
 
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
@@ -206,21 +190,21 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 			Integer statusCode = Integer.valueOf(status.toString());
 
 			if (statusCode == HttpStatus.NOT_FOUND.value()) {
-				errorPage = "error/404";
+				Strona_error = "error/404";
 
 			} else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-				errorPage = "error/403";
+				Strona_error = "error/403";
 
 			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
 
-				errorPage = "error/500";
+				Strona_error = "error/500";
 
 			}
 		}
-		return errorPage;
+		return Strona_error;
 	}
 
-	public String getErrorPath() {
+	public String sciezkaError() {
 		return "/error";
 	}
 

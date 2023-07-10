@@ -52,15 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 				.antMatchers("/js/**", "/css/**").permitAll()
 
-				.antMatchers("/lis_wys_us").authenticated()
-
 				.antMatchers("/Panel_Administtora").authenticated()
-
-				.antMatchers("/wysylanie").authenticated().
-
-				antMatchers("/lista").authenticated()
-
-				.antMatchers("/usuwanie").authenticated()
 
 				.antMatchers("/pliki").authenticated()
 
@@ -69,7 +61,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/pliki/").authenticated()
 
 				.antMatchers("/glowna").authenticated()
-
+				
+				.antMatchers("/kontakt/JP").authenticated()
+				
+				.antMatchers("/kontakt/JL").authenticated()
+				
+				.antMatchers("/katalog").authenticated()
+				
 				.anyRequest().permitAll()
 
 				.and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/glowna")

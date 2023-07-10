@@ -12,24 +12,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PrzekierowanieHTPP {
 	@Bean
-public TomcatServletWebServerFactory servletConainer() {
+public TomcatServletWebServerFactory PrzekierowanieHTPPS() {
 		return new TomcatServletWebServerFactory() {
 	@Override
 	protected void postProcessContext(Context context) {
-		SecurityConstraint securityConstraint = new SecurityConstraint();
-		securityConstraint.setUserConstraint("CONFIDENTAL");
+		SecurityConstraint ograniczenie_bezpieczenstwa = new SecurityConstraint();
+		ograniczenie_bezpieczenstwa.setUserConstraint("CONFIDENTAL");
 		SecurityCollection collection = new SecurityCollection();
 		collection.addPattern("/*");
-		securityConstraint.addCollection(collection);
-		context.addConstraint(securityConstraint);
+		ograniczenie_bezpieczenstwa.addCollection(collection);
+		context.addConstraint(ograniczenie_bezpieczenstwa);
 	}
 		
 	{
-		getAdditionalTomcatConnectors().add(0,redirectConnector());
+		getAdditionalTomcatConnectors().add(0,przekierowanie());
 	}
 };
 	}
-		private Connector redirectConnector() {
+		private Connector przekierowanie() {
 			return new Connector(Http11NioProtocol.class.getName()) {{
 				setScheme("http");
 				setPort(80);

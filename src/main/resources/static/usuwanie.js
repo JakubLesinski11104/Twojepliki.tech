@@ -4,9 +4,7 @@ button.addEventListener("click", async (event) => {
 	event.preventDefault();
 
 	const fileId = document.getElementById("file-id").value;
-	//const url = `http://localhost:9000/pliki/${fileId}`;
 	const url = `https://localhost:443/pliki/${fileId}`;
-	//const url = `http://141.148.241.107:9000/pliki/${fileId}`;
 	//const url = `https://141.148.241.107:443/pliki/${fileId}`;
 
 	try {
@@ -19,6 +17,7 @@ button.addEventListener("click", async (event) => {
 		}
 
 		alert("Plik został usunięty!");
+		window.location.reload();
 	} catch (error) {
 		console.error(error);
 		alert("Wystąpił błąd. Plik nie został usunięty.");

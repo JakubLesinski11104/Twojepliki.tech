@@ -1,0 +1,26 @@
+//wylogowanie
+<form th:action="@{/logout}" method="post">
+<input type="submit" value="Sign Out" /></form>
+		
+//wyswietlanie username
+[[${#request.userPrincipal.principal.username}]]
+
+//imie i nazwisko
+[[${#request.userPrincipal.principal.ImieNazwisko}]]
+
+//Panel admina
+//Jezeli nie admin
+<div th:if="${#httpServletRequest.userPrincipal.getName() != 'admin'}"></div>
+//jezeli admin
+<div th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}">
+//jezeli admin to wyswietla napis
+<div th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}">
+<p>Jesteś zalogowany jako admininistator.</p> </div>
+//Lista uzytkownikow
+<table class="table table-striped table-bordered">
+<thead class="thead-dark"><tr><th>ID</th><th>E-mail</th>
+<th>Imie</th><th>Nazwisko</th><th>Username</th></tr>
+</thead><tbody><tr th:each="Uzytkownik: ${listaUzytkownik}">
+<td th:text="${Uzytkownik.id}">ID</td><td th:text="${Uzytkownik.email}">E-mail</td>
+<td th:text="${Uzytkownik.imie}">Imie</td><td th:text="${Uzytkownik.nazwisko}">Nazwisko</td>
+<td th:text="${Uzytkownik.username}">Username</td></tr></tbody></table>

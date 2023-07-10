@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Strona główna</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript"
 	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-
 <script type="text/javascript" src="F12.js"></script>
 <script type="text/javascript" src="Prawy_mysz.js"></script>
-
 </head>
 <body>
 	<div class="container text-center">
-		<h3>
-			<a th:href="@{/Panel_Administatora}">Panel Admina(do ukrycia)</a>
-		</h3>
+		<div th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}">
+			<h3>
+				<a th:href="@{/Panel_Administatora}">Panel Administratora</a>
+			</h3>
+		</div>
 		<h3>
 			<a th:href="@{/rejestracja}">Rejestracja</a>
 		</h3>
@@ -25,24 +26,15 @@
 			<a th:href="@{/login}">Login</a>
 		</h3>
 		<h3>
-			<a th:href="@{/lista}">Lista plików</a>
-		</h3>
-		<h3>
-			<a th:href="@{/wysylanie}">Wysylanie plików</a>
-		</h3>
-		<h3>
-			<a th:href="@{/usuwanie}">Usuwanie plików</a>
-		</h3>
-		<h3>
 			<a th:href="@{/kontakt}">Kontakt</a>
 		</h3>
 		<h3>
-			<a th:href="@{/lis_wys_us}">lis_wys_us</a>
+			<a th:href="@{/katalog}">Katalog plików</a>
 		</h3>
+
 		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" />
+			<input type="submit" value="Wyloguj się" />
 		</form>
 	</div>
-
 </body>
 </html>

@@ -1,14 +1,14 @@
- function generatePassword(length) {
-      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-      var password = '';
+ function generujhaslo(length) {
+      var znaki = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+      var haslo = '';
       for (var i = 0; i < length; i++) {
-        password += characters.charAt(Math.floor(Math.random() * characters.length));
+        haslo += znaki.charAt(Math.floor(Math.random() * znaki.length));
       }
-      return password;
+      return haslo;
     }
     
-    function generateAndDisplayPassword() {
-      var length = 10; // Długość hasła
-      var password = generatePassword(length);
-      document.getElementById('passwordField').value = password;
+    function generujiwyswietlhaslo() {
+      var dlugosc = 10;
+      var haslo = generujhaslo(dlugosc);
+      document.getElementById('polehasla').value = haslo;
     }
