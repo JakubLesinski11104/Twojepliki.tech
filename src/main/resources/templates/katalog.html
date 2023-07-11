@@ -23,35 +23,30 @@
 		<p>
 			Witaj <b>[[${#request.userPrincipal.principal.ImieNazwisko}]]</b>
 		</p>
-		<h1>Wrzucone pliki przez:
-			[[${#request.userPrincipal.principal.username}]]</h1>
+		<h2>Wrzuć plik:</h2>
 		<form id="upload-form">
-			<input type="file" id="file-input" />
+			<input type="file" id="file-input" multiple/>
 			<button type="submit">Wyślij plik</button>
 		</form>
 	</div>
 	<hr />
+	<h2>Wrzucone pliki przez:
+			[[${#request.userPrincipal.principal.username}]]</h2>
 	<table id="data">
-		<thead>
-			<tr>
-				<th>Nazwa pliku</th>
-				<th>Link</th>
-				<th>Zaznacz</th>
-			</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
-	<button id="pobierz">Pobierz zaznaczone pliki</button>
+    <thead>
+      <tr>
+        <th>Nazwa pliku</th>
+        <th>Link</th>
+        <th>Zaznacz</th>
+        <th>Usuń</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <button id="pobierz">Pobierz zaznaczone pliki</button>
 	<script type="text/javascript" src="katalog.js"></script>
 	<hr />
-	<h3>Usuń plik!</h3>
-	<form id="usuwanie">
-		<label for="file-id">Podaj nazwę pliku:</label> <input type="text"
-			id="file-id" name="file-id" required>
-
-		<button type="submit" id="przycisk_usun">Usuń</button>
-	</form>
-	<script type="text/javascript" src="usuwanie.js"></script>
+	
 
 </body>
 </html>

@@ -1,112 +1,146 @@
 const url = "https://localhost:443/pliki";
-//const url = `https://141.148.241.107:443/pliki`;
+    const uploadUrl = "https://localhost:443/wyslij";
+    const deleteUrl = "https://localhost:443/pliki";
+    let wyslanePliki = [];
 
-const uploadUrl = "https://localhost:443/wyslij";
-//const uploadUrl = `https://141.148.241.107:443/pliki`;
+    async function fetchData() {
+      const response = await fetch(url);
+      const data = await response.json();
+      const tableBody = document.querySelector("table#data tbody");
 
-async function fetchData() {
-	const response = await fetch(url);
-	const data = await response.json();
-	const tableBody = document.querySelector("table#data tbody");
-
-	data.forEach((customer) => {
-		const row = document.createElement("tr");
-		row.innerHTML = `
+      data.forEach((customer) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
           <td>${customer.name}</td>
           <td><a href="${customer.url}">Pobierz</a></td>
           <td><input type="checkbox" name="plik" value="${customer.url}"></td>
+          <td><button onclick="usunPlik('${customer.name}')">Usuń</button></td>
         `;
-		tableBody.appendChild(row);
-	});
-}
+        tableBody.appendChild(row);
+        wyslanePliki.push(customer.name);
+      });
+    }
 
-function pobierzPlik(url) {
-	const elementA = document.createElement('a');
-	elementA.href = url;
-	elementA.download = url.split('/').pop();
-	elementA.click();
-}
+    function pobierzPlik(url) {
+      const elementA = document.createElement('a');
+      elementA.href = url;
+      elementA.download = url.split('/').pop();
+      elementA.click();
+    }
 
-function pobierzZip(urls) {
-	const zip = new JSZip();
-	const count = urls.length;
-	let downloaded = 0;
+    function pobierzZip(urls) {
+      const zip = new JSZip();
+      const count = urls.length;
+      let downloaded = 0;
 
-	function checkComplete() {
-		if (downloaded === count) {
-			zip.generateAsync({ type: 'blob' }).then(function(content) {
-				const elementA = document.createElement('a');
-				elementA.href = URL.createObjectURL(content);
-				elementA.download = 'pobrane_pliki.zip';
-				elementA.click();
-			});
-		}
-	}
+      function checkComplete() {
+        if (downloaded === count) {
+          zip.generateAsync({ type: 'blob' }).then(function (content) {
+            const elementA = document.createElement('a');
+            elementA.href = URL.createObjectURL(content);
+            elementA.download = 'pobrane_pliki.zip';
+            elementA.click();
+          });
+        }
+      }
 
-	urls.forEach(function(url) {
-		fetch(url)
-			.then(function(response) {
-				return response.blob();
-			})
-			.then(function(blob) {
-				const fileName = url.split('/').pop();
-				zip.file(fileName, blob);
+      urls.forEach(function (url) {
+        fetch(url)
+          .then(function (response) {
+            return response.blob();
+          })
+          .then(function (blob) {
+            const fileName = url.split('/').pop();
+            zip.file(fileName, blob);
 
-				downloaded++;
-				checkComplete();
-			});
-	});
-}
+            downloaded++;
+            checkComplete();
+          });
+      });
+    }
 
-async function wyslijPlik(file) {
-	const formData = new FormData();
-	formData.append('file', file);
+    async function wyslijPliki(files) {
+      const promises = [];
 
-	try {
-		const response = await fetch(uploadUrl, {
-			method: 'POST',
-			body: formData
-		});
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
 
-		if (!response.ok) {
-			throw new Error(response.statusText);
-		}
+        if (wyslanePliki.includes(file.name)) {
+          const shouldReplace = confirm(`Plik "${file.name}" już istnieje w API. Czy chcesz go zastąpić?`);
+          if (!shouldReplace) {
+            continue; // Pomijamy plik
+          }
+        }
 
-		alert('Plik został wysłany!');
-		window.location.reload();
-	} catch (error) {
-		console.error(error);
-		alert('Wystąpił błąd. Plik nie został wysłany.');
-	}
-}
+        const formData = new FormData();
+        formData.append('file', file);
 
-fetchData();
+        const promise = fetch(uploadUrl, {
+          method: 'POST',
+          body: formData
+        });
 
-const przyciskPobierz = document.getElementById('pobierz');
-przyciskPobierz.addEventListener('click', function() {
-	const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
-		return checkbox.value;
-	});
+        promises.push(promise);
+      }
 
-	if (zaznaczonePliki.length === 1) {
-		pobierzPlik(zaznaczonePliki[0]);
-	} else if (zaznaczonePliki.length > 1) {
-		pobierzZip(zaznaczonePliki);
-	} else {
-		alert('Nie zaznaczono żadnego pliku!');
-	}
-});
+      try {
+        await Promise.all(promises);
+        alert('Pliki zostały wysłane!');
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+        alert('Wystąpił błąd. Pliki nie zostały wysłane.');
+      }
+    }
 
-const form = document.getElementById('upload-form');
-const fileInput = document.getElementById('file-input');
+    async function usunPlik(nazwaPliku) {
+      const shouldDelete = confirm(`Czy na pewno chcesz usunąć plik "${nazwaPliku}"?`);
+      if (shouldDelete) {
+        try {
+          const response = await fetch(`${deleteUrl}/${nazwaPliku}`, {
+            method: 'DELETE'
+          });
 
-form.addEventListener('submit', function(event) {
-	event.preventDefault();
-	const file = fileInput.files[0];
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
 
-	if (file) {
-		wyslijPlik(file);
-	} else {
-		alert('Nie wybrano żadnego pliku!');
-	}
-});
+          alert('Plik został usunięty!');
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+          alert('Wystąpił błąd. Plik nie został usunięty.');
+        }
+      }
+    }
+
+    fetchData();
+
+    const przyciskPobierz = document.getElementById('pobierz');
+    przyciskPobierz.addEventListener('click', function () {
+      const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function (checkbox) {
+        return checkbox.value;
+      });
+
+      if (zaznaczonePliki.length === 1) {
+        pobierzPlik(zaznaczonePliki[0]);
+      } else if (zaznaczonePliki.length > 1) {
+        pobierzZip(zaznaczonePliki);
+      } else {
+        alert('Nie zaznaczono żadnego pliku!');
+      }
+    });
+
+    const form = document.getElementById('upload-form');
+    const fileInput = document.getElementById('file-input');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const files = fileInput.files;
+
+      if (files.length > 0) {
+        wyslijPliki(files);
+      } else {
+        alert('Nie wybrano żadnych plików!');
+      }
+    });
