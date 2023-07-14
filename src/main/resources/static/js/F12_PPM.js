@@ -5,3 +5,7 @@ $(document).keydown(function(event){
 		return false;
 	}
 });
+
+$(document).on("contextmenu", function(e){
+	e.preventDefault();
+});

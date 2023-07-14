@@ -1,0 +1,25 @@
+body {
+	background-color:#dee2e6;
+}
+
+.btn-usun {
+  border-color: red !important;
+}
+
+.btn-pobierz {
+  border-color: green !important;
+}
+
+body {
+	background-color: #E2F1F7;
+}
+table.custom-table {
+  background-color: #e6f0ff;
+}
+.table tbody td {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+}
+.navbar-custom {
+  background-color: #087cfc;
+}
