@@ -10,22 +10,61 @@
 <script type="text/javascript"
 	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/F12_PPM.js"></script>
+<link rel="stylesheet" href="css/style.css">
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container">
+    
+     <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/login">Zaloguj</a>
+        </li>
+      </ul>
+    </div>
+   
+   <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/kontakt">Kontakt</a>
+        </li>
+      </ul>
+    </div>
+    
+    
+</nav>
 </head>
 <body>
-	<div class="container-fluid">
-		<h3>
-			<a th:href="@{/login}">Login</a>
-		</h3>
-		<h3>
-			<a th:href="@{/kontakt}">Kontakt</a>
-		</h3>
-	</div>
+
+<style type="text/css">
+
+
+
+.form-signup{
+    background-color: #E2F1F7;
+	border-radius: 20px;
+	width: 80%;
+	padding: 20px;
+	margin-top: 150px;
+
+}
+
+
+
+</style>
+
+<br></br>
+	<br></br>
+	
+
 	<div class="container text-center">
-		<div>
-			<h1>Rejestracja konta</h1>
+	
+		
+		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}" class="form-signup"
+			method="post" style="max-width: 400px; margin: 0 auto;">
+			<div>
+			<h1>Rejestracja</h1>
 		</div>
-		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}"
-			method="post" style="max-width: 600px; margin: 0 auto;">
 			<div class="m-3">
 				<div class="form-group row">
 					<label class="col-4 col-form-label">E-mail: </label>
@@ -35,7 +74,22 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Username </label>
+					<label class="col-4 col-form-label">Imię: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{imie}" class="form-control"
+							required maxlength="15" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Nazwisko: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{nazwisko}" class="form-control"
+							required maxlength="20" />
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Username: </label>
 					<div class="col-8">
 						<input type="text" th:field="*{username}" class="form-control"
 							pattern="[a-zA-Z0-9]+" required maxlength="20" />
@@ -49,10 +103,12 @@
 					</div>
 				</div>
 				
+				
 <button onclick="generujiwyswietlhaslo()">Generuj hasło</button>
   <input type="text" id="polehasla" readonly>
   	<script type="text/javascript" src="js/gen_haslo.js"></script>
   	
+  	<br></br>
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Powtórz hasło: </label>
 					<div class="col-8">
@@ -60,25 +116,13 @@
 							required minlength="6" maxlength="20" />
 					</div>
 				</div>
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Imie: </label>
-					<div class="col-8">
-						<input type="text" th:field="*{imie}" class="form-control"
-							required maxlength="15" />
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Nazwisko: </label>
-					<div class="col-8">
-						<input type="text" th:field="*{nazwisko}" class="form-control"
-							required maxlength="20" />
-					</div>
-				</div>
+				
 				<div>
-					<button type="submit" class="btn btn-primary"
+					<button type="submit" class="btn btn-primary btn-block"
 						onclick="sprawdzHaslo()">Zarejestruj</button>
 				</div>
 			</div>
+			
 		</form>
 	</div>
   

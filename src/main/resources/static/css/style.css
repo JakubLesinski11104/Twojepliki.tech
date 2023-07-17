@@ -1,5 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: black;
+}
 body {
-	background-color:#dee2e6;
+	margin: 0;
+  padding: 0;
+  background: linear-gradient(130deg,#0D7FFD, #8e44ad);
+  height: 100vh;
+  overflow: hidden;
 }
 
 .btn-usun {
@@ -21,5 +33,17 @@ table.custom-table {
   font-size: 1.2rem;
 }
 .navbar-custom {
-  background-color: #087cfc;
+  background-color:#000000;
+}
+
+form{
+	background-color: #E2F1F7;
+	border-radius: 20px;
+	width: 25%;
+	padding: 30px;
+	margin-top: 150px;
+	
+	
+	
+	
 }
