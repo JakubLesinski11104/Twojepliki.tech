@@ -1,38 +1,68 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  color: black;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+	color: black;
 }
+
 body {
 	margin: 0;
-  padding: 0;
-  background: linear-gradient(130deg,#0D7FFD, #8e44ad);
-  height: 100vh;
-  overflow: hidden;
+	padding: 0;
+	background: linear-gradient(130deg, #0D7FFD, #8e44ad);
+	height: 100vh;
+	overflow: hidden;
 }
 
 .btn-usun {
-  border-color: red !important;
+	border-color: red !important;
 }
 
 .btn-pobierz {
-  border-color: green !important;
+	border-color: green !important;
 }
 
 body {
 	background-color: #E2F1F7;
 }
+
 table.custom-table {
-  background-color: #e6f0ff;
-}
-.table tbody td {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.2rem;
-}
-.navbar-custom {
-  background-color:#000000;
+	background-color: #e6f0ff;
 }
 
+.table tbody td {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 1.2rem;
+}
+
+.navbar-custom {
+	background-color: #000000;
+}
+
+.form-signup {
+	background-color: #E2F1F7;
+	border-radius: 20px;
+	width: 80%;
+	padding: 20px;
+	margin-top: 150px;
+}
+
+.login {
+	max-width: 350px;
+	margin: 0 auto;
+	background-color: #E2F1F7;
+	border-radius: 20px;
+	width: 25%;
+	padding: 30px;
+	margin-top: 150px;
+}
+.card-body{
+	
+	
+	background-color: #E2F1F7;
+	
+	
+	
+}
