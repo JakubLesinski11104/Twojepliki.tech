@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
 
+html {
+	
+	height: 100%;
+}
+
+
 * {
 	margin: 0;
 	padding: 0;
@@ -14,6 +20,9 @@ body {
 	background: linear-gradient(130deg, #0D7FFD, #8e44ad);
 	height: 100vh;
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 .btn-usun {
@@ -64,5 +73,13 @@ table.custom-table {
 	background-color: #E2F1F7;
 	
 	
-	
 }
+
+.sticky-footer{
+	
+	background-color: black;
+	color: white;
+	padding: 10px;
+	margin-top: auto;
+}
+
