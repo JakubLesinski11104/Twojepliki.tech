@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista plików
+	[[${#request.userPrincipal.principal.username}]]</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/Wyl_PM_F12.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<h1>Udostępnij plik!</h1>
+	<div id="message-container"></div>
+
+	<form id="value-form" class="form-inline">
+		<div class="form-group mb-2">
+			<input type="text" class="form-control" id="value-input"
+				placeholder="Wprowadź nazwę użytkownika któremu chcesz wysłać plik">
+		</div>
+		<button type="submit" class="btn btn-primary mb-2">Wyślij</button>
+	</form>
+
+	<table id="data">
+		<thead>
+			<tr>
+				<th>Nazwa pliku</th>
+				<th>Udostepnij</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<script type="text/javascript" src="js/udostepnijplik.js"></script>
+</body>
+</html>

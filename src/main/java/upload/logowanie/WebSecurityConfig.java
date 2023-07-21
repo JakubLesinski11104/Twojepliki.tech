@@ -68,6 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				
 				.antMatchers("/katalog").authenticated()
 				
+				.antMatchers("/udostepnijplik").authenticated()
+				
+				.antMatchers("/udostepnij").authenticated()
+				
 				.anyRequest().permitAll()
 
 				.and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/glowna")

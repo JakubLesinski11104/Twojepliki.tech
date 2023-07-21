@@ -15,5 +15,11 @@ public interface UsługaPrzechowywaniaPlikow {
 	public boolean usun(String filename);
 
 	public Stream<Path> wczytaj();
+	
+	public void zapiszudostepnij(MultipartFile file);
+	
+	public Resource wyslijudostepnij(String filename);
+
+	public Stream<Path> wczytajAdmin();
 
 }

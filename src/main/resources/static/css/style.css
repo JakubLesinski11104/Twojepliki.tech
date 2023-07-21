@@ -17,7 +17,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	background: linear-gradient(130deg, #0D7FFD, #8e44ad);
+	background: linear-gradient(130deg, #a2d5c6, #077b8a);
 	height: 100vh;
 	overflow: hidden;
 	display: flex;
@@ -47,7 +47,7 @@ table.custom-table {
 }
 
 .navbar-custom {
-	background-color: #000000;
+	background:  black;
 }
 
 .form-signup {
@@ -69,11 +69,17 @@ table.custom-table {
 }
 .card-body{
 	
-	
-	background-color: #E2F1F7;
-	
-	
+padding: 20px;
+  width: 350px;
+  margin: 0 auto;
+  background-color: #E2F1F7;
+  border-radius: 5px;
+  width: 90%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
+
+
 
 .footer{
 	
@@ -83,4 +89,7 @@ table.custom-table {
 	margin-top: auto;
 }
 
-
+input.wiekszy {
+        width: 30px;
+        height: 30px;
+      }

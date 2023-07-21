@@ -44,8 +44,9 @@
           <a class="nav-link text-white" href="/logout">Wyloguj</a>
         </li>
       </ul>
-    </div>
+    </div> 
 </nav>
+
 </head>
 <body>
 	<div class="container text-center">
@@ -66,14 +67,18 @@
 		<h3>
 			<a th:href="@{/katalog}">Katalog plików</a>
 		</h3>
+		<h3>
+			<a th:href="@{/udostepnij}">Udostepnij</a>
+		</h3>
+		
 
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Wyloguj się" />
 		</form>
 	</div>
 	
-	
 	<footer class="footer">
+	
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
     </footer>
 </body>

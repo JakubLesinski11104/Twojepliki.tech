@@ -13,21 +13,24 @@ async function fetchData() {
 
 	data.forEach((customer) => {
 		const card = document.createElement("div");
-		card.className = "col-md-4";
+		card.className = "col-md-4 ";
 		card.innerHTML = `
-          <div class="card mb-4 box-shadow">
-            <div class="card-body">
-              <p class="card-text">${customer.name}</p>
+         
+        
+                        <div class="card-body mb-4">
+                         <p class="card-text">${customer.name}</p>
               <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+               <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${customer.url}">&nbsp;</label>
+                  <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${customer.url}" name="plik" value="${customer.url}">
+               </div>
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${customer.url}')">Pobierz</button>
-                  <label for="${customer.url}">Zaznacz:</label>
-                  <input type="checkbox" id="${customer.url}" name="plik" value="${customer.url}">
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${customer.name}')">Usuń</button>
               </div>
             </div>
-          </div>
+      
         `;
 		container.appendChild(card);
 		wyslanePliki.push(customer.name);
@@ -39,6 +42,7 @@ function pobierzPlik(url) {
 	elementA.href = url;
 	elementA.download = url.split('/').pop();
 	elementA.click();
+	showMessage("Pobrano plik: " + elementA.download);
 }
 
 function getCurrentTime() {
@@ -56,7 +60,6 @@ function padZero(number) {
 }
 
 function pobierzZip(urls) {
-
 	const zip = new JSZip();
 	const count = urls.length;
 	let downloaded = 0;
@@ -71,6 +74,7 @@ function pobierzZip(urls) {
 				const newFileName = "pobrane_" + currentTime + "_" + currentDate;
 				elementA.download = newFileName + '.zip';
 				elementA.click();
+				showMessage("Pobrano plik ZIP: " + elementA.download);
 			});
 		}
 	}
@@ -90,17 +94,24 @@ function pobierzZip(urls) {
 	});
 }
 
+let shouldReplaceFile = null;
+
 async function wyslijPliki(files) {
 	const promises = [];
+	const filesToReplace = [];
 
 	for (let i = 0; i < files.length; i++) {
 		const file = files[i];
 
 		if (wyslanePliki.includes(file.name)) {
-			const shouldReplace = confirm(`Plik "${file.name}" jest już na dysku. Czy chcesz go zastąpić?`);
-			if (!shouldReplace) {
+			if (shouldReplaceFile === null) {
+				shouldReplaceFile = await showReplacementPrompt(file.name);
+			}
+
+			if (!shouldReplaceFile) {
 				continue;
 			}
+			filesToReplace.push(file.name);
 		}
 
 		const formData = new FormData();
@@ -116,33 +127,45 @@ async function wyslijPliki(files) {
 
 	try {
 		await Promise.all(promises);
-		alert('Pliki zostały wysłane!');
-		window.location.reload();
+		showMessage('Pliki zostały wysłane! Odświeżymy stronę!');
+		if (filesToReplace.length > 0) {
+			showMessage(`Zastąpione pliki: ${filesToReplace.join(", ")}`);
+		}
+		setTimeout(function() {
+			window.location.reload();
+		}, 2000);
 	} catch (error) {
 		console.error(error);
-		alert('Wystąpił błąd. Pliki nie zostały wysłane.');
+		showMessage('Wystąpił błąd. Pliki nie zostały wysłane.');
 	}
 }
-
 async function usunPlik(nazwaPliku) {
-	const shouldDelete = confirm(`Czy na pewno chcesz usunąć plik "${nazwaPliku}"?`);
-	if (shouldDelete) {
-		try {
-			const response = await fetch(`${deleteUrl}/${nazwaPliku}`, {
-				method: 'DELETE'
-			});
+	showConfirmationModal(`Czy na pewno chcesz usunąć plik "${nazwaPliku}"?`, async (confirmed) => {
+		if (confirmed) {
+			try {
+				const response = await fetch(`${deleteUrl}/${nazwaPliku}`, {
+					method: 'DELETE'
+				});
 
-			if (!response.ok) {
-				throw new Error(response.statusText);
+				if (!response.ok) {
+					throw new Error(response.statusText);
+				}
+
+				showMessage('Plik został usunięty!');
+				setTimeout(function() {
+					window.location.reload();
+				}, 2000);
+			} catch (error) {
+				console.error(error);
+				showMessage('Wystąpił błąd. Plik nie został usunięty.');
 			}
-
-			alert('Plik został usunięty!');
-			window.location.reload();
-		} catch (error) {
-			console.error(error);
-			alert('Wystąpił błąd. Plik nie został usunięty.');
 		}
-	}
+	});
+}
+
+function showMessage(message) {
+	const messageContainer = document.getElementById("message-container");
+	messageContainer.innerHTML = `<div class="alert alert-info">${message}</div>`;
 }
 
 fetchData();
@@ -158,7 +181,7 @@ przyciskPobierz.addEventListener('click', function() {
 	} else if (zaznaczonePliki.length > 1) {
 		pobierzZip(zaznaczonePliki);
 	} else {
-		alert('Nie zaznaczono żadnego pliku!');
+		showMessage('Nie zaznaczono żadnego pliku!');
 	}
 });
 
@@ -172,6 +195,35 @@ form.addEventListener('submit', function(event) {
 	if (files.length > 0) {
 		wyslijPliki(files);
 	} else {
-		alert('Nie wybrano żadnych plików!');
+		showMessage('Nie wybrano żadnych plików!');
 	}
-});
+}
+
+);
+function showConfirmationModal(message, callback) {
+	const confirmationMessageElement = document.getElementById("confirmationMessage");
+	confirmationMessageElement.textContent = message;
+
+	const confirmButton = document.getElementById("confirmDelete");
+	confirmButton.addEventListener("click", () => {
+		$('#confirmationModal').modal('hide');
+		callback(true);
+	});
+
+	$('#confirmationModal').modal('show');
+}
+async function showReplacementPrompt(fileName) {
+	return new Promise((resolve) => {
+		const replacementMessageElement = document.getElementById("replacementMessage");
+		replacementMessageElement.textContent = `Plik "${fileName}" jest już na dysku.`;
+
+
+		const cancelButton = document.getElementById("cancelReplace");
+		cancelButton.addEventListener("click", () => {
+			$('#replacementModal').modal('hide');
+			resolve(false);
+		});
+
+		$('#replacementModal').modal('show');
+	});
+}

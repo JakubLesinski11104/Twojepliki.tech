@@ -86,4 +86,42 @@ public class KontrolerPlikow {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new KomunikatOdpowiedzi(message));
 		}
 	}
+	
+
+@PostMapping("/udostepnijplik")
+public ResponseEntity<KomunikatOdpowiedzi> udostepnijPlik(@RequestParam("file") MultipartFile file) {
+	String message = "";
+
+	try {
+		usługa_przechowywania.zapiszudostepnij(file);
+
+		message = "Udostepniono plik: " + file.getOriginalFilename();
+		return ResponseEntity.status(HttpStatus.OK).body(new KomunikatOdpowiedzi(message));
+	} catch (Exception e) {
+		message = "Nie wrzucono pliku: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
+		return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new KomunikatOdpowiedzi(message));
+	}
+}
+
+@GetMapping("/plikiAdmin")
+public ResponseEntity<List<PlikInfo>> getListaPlikowAdmin() {
+	List<PlikInfo> fileInfos = usługa_przechowywania.wczytajAdmin().map(path -> {
+		String filename = path.getFileName().toString();
+		String url = MvcUriComponentsBuilder
+				.fromMethodName(KontrolerPlikow.class, "getPlikAdmin", path.getFileName().toString()).build().toString();
+
+		return new PlikInfo(filename, url);
+	}).collect(Collectors.toList());
+
+	return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+}
+
+@GetMapping("/plikiAdmin/{filename:.+}")
+public ResponseEntity<Resource> getPlikAdmin(@PathVariable String filename) {
+	Resource file = usługa_przechowywania.wyslij(filename);
+	return ResponseEntity.ok()
+			.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+			.body(file);
+}
+
 }

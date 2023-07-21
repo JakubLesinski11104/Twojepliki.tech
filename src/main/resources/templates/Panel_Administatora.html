@@ -84,6 +84,27 @@
 				</table>
 			</div>
 		</div>
+		<div class="container text-center">
+			<h1>Pliki użytkowników:</h1>
+			<form id="value-form">
+				<input type="text" id="value-input" placeholder="Wprowadź wartość"
+					required>
+				<button type="submit" class="btn btn-primary">Wyślij</button>
+			</form>
+			<div id="error-message" style="display: none;"
+				class="alert alert-danger"></div>
+			<table id="fileList" class="table table-striped table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>Nazwa pliku</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+		<script src="js/plikiadmina.js"></script>
 	</div>
 <footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>

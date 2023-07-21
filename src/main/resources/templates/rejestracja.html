@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Rejestracja</title>
  <link rel="icon" href="assets/icons8-disk-32.png" type="image/png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0  shrink-to-fit=no">
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
@@ -37,95 +37,106 @@
 </head>
 <body>
 <p th:text="${komunikat_email}"></p>
-    <p th:text="${komunikat_username}"></p>
-    <p th:text="${komunikat_haslo}"></p>
-    <p th:text="${komunikat_imie}"></p>
-    <p th:text="${komunikat_nazwisko}"></p>
-
-
-
-	
+	<p th:text="${komunikat_username}"></p>
+	<p th:text="${komunikat_haslo}"></p>
+	<p th:text="${komunikat_imie}"></p>
+	<p th:text="${komunikat_nazwisko}"></p>
 
 	<div class="container text-center">
-	
-		
-		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}" class="form-signup"
-			method="post" style="max-width: 400px; margin: 0 auto;">
+
+
+		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}"
+			class="form-signup" method="post"
+			style="max-width: 400px; margin: 0 auto;">
 			<div>
-			<h1>Rejestracja</h1>
-		</div>
+				<h1>Rejestracja</h1>
+			</div>
 			<div class="m-3">
 				<div class="form-group row">
 					<label class="col-4 col-form-label">E-mail: </label>
 					<div class="col-8">
 						<input type="email" th:field="*{email}" class="form-control"
-							required maxlength="40" />
+							title="Podaj email" required maxlength="40" />
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Imię: </label>
 					<div class="col-8">
 						<input type="text" th:field="*{imie}" class="form-control"
-							required maxlength="15" />
+							title="Podaj swoje imię" required maxlength="15" />
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Nazwisko: </label>
 					<div class="col-8">
 						<input type="text" th:field="*{nazwisko}" class="form-control"
-							required maxlength="20" />
+							title="Podaj swoje nazwisko" required maxlength="20" />
 					</div>
 				</div>
-				
+
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Username: </label>
 					<div class="col-8">
 						<input type="text" th:field="*{username}" class="form-control"
-							pattern="[a-zA-Z0-9]+" required maxlength="20" />
+							title="Podaj nazwę użytkownika" pattern="[a-zA-Z0-9]+" required
+							maxlength="20" />
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Hasło: </label>
 					<div class="col-8">
 						<input type="password" id="haslo" th:field="*{haslo}"
-							class="form-control" required minlength="6" maxlength="20" />
+							class="form-control" required minlength="6" maxlength="20"
+							title="Hasło musi zawierać mała i dużą literę a także znak specjalny lub cyfrę" />
 					</div>
+					<div id="hasloErrorMsg" style="color: red;"></div>
 				</div>
-				
-				
-<button onclick="generujiwyswietlhaslo()">Generuj hasło</button>
-  <input type="text" id="polehasla" readonly>
-  	<script type="text/javascript" src="js/gen_haslo.js"></script>
-  	
-  	<br></br>
+				<button onclick="generujiwyswietlhaslo()">Generuj hasło</button>
+				<input type="text" id="polehasla" readonly>
+				<script type="text/javascript" src="js/gen_haslo.js"></script>
+
+				<br></br>
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Powtórz hasło: </label>
 					<div class="col-8">
 						<input type="password" id="hasloPowtorzone" class="form-control"
-							required minlength="6" maxlength="20" />
+							title="Hasło musi zawierać mała i dużą literę a także znak specjalny lub cyfrę"
+							required minlength="6" maxlength="20" />							
 					</div>
+					<div id="hasloPowtorzoneErrorMsg" style="color: red;"></div>
 				</div>
-				
+				Przy zarejestrowaniu zgadzasz się na <a href="/regulamin">regulamin</a>
 				<div>
+					<br />
 					<button type="submit" class="btn btn-primary btn-block"
 						onclick="sprawdzHaslo()">Zarejestruj</button>
 				</div>
 			</div>
-			
+
 		</form>
 	</div>
-  
-	<script>
-		function sprawdzHaslo() {
-			var haslo = document.getElementById("haslo").value;
-			var hasloPowtorzone = document.getElementById("hasloPowtorzone").value;
 
-			if (haslo !== hasloPowtorzone) {
-				alert("Wprowadzone hasła nie są identyczne. Proszę wprowadzić poprawne hasło.");
-				event.preventDefault();
-			}
+
+
+<script>
+	function sprawdzHaslo() {
+		  var haslo = document.getElementById("haslo").value;
+		  var hasloPowtorzone = document.getElementById("hasloPowtorzone").value;
+
+		  var hasloErrorMsg = document.getElementById("hasloErrorMsg");
+		  var hasloPowtorzoneErrorMsg = document.getElementById("hasloPowtorzoneErrorMsg");
+
+		  if (haslo !== hasloPowtorzone) {
+		    hasloErrorMsg.textContent = "Wprowadzone hasła nie są identyczne. Proszę wprowadzić poprawne hasło.";
+		    hasloPowtorzoneErrorMsg.textContent = "Wprowadzone hasła nie są identyczne. Proszę wprowadzić poprawne hasło.";
+		    event.preventDefault();
+		  } else {
+		    hasloErrorMsg.textContent = "";
+		    hasloPowtorzoneErrorMsg.textContent = "";
+		  }
 		}
 	</script>
+
 	
 	<footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
