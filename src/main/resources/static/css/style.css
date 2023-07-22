@@ -19,7 +19,7 @@ body {
 	padding: 0;
 	background: linear-gradient(130deg, #a2d5c6, #077b8a);
 	height: 100vh;
-	overflow: hidden;
+
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
