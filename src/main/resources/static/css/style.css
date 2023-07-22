@@ -19,7 +19,6 @@ body {
 	padding: 0;
 	background: linear-gradient(130deg, #a2d5c6, #077b8a);
 	height: 100vh;
-
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -46,8 +45,9 @@ table.custom-table {
 	font-size: 1.2rem;
 }
 
-.navbar-custom {
-	background:  black;
+.navbar{
+	background:  #077b8a;
+	opacity: 100%
 }
 
 .form-signup {
@@ -83,13 +83,26 @@ padding: 20px;
 
 .footer{
 	
-	background-color: black;
+	background-color: #077b8a;
 	color: white;
-	padding: 10px;
+	padding: 8px;
 	margin-top: auto;
+	opacity:85%;
+	font-size: 14px;
 }
 
 input.wiekszy {
         width: 30px;
         height: 30px;
       }
+      
+.tekstglowna {
+    font-size: 16px;
+    font-family: Verdana, sans-serif;
+  }
+  
+  .tekstkatalog {
+    font-size: 32px;
+    font-family: Verdana, sans-serif;
+    text-align: center;
+  }
