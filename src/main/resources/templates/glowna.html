@@ -30,12 +30,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/udostepnij">Udostepnij</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/rejestracja">Rejestracja</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
+       
     </ul>
     <div th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}" class="ml-auto">
       <a class="nav-link" href="/Panel_Administatora">Panel Administratora</a>
