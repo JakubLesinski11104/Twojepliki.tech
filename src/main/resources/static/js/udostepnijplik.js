@@ -1,10 +1,18 @@
 const url = "https://localhost:443/pliki";
 //const url = "https://141.148.241.107:443/pliki";
+//const url = "https://wspoldzielenieplikow.me:443/pliki";
+
 const uploadUrl = "https://localhost:443/wyslij";
 //const uploadUrl = "https://141.148.241.107:443/wyslij";
+//const uploadUrl = "https://wspoldzielenieplikow.me:443/wyslij";
+
 const deleteUrl = "https://localhost:443/pliki";
 //const deleteUrl = "https://141.148.241.107:443/pliki";
+//const deleteUrl = "https://wspoldzielenieplikow.me:443/pliki";
+
 const shareUrl = "https://localhost:443/udostepnijplik";
+//const shareUrl = "https://141.148.241.107:443/udostepnijplik";
+//const shareUrl = "https://wspoldzielenieplikow.me:443/udostepnijplik";
 
 let wyslanePliki = [];
 
