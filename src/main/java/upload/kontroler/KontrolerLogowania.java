@@ -1,4 +1,4 @@
-package upload.logowanie;
+package upload.kontroler;
 
 import java.io.IOException;
 
@@ -47,6 +47,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import upload.logowanie.RepozytoriumLogowania;
+import upload.logowanie.Uzytkownik;
 import upload.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
@@ -54,6 +56,7 @@ import upload.usluga.UsługaPrzechowywaniaPlikow;
 //Linux
 //@CrossOrigin("https://141.148.241.107:443")
 //@CrossOrigin("https://wspoldzielenieplikow.me:443")
+//@CrossOrigin("https://twojepliki.tech:443")
 public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired

@@ -108,3 +108,53 @@ input.wiekszy {
     font-family: Verdana, sans-serif;
     text-align: center;
   }
+  
+  
+  
+  
+  /* Notatnik */
+  
+.toggle-button {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #E0FF00;
+  color: black;
+  padding: 20px 20px;
+  border-radius: 20px 0 0 20px; 
+  z-index: 9999;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 50px;
+  border: none;
+}
+
+
+ .vertical-btn-container {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+ .toggle-button.hidden {
+  right: -170px;
+}
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100%;
+      background-color: #E2F1F7;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      transition: right 0.3s ease;
+    }
+
+    .sidebar.show {
+      right: 0;
+    }

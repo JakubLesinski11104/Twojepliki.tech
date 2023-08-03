@@ -1,14 +1,18 @@
 const url = "https://localhost:443/pliki";
 //const url = "https://141.148.241.107:443/pliki";
 //const url = "https://wspoldzielenieplikow.me:443/pliki";
+//const url = "https://twojepliki.tech:443/pliki";
 
 const uploadUrl = "https://localhost:443/wyslij";
 //const uploadUrl = "https://141.148.241.107:443/wyslij";
 //const uploadUrl = "https://wspoldzielenieplikow.me:443/wyslij";
+//const uploadUrl = "https://twojepliki.tech:443/wyslij";
+
 
 const deleteUrl = "https://localhost:443/pliki";
 //const deleteUrl = "https://141.148.241.107:443/pliki";
 //const deleteUrl = "https://wspoldzielenieplikow.me:443/pliki";
+//const deleteUrl = "https://twojepliki.tech:443/pliki";
 
 let wyslanePliki = [];
 
@@ -232,4 +236,48 @@ async function showReplacementPrompt(fileName) {
 
 		$('#replacementModal').modal('show');
 	});
+}
+function closeLightbox() {
+    const lightboxContainer = document.getElementById('lightbox-container');
+    lightboxContainer.style.display = 'none';
+}
+function podgladPliku() {
+    const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
+        return checkbox.value;
+    });
+
+    if (zaznaczonePliki.length === 1) {
+        const podgladUrl = zaznaczonePliki[0]; // URL do podglądu pliku
+
+        // Używamy Axios, aby pobrać zawartość pliku
+        axios.get(podgladUrl, { responseType: 'blob' })
+            .then(response => {
+                const blob = new Blob([response.data], { type: response.headers['content-type'] });
+
+                // Tworzymy URL z bloba
+                const fileUrl = URL.createObjectURL(blob);
+
+                // Pobieramy kontener lightboxa
+                const lightboxContainer = document.getElementById('lightbox-container');
+                lightboxContainer.innerHTML = ''; // Wyczyść zawartość kontenera
+
+                // Tworzymy element, w którym wyświetlimy zawartość pliku
+                const fileContent = document.createElement('iframe');
+                fileContent.src = fileUrl;
+                fileContent.style.width = '800px';
+                fileContent.style.height = '600px';
+
+                // Dodajemy zawartość do kontenera lightboxa
+                lightboxContainer.appendChild(fileContent);
+
+                // Pokazujemy lightbox
+                lightboxContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error(error);
+                showMessage('Wystąpił błąd podczas pobierania pliku.');
+            });
+    } else {
+        showMessage('Proszę zaznaczyć jeden plik do podglądu.');
+    }
 }

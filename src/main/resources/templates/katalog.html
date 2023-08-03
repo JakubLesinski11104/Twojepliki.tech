@@ -11,8 +11,7 @@
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript"
 	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="F12.js"></script>
-<script type="text/javascript" src="Prawy_mysz.js"></script>
+<script type="text/javascript" src="js/F12_PPM.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
@@ -54,7 +53,11 @@
 	<div class="container text-center">
     
     <div id="message-container"></div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   
+<button id="podglad" class="btn btn-sm btn-outline-secondary" onclick="podgladPliku()">Podgląd</button>
+<div id="lightbox-container" style="display: none;">        <button id="close-btn" onclick="closeLightbox()">Zamknij</button>
+</div>
 
      <form id="upload-form">
         <input type="file" id="file-input" name="file" multiple required>
@@ -65,8 +68,7 @@
      <hr />
     <div class="row" id="data"></div>
  <hr />
-    
-    <div class="modal" id="confirmationModal">
+         <div class="modal" id="confirmationModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,7 +103,30 @@
     </div>
 </div>
 		<script type="text/javascript" src="js/katalog.js"></script>
+		
 	</div>
+	
+  <script type="text/javascript" src="js/katalog.js">  </script>
+    <div class="container vertical-btn-container">
+  <div class="toggle-button" id="toggleSidebarButton">Notatnik</div>
+</div>
+  <div class="sidebar" id="sidebar">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h1 class="text-center mb-4">Notatnik</h1>
+          <div class="note-container">
+            <textarea id="noteTextArea" class="form-control mb-3" rows="10" cols="50"></textarea>
+            <button id="saveButton" class="btn btn-primary">Zapisz</button>
+            <button id="backButton" class="btn btn-secondary">Powrót</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="js/notatnik.js"></script>
 	<footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
     </footer>

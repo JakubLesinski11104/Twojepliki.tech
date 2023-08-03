@@ -24,6 +24,7 @@ $(document).ready(function() {
 const apiUrl = "https://localhost:443/plikiAdmin";
 //const apiUrl = "https://141.148.241.107:443/plikiAdmin";
 //const apiUrl = "https://wspoldzielenieplikow.me:443/plikiAdmin";
+//const apiUrl = "https://twojepliki.tech:443/plikiAdmin";
 
 const fileListDiv = document.getElementById("fileList");
 

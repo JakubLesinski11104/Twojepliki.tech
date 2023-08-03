@@ -27,6 +27,7 @@ import upload.usluga.UsługaPrzechowywaniaPlikow;
 //Linux
 //@CrossOrigin("https://141.148.241.107:443")
 //@CrossOrigin("https://wspoldzielenieplikow.me:443")
+//@CrossOrigin("https://twojepliki.tech:443")
 public class KontrolerPlikow {
 
 	@Autowired
