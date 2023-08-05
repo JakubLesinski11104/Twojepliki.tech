@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Bład</title>
+<title>Wystąpił błąd</title>
  <link rel="icon" href="assets/icons8-disk-32.png" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
@@ -47,12 +47,13 @@
 </nav>
 </head>
 <body>
-	<h1>Wystapił bład</h1>
-	<h1>Nie odnaleziono pliku lub na podane dane zostalo juz utworzone
-		konto</h1>
+<div class="container text-center">
+		<h1>Wystąpił błąd</h1>
+	<h1>Na podane dane zostało już utworzone konto</h1>
 	<h3>
 		<a th:href="@{/glowna}">Wróć do strony głównej</a>
 	</h3>
+	</div>
 	<footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
     </footer>

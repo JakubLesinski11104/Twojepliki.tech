@@ -105,16 +105,17 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 		return username_folder;
 
 	}
-
+	
 	@GetMapping("/rejestracja")
 
 	public String Rejestracja(Model model) {
-
+		
 		model.addAttribute("uzytkownik", new Uzytkownik());
 
 		return "rejestracja";
 
 	}
+
 
 	@PostMapping("/proces_rejestracji")
 
@@ -151,7 +152,7 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 			return "rejestracja";
 		}
-
+		
 		BCryptPasswordEncoder EnkoderHasla = new BCryptPasswordEncoder();
 
 		String ZakodowaneHaslo = EnkoderHasla.encode(uzytkownik.getHaslo());
@@ -280,10 +281,7 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 			if (statusCode == HttpStatus.NOT_FOUND.value()) {
 				Strona_error = "error/404";
 
-			} else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-				Strona_error = "error/403";
-
-			}else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
 
 				Strona_error = "error/500";
 
