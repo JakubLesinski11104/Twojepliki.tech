@@ -78,31 +78,9 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	public String StronaGlowna() {
 
-		var username_folder = getFolderUzytkownika();
-
-		try {
-
-			Files.createDirectories(username_folder);
-
-		} catch (IOException e) {
-
-			throw new RuntimeException("Nie utworzono folderu");
-
-		}
+		
 
 		return "glowna";
-
-	}
-
-	public Path getFolderUzytkownika() {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		String username = auth.getName();
-
-		var username_folder = Paths.get("Wyslane_pliki", username);
-
-		return username_folder;
 
 	}
 	
@@ -128,7 +106,7 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 			return "rejestracja";
 		}
 		if (uzytkownik.getUsername() == null || uzytkownik.getUsername().isEmpty()
-				|| !uzytkownik.getUsername().matches("^[a-zA-Z0-9]+$")) {
+				|| !uzytkownik.getUsername().matches("^[a-zA-Z0-9]).{6,}$")) {
 			model.addAttribute("komunikat_username",
 					"Nazwa uzytkownika musi zawierać mimimum 6 znaków i nie moze zawierać znaków specjalnych!");
 			return "rejestracja";
@@ -209,9 +187,12 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 
 	}
 
+	
+	
 	@GetMapping("/kontakt")
 	public String kontakt() {
 
+		
 		return "kontakt";
 
 	}
@@ -229,13 +210,28 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 		return "JP";
 
 	}
-
+	
+	
 	@GetMapping("/katalog")
 	public String katalog() {
+		
 
 		return "katalog";
 
 	}
+	
+	private String podfolder;
+	@PostMapping("/katalog")
+	@ResponseBody
+	public String katalogPost(@RequestParam("pod_folder") String pod_folder) {
+		
+		podfolder = pod_folder;
+
+		return "katalog";
+
+	}
+	
+	
 
 	@GetMapping("/regulamin")
 	public String regulamin() {
@@ -257,7 +253,8 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 	@ResponseBody
 	public String udostepnijplik(@RequestParam("udostepnij") String udostepnij) {
 		udostepnijplik = udostepnij;
-
+		
+		
 		return "udostepnij";
 	}
 
@@ -265,6 +262,42 @@ public class KontrolerLogowania implements UsługaPrzechowywaniaPlikow {
 		var udostepnij_folder = Paths.get("Wyslane_pliki", udostepnijplik);
 
 		return udostepnij_folder;
+
+	}
+	
+	public Path getFolderUzytkownika() {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		String username = auth.getName();
+		
+		if(podfolder != null) {
+			var username_folder = Paths.get("Wyslane_pliki", username, podfolder);
+			try {
+
+				Files.createDirectories(username_folder);
+
+			} catch (IOException e) {
+
+				throw new RuntimeException("Nie utworzono folderu");
+
+			}
+			return username_folder;
+		}
+		
+			var username_folder = Paths.get("Wyslane_pliki", username);
+			try {
+
+				Files.createDirectories(username_folder);
+
+			} catch (IOException e) {
+
+				throw new RuntimeException("Nie utworzono folderu");
+
+			}
+
+		return username_folder;
+		
 
 	}
 

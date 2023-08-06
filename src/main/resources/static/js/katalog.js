@@ -1,4 +1,4 @@
-const url = "https://localhost:443/pliki";
+const plikiurl = "https://localhost:443/pliki";
 //const url = "https://141.148.241.107:443/pliki";
 //const url = "https://wspoldzielenieplikow.me:443/pliki";
 //const url = "https://twojepliki.tech:443/pliki";
@@ -17,7 +17,7 @@ const deleteUrl = "https://localhost:443/pliki";
 let wyslanePliki = [];
 
 async function fetchData() {
-	const response = await fetch(url);
+	const response = await fetch(plikiurl);
 	const data = await response.json();
 	const container = document.getElementById("data");
 
@@ -281,3 +281,64 @@ function podgladPliku() {
         showMessage('Proszę zaznaczyć jeden plik do podglądu.');
     }
 }
+
+ function FetchFiles() {
+        // Your code to fetch files goes here
+    }
+
+    function hideErrorMessage() {
+        // Your code to hide error messages goes here
+    }
+
+    function displayErrorMessage(message) {
+        // Your code to display error messages goes here
+    }
+
+    $(document).ready(function () {
+        $('#value-form').submit(function (event) {
+            event.preventDefault();
+
+            var value = $('#value-input').val();
+
+            if (value) {
+                $.ajax({
+                    url: '/katalog',
+                    type: 'POST',
+                    data: { pod_folder: value },
+                    success: function (response) {
+                        FetchFiles();
+                        hideErrorMessage();
+                    },
+                    error: function (error) {
+                        displayErrorMessage("Wystąpił błąd podczas wysyłania danych: " + error);
+                    },
+                    complete: function () {
+                        // Po zakończeniu zapytania AJAX, odśwież stronę
+                        location.reload();
+                    }
+                });
+            }
+        });
+
+        // Handle the "Back" button click
+        $('#back-button').click(function () {
+            // Clear the input field and sent parameter
+            $('#value-input').val('');
+            $.ajax({
+                url: '/katalog',
+                type: 'POST',
+                data: { pod_folder: null }, // Set the parameter to null to remove it on the server-side
+                success: function (response) {
+                    FetchFiles();
+                    hideErrorMessage();
+                },
+                error: function (error) {
+                    displayErrorMessage("Wystąpił błąd podczas wysyłania danych: " + error);
+                },
+                complete: function () {
+                    // Po zakończeniu zapytania AJAX, odśwież stronę
+                    location.reload();
+                }
+            });
+        });
+    });

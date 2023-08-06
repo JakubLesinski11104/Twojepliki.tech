@@ -51,7 +51,16 @@
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${#request.userPrincipal.principal.ImieNazwisko}]]</b> </p>
 
 	<div class="container text-center">
-    
+     Stwórz folder i przejdz do niego:
+			<form id="value-form">
+				<input type="text" id="value-input" placeholder="Wprowadź wartość" required>
+				<button type="submit" class="btn btn-primary">Wyślij</button>
+				<button type="button" id="back-button" class="btn btn-primary btn-podfolder">Wróć</button>
+			</form>
+
+		
+
+
     <div id="message-container"></div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   
@@ -102,6 +111,7 @@
             </div>
         </div>
     </div>
+ 
 </div>
 		<script type="text/javascript" src="js/katalog.js"></script>
 		

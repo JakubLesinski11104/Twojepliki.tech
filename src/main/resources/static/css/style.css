@@ -32,6 +32,11 @@ body {
 	border-color: green !important;
 }
 
+.btn-podfolder {
+	border-color: green !important;
+	background-color: grey !important;;
+}
+
 body {
 	background-color: #E2F1F7;
 }
