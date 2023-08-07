@@ -15,7 +15,8 @@
 	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/F12_PPM.js"></script>
 <link rel="stylesheet" href="css/style.css">
-
+</head>
+<body>
 
 <nav class="navbar navbar-expand-md navbar-dark mb-4">
 	<a class="navbar-brand"
@@ -37,11 +38,9 @@
 		</ul>
 	</div>
 </nav>
-</head>
-<body>
+
 	<div class="container text-center">
-		<br />
-		<br />
+		<br /><br />
 		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}"
 			class="form-signup" method="post"
 			style="max-width: 400px; margin: 0 auto;">
@@ -98,6 +97,7 @@
 						<div id="hasloErrorMsg" style="color: red;"></div>
 					</div>
 				</div>
+				
 				<div class="form-group row">
 					<label class="col-4 col-form-label">Powtórz hasło: </label>
 					<div class="col-8">
@@ -113,24 +113,16 @@
 					</div>
 				</div>
 				
-
-
 				Przy zarejestrowaniu zgadzasz się na <a href="/regulamin">regulamin</a>
-				<div>
-					<br />
-					
+				<div><br />
 					<button type="submit" class="btn btn-primary btn-block"
 						onclick="sprawdzHaslo()">Zarejestruj</button>
 				</div>
 			</div>
-
 		</form>
 	</div>
 
-	<script type="text/javascript" src="js/Spr_Pok_Has.js">	</script>
-
-
-	<br></br>
+<script type="text/javascript" src="js/Spr_Pok_Has.js">	</script>
 
 	<footer class="footer">
 		<p style="color: white; text-align: center;">© Copyright Jakub

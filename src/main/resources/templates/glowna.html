@@ -12,7 +12,8 @@
 	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/F12_PPM.js"></script>
 <link rel="stylesheet" href="css/style.css">
-    
+</head>
+<body>
 
 <nav class="navbar navbar-expand-md navbar-dark mb-4">
    <a class="navbar-brand" style="background-image: url('/assets/icons8-disk-32.png'); background-size: 32px 32px; width: 32px; height: 32px;"></a>
@@ -29,8 +30,7 @@
       </li>
         <li class="nav-item">
           <a class="nav-link" href="/udostepnij">Udostepnij</a>
-        </li>
-       
+        </li>  
     </ul>
     <div th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}" class="ml-auto">
       <a class="nav-link" href="/Panel_Administatora">Panel Administratora</a>
@@ -45,8 +45,6 @@
     </ul>
   </div>
 </nav>
-</head>
-<body>
 
 <br></br>
 <br></br>
@@ -65,8 +63,8 @@ hendrerit quis vulputate eget, efficitur id elit. Duis eu hendrerit neque. Quisq
 </main>
 	
 	<footer class="footer">
-	
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
     </footer>
+    
 </body>
 </html>

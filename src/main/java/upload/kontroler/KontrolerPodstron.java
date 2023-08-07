@@ -1,50 +1,28 @@
 package upload.kontroler;
 
 import java.io.IOException;
-
 import java.net.MalformedURLException;
-
 import java.nio.file.FileAlreadyExistsException;
-
 import java.nio.file.Files;
-
 import java.nio.file.Path;
-
 import java.nio.file.Paths;
-
 import java.util.List;
-
 import java.util.stream.Stream;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.core.io.Resource;
-
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import upload.logowanie.RepozytoriumLogowania;
@@ -54,8 +32,6 @@ import upload.usluga.UsługaPrzechowywaniaPlikow;
 @Controller
 @CrossOrigin("https://localhost:443")
 //Linux
-//@CrossOrigin("https://141.148.241.107:443")
-//@CrossOrigin("https://wspoldzielenieplikow.me:443")
 //@CrossOrigin("https://twojepliki.tech:443")
 public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 

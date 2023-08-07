@@ -1,11 +1,7 @@
 const url = "https://localhost:443/pliki";
-//const url = "https://141.148.241.107:443/pliki";
-//const url = "https://wspoldzielenieplikow.me:443/pliki";
 //const url = "https://twojepliki.tech:443/pliki";
 
 const shareUrl = "https://localhost:443/udostepnijplik";
-//const shareUrl = "https://141.148.241.107:443/udostepnijplik";
-//const shareUrl = "https://wspoldzielenieplikow.me:443/udostepnijplik";
 //const shareUrl = "https://twojepliki.tech:443/udostepnijplik";
 
 let wyslanePliki = [];
@@ -47,8 +43,7 @@ async function fetchData() {
                   <button class="btn btn-primary btn-block" onclick="udostepnijPlik('${customer.url}', '${customer.name}')">Udostępnij</button>
               </div>
             </div>
-      
-        `;
+       `;
 		container.appendChild(card);
 		wyslanePliki.push(customer.name);
 	});
@@ -93,7 +88,6 @@ function getCurrentTime() {
 	const hours = date.getHours();
 	const minutes = date.getMinutes();
 	const seconds = date.getSeconds();
-
 	const time = `${padZero(hours)}.${padZero(minutes)}.${padZero(seconds)}`;
 	return time;
 }

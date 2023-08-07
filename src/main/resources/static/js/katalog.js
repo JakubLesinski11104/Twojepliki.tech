@@ -1,17 +1,11 @@
 const plikiurl = "https://localhost:443/pliki";
-//const url = "https://141.148.241.107:443/pliki";
-//const url = "https://wspoldzielenieplikow.me:443/pliki";
 //const url = "https://twojepliki.tech:443/pliki";
 
 const uploadUrl = "https://localhost:443/wyslij";
-//const uploadUrl = "https://141.148.241.107:443/wyslij";
-//const uploadUrl = "https://wspoldzielenieplikow.me:443/wyslij";
 //const uploadUrl = "https://twojepliki.tech:443/wyslij";
 
 
 const deleteUrl = "https://localhost:443/pliki";
-//const deleteUrl = "https://141.148.241.107:443/pliki";
-//const deleteUrl = "https://wspoldzielenieplikow.me:443/pliki";
 //const deleteUrl = "https://twojepliki.tech:443/pliki";
 
 let wyslanePliki = [];
@@ -25,8 +19,6 @@ async function fetchData() {
 		const card = document.createElement("div");
 		card.className = "col-md-4 ";
 		card.innerHTML = `
-         
-        
                         <div class="card-body mb-4">
                          <p class="card-text">${customer.name}</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -39,8 +31,7 @@ async function fetchData() {
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${customer.name}')">Usuń</button>
               </div>
-            </div>
-      
+            </div>    
         `;
 		container.appendChild(card);
 		wyslanePliki.push(customer.name);
@@ -60,7 +51,6 @@ function getCurrentTime() {
 	const hours = date.getHours();
 	const minutes = date.getMinutes();
 	const seconds = date.getSeconds();
-
 	const time = `${padZero(hours)}.${padZero(minutes)}.${padZero(seconds)}`;
 	return time;
 }
@@ -149,6 +139,7 @@ async function wyslijPliki(files) {
 		showMessage('Wystąpił błąd. Pliki nie zostały wysłane.');
 	}
 }
+
 async function usunPlik(nazwaPliku) {
 	showConfirmationModal(`Czy na pewno chcesz usunąć plik "${nazwaPliku}"?`, async (confirmed) => {
 		if (confirmed) {
@@ -227,7 +218,6 @@ async function showReplacementPrompt(fileName) {
 		const replacementMessageElement = document.getElementById("replacementMessage");
 		replacementMessageElement.textContent = `Plik "${fileName}" jest już na dysku.`;
 
-
 		const cancelButton = document.getElementById("cancelReplace");
 		cancelButton.addEventListener("click", () => {
 			$('#replacementModal').modal('hide');
@@ -250,30 +240,24 @@ function podgladPliku() {
     });
 
     if (zaznaczonePliki.length === 1) {
-        const podgladUrl = zaznaczonePliki[0]; // URL do podglądu pliku
+        const podgladUrl = zaznaczonePliki[0]; 
 
-        // Używamy Axios, aby pobrać zawartość pliku
         axios.get(podgladUrl, { responseType: 'blob' })
             .then(response => {
                 const blob = new Blob([response.data], { type: response.headers['content-type'] });
 
-                // Tworzymy URL z bloba
                 const fileUrl = URL.createObjectURL(blob);
 
-                // Pobieramy kontener lightboxa
                 const lightboxContainer = document.getElementById('lightbox-container');
-                lightboxContainer.innerHTML = ''; // Wyczyść zawartość kontenera
+                lightboxContainer.innerHTML = ''; 
 
-                // Tworzymy element, w którym wyświetlimy zawartość pliku
                 const fileContent = document.createElement('iframe');
                 fileContent.src = fileUrl;
                 fileContent.style.width = '800px';
                 fileContent.style.height = '600px';
 
-                // Dodajemy zawartość do kontenera lightboxa
                 lightboxContainer.appendChild(fileContent);
 
-                // Pokazujemy lightbox
                 lightboxContainer.style.display = 'block';
             })
             .catch(error => {
@@ -287,17 +271,11 @@ function podgladPliku() {
 
 //Podkatalog
 
- function FetchFiles() {
-        // Your code to fetch files goes here
-    }
+ function FetchFiles() {}
 
-    function hideErrorMessage() {
-        // Your code to hide error messages goes here
-    }
+    function hideErrorMessage() {}
 
-    function displayErrorMessage(message) {
-        // Your code to display error messages goes here
-    }
+    function displayErrorMessage(message) {}
 
     $(document).ready(function () {
         $('#value-form').submit(function (event) {
@@ -318,21 +296,18 @@ function podgladPliku() {
                         displayErrorMessage("Wystąpił błąd podczas wysyłania danych: " + error);
                     },
                     complete: function () {
-                        // Po zakończeniu zapytania AJAX, odśwież stronę
                         location.reload();
                     }
                 });
             }
         });
-
-        // Handle the "Back" button click
+ 
         $('#back-button').click(function () {
-            // Clear the input field and sent parameter
             $('#value-input').val('');
             $.ajax({
                 url: '/katalog',
                 type: 'POST',
-                data: { pod_folder: null }, // Set the parameter to null to remove it on the server-side
+                data: { pod_folder: null },
                 success: function (response) {
                     FetchFiles();
                     hideErrorMessage();
@@ -341,7 +316,6 @@ function podgladPliku() {
                     displayErrorMessage("Wystąpił błąd podczas wysyłania danych: " + error);
                 },
                 complete: function () {
-                    // Po zakończeniu zapytania AJAX, odśwież stronę
                     location.reload();
                 }
             });
@@ -351,9 +325,8 @@ function podgladPliku() {
 //Wysuwany formularz do podkatalogu  
     
     const expandButton = document.getElementById("expand-button");
-		        const hiddenDiv = document.getElementById("hidden-div");
-
-		        expandButton.addEventListener("click", () => {
+	const hiddenDiv = document.getElementById("hidden-div");
+	expandButton.addEventListener("click", () => {
 		            if (hiddenDiv.style.display === "none") {
 		                hiddenDiv.style.display = "block";
 		            } else {
