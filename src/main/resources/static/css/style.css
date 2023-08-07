@@ -179,3 +179,9 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 	color: #aaa;
 }
 
+/* Wysuwany formularz do podkatalogow */
+#hidden-div {
+            padding: 10px;
+            margin-top: 10px;
+        }
+

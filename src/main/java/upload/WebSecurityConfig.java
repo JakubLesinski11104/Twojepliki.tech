@@ -1,4 +1,4 @@
-package upload.logowanie;
+package upload;
 
 import javax.sql.DataSource;
 
@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+
+import upload.logowanie.UslugaDaneUzytkownika;
 
 @Configuration
 @EnableWebSecurity

@@ -50,13 +50,21 @@
 
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${#request.userPrincipal.principal.ImieNazwisko}]]</b> </p>
 
-	<div class="container text-center">
-     Stwórz folder i przejdz do niego:
+    <div class="container text-center">
+        <button id="expand-button" class="btn btn-primary">Stwórz folder i/lub przejdz do niego:</button>
+        <div id="hidden-div" style="display: none;">
 			<form id="value-form">
-				<input type="text" id="value-input" placeholder="Wprowadź wartość" required>
-				<button type="submit" class="btn btn-primary">Wyślij</button>
+				<input type="text" id="value-input" placeholder="Wprowadź nazwę folderu" required>
+				<button type="submit" class="btn btn-primary">Zatwierdz</button>
 				<button type="button" id="back-button" class="btn btn-primary btn-podfolder">Wróć</button>
 			</form>
+    
+</div>
+    </div>
+
+
+	<div class="container text-center">
+
 
 		
 

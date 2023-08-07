@@ -237,6 +237,9 @@ async function showReplacementPrompt(fileName) {
 		$('#replacementModal').modal('show');
 	});
 }
+
+//Podglad pliku
+
 function closeLightbox() {
     const lightboxContainer = document.getElementById('lightbox-container');
     lightboxContainer.style.display = 'none';
@@ -281,6 +284,8 @@ function podgladPliku() {
         showMessage('Proszę zaznaczyć jeden plik do podglądu.');
     }
 }
+
+//Podkatalog
 
  function FetchFiles() {
         // Your code to fetch files goes here
@@ -342,3 +347,16 @@ function podgladPliku() {
             });
         });
     });
+  
+//Wysuwany formularz do podkatalogu  
+    
+    const expandButton = document.getElementById("expand-button");
+		        const hiddenDiv = document.getElementById("hidden-div");
+
+		        expandButton.addEventListener("click", () => {
+		            if (hiddenDiv.style.display === "none") {
+		                hiddenDiv.style.display = "block";
+		            } else {
+		                hiddenDiv.style.display = "none";
+		            }
+		        });
