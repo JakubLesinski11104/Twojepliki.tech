@@ -1,4 +1,4 @@
-package upload.model;
+package aplikacja.model;
 
 public class PlikInfo {
 	private String nazwa;

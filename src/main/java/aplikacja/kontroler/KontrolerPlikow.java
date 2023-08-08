@@ -1,4 +1,4 @@
-package upload.kontroler;
+package aplikacja.kontroler;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import upload.model.PlikInfo;
-import upload.odpowiedz.KomunikatOdpowiedzi;
-import upload.usluga.UsługaPrzechowywaniaPlikow;
+import aplikacja.model.PlikInfo;
+import aplikacja.odpowiedz.KomunikatOdpowiedzi;
+import aplikacja.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
 @CrossOrigin("https://localhost:443")

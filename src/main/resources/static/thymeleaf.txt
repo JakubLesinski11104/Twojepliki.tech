@@ -1,5 +1,5 @@
 //wylogowanie
-<form th:action="@{/logout}" method="post">
+<form th:action="@{/wyloguj}" method="post">
 <input type="submit" value="Sign Out" /></form>
 		
 //wyswietlanie username

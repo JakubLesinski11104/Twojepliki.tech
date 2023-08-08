@@ -1,9 +1,9 @@
-package upload.wyjatek;
+package aplikacja.wyjatek;
 
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import upload.odpowiedz.KomunikatOdpowiedzi;
+import aplikacja.odpowiedz.KomunikatOdpowiedzi;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package upload.kontroler;
+package aplikacja.kontroler;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import upload.logowanie.RepozytoriumLogowania;
-import upload.logowanie.Uzytkownik;
-import upload.usluga.UsługaPrzechowywaniaPlikow;
+import aplikacja.logowanie.RepozytoriumLogowania;
+import aplikacja.logowanie.Uzytkownik;
+import aplikacja.usluga.UsługaPrzechowywaniaPlikow;
 
 @Controller
 @CrossOrigin("https://localhost:443")

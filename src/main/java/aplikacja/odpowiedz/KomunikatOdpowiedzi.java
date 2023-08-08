@@ -1,4 +1,4 @@
-package upload.odpowiedz;
+package aplikacja.odpowiedz;
 
 public class KomunikatOdpowiedzi {
 	private String odpowiedz;

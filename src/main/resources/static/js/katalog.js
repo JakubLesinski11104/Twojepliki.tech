@@ -1,9 +1,8 @@
 const plikiurl = "https://localhost:443/pliki";
-//const url = "https://twojepliki.tech:443/pliki";
+//const plikiurl = "https://twojepliki.tech:443/pliki";
 
 const uploadUrl = "https://localhost:443/wyslij";
 //const uploadUrl = "https://twojepliki.tech:443/wyslij";
-
 
 const deleteUrl = "https://localhost:443/pliki";
 //const deleteUrl = "https://twojepliki.tech:443/pliki";
@@ -230,44 +229,6 @@ async function showReplacementPrompt(fileName) {
 
 //Podglad pliku
 
-function closeLightbox() {
-    const lightboxContainer = document.getElementById('lightbox-container');
-    lightboxContainer.style.display = 'none';
-}
-function podgladPliku() {
-    const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
-        return checkbox.value;
-    });
-
-    if (zaznaczonePliki.length === 1) {
-        const podgladUrl = zaznaczonePliki[0]; 
-
-        axios.get(podgladUrl, { responseType: 'blob' })
-            .then(response => {
-                const blob = new Blob([response.data], { type: response.headers['content-type'] });
-
-                const fileUrl = URL.createObjectURL(blob);
-
-                const lightboxContainer = document.getElementById('lightbox-container');
-                lightboxContainer.innerHTML = ''; 
-
-                const fileContent = document.createElement('iframe');
-                fileContent.src = fileUrl;
-                fileContent.style.width = '800px';
-                fileContent.style.height = '600px';
-
-                lightboxContainer.appendChild(fileContent);
-
-                lightboxContainer.style.display = 'block';
-            })
-            .catch(error => {
-                console.error(error);
-                showMessage('Wystąpił błąd podczas pobierania pliku.');
-            });
-    } else {
-        showMessage('Proszę zaznaczyć jeden plik do podglądu.');
-    }
-}
 
 //Podkatalog
 

@@ -1,4 +1,4 @@
-package upload.kontroler;
+package aplikacja.kontroler;
 
 import java.io.UnsupportedEncodingException;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import upload.logowanie.RepozytoriumLogowania;
-import upload.logowanie.SerwisRejestracji;
-import upload.logowanie.Uzytkownik;
+import aplikacja.logowanie.RepozytoriumLogowania;
+import aplikacja.logowanie.SerwisRejestracji;
+import aplikacja.logowanie.Uzytkownik;
 
 
 @Controller

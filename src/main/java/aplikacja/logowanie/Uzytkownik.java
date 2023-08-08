@@ -1,4 +1,4 @@
-package upload.logowanie;
+package aplikacja.logowanie;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

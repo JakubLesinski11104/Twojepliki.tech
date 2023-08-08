@@ -1,4 +1,4 @@
-package upload;
+package aplikacja;
 
 import javax.sql.DataSource;
 
@@ -14,11 +14,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
-import upload.logowanie.UslugaDaneUzytkownika;
+import aplikacja.logowanie.UslugaDaneUzytkownika;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class KonfiguracjaZabezpieczenSieciowych extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
@@ -76,8 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				
 				.anyRequest().permitAll()
 
-				.and().formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/glowna")
-				.permitAll().and().logout().logoutSuccessUrl("/").permitAll();
+				.and().formLogin().loginPage("/login").usernameParameter("email").passwordParameter("haslo").defaultSuccessUrl("/glowna")
+				.permitAll().and().logout().logoutUrl("/wyloguj").logoutSuccessUrl("/").permitAll();
 
 		http.csrf().disable();
 		http.cors().disable();

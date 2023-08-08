@@ -1,4 +1,4 @@
-package upload.usluga;
+package aplikacja.usluga;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
