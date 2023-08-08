@@ -29,7 +29,12 @@ public class Uzytkownik {
 
 	@Column(name = "nazwisko", nullable = false, length = 20)
 	private String nazwisko;
+	
+	@Column(name = "kod_weyfikacyjny", length = 64)
+	private String kod_weyfikacyjny;
 
+	private boolean enabled;
+	
 	public Long getId() {
 		return id;
 	}
@@ -77,5 +82,24 @@ public class Uzytkownik {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getKodWeyfikacyjny() {
+		return kod_weyfikacyjny;
+	}
 
+	public void setKodWeyfikacyjny(String kod_weyfikacyjny) {
+		this.kod_weyfikacyjny = kod_weyfikacyjny;
+	}
+	
+	public String getPelneDane() {
+		return this.imie + " " + this.nazwisko;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

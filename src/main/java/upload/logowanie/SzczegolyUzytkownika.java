@@ -45,7 +45,7 @@ public class SzczegolyUzytkownika implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return uzytkownik.isEnabled();
 	}
 
 	public String getImieNazwisko() {

@@ -1,6 +1,12 @@
 package upload.kontroler;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import upload.logowanie.RepozytoriumLogowania;
+import upload.logowanie.SerwisRejestracji;
 import upload.logowanie.Uzytkownik;
 
 
@@ -23,7 +30,7 @@ public class KontrolerLogowania {
 
 	@Autowired
 
-	private RepozytoriumLogowania loginRepo;
+	private SerwisRejestracji Serwis_Logowania;
 
 	@GetMapping("/")
 
@@ -57,7 +64,7 @@ public class KontrolerLogowania {
 
 	@PostMapping("/proces_rejestracji")
 
-	public String procesRejestracji(@ModelAttribute("uzytkownik") Uzytkownik uzytkownik, Model model) {
+	public String procesRejestracji(@ModelAttribute("uzytkownik") Uzytkownik uzytkownik, Model model, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 
 		if (uzytkownik.getEmail() == null || uzytkownik.getEmail().isEmpty() || !uzytkownik.getEmail().contains("@")
 				|| uzytkownik.getEmail().length() < 6) {
@@ -66,7 +73,7 @@ public class KontrolerLogowania {
 			return "rejestracja";
 		}
 		if (uzytkownik.getUsername() == null || uzytkownik.getUsername().isEmpty()
-				|| !uzytkownik.getUsername().matches("^[a-zA-Z0-9]).{6,}$")) {
+				|| !uzytkownik.getUsername().matches("^[a-zA-Z0-9]+$")) {
 			model.addAttribute("komunikat_username",
 					"Nazwa uzytkownika musi zawierać mimimum 6 znaków i nie moze zawierać znaków specjalnych!");
 			return "rejestracja";
@@ -91,13 +98,7 @@ public class KontrolerLogowania {
 			return "rejestracja";
 		}
 		
-		BCryptPasswordEncoder EnkoderHasla = new BCryptPasswordEncoder();
-
-		String ZakodowaneHaslo = EnkoderHasla.encode(uzytkownik.getHaslo());
-
-		uzytkownik.setHaslo(ZakodowaneHaslo);
-
-		loginRepo.save(uzytkownik);
+		Serwis_Logowania.rejestracja(uzytkownik, getURL(request));	
 
 		return "pomyslna_rejestracja";
 
@@ -109,5 +110,19 @@ public class KontrolerLogowania {
 
 		return "index";
 
+	}
+	
+	private String getURL(HttpServletRequest request) {
+		String URL = request.getRequestURL().toString();
+		return URL.replace(request.getServletPath(), "");
+	}	
+	
+	@GetMapping("/weryfikacja")
+	public String weryfikacjaUzytkownika(@Param("kod") String kod) {
+		if (Serwis_Logowania.weryfikacja(kod)) {
+			return "poprawna_weyfikacja";
+		} else {
+			return "niepoprawna_weyfikacja";
+		}
 	}
 }
