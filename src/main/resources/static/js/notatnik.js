@@ -1,7 +1,7 @@
 const NotatnikapiBaseUrl = 'https://localhost:443';
 //const NotatnikapiBaseUrl = 'https://twojepliki.tech:443';
-const NotatnikgetFileUrl = `${NotatnikapiBaseUrl}/pliki/Twoja notatka.txt`;
-const NotatnikdeleteFileUrl = `${NotatnikapiBaseUrl}/pliki/Twoja notatka.txt`;
+const NotatnikgetFileUrl = `${NotatnikapiBaseUrl}/pliki/Twoja_notatka.txt`;
+const NotatnikdeleteFileUrl = `${NotatnikapiBaseUrl}/pliki/Twoja_notatka.txt`;
 const NotatnikuploadUrl = `${NotatnikapiBaseUrl}/wyslij`;
 
 const backButton = document.getElementById('backButton');
@@ -45,7 +45,7 @@ async function getFileFromApi() {
 async function saveNoteToServer(fileContent) {
 	try {
 		const formData = new FormData();
-		formData.append('file', new Blob([fileContent], { type: 'text/plain' }), 'Twoja notatka.txt');
+		formData.append('file', new Blob([fileContent], { type: 'text/plain' }), 'Twoja_notatka.txt');
 
 		const response = await fetch(NotatnikuploadUrl, {
 			method: 'POST',
