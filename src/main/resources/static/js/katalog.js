@@ -15,27 +15,34 @@ async function fetchData() {
 	const container = document.getElementById("data");
 
 	data.forEach((customer) => {
-		const card = document.createElement("div");
-		card.className = "col-md-4 ";
-		card.innerHTML = `
-                        <div class="card-body mb-4">
-                         <p class="card-text">${customer.name}</p>
-              <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-               <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${customer.url}">&nbsp;</label>
-                  <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${customer.url}" name="plik" value="${customer.url}">
-               </div>
+    const card = document.createElement("div");
+    card.className = "col-md-4 ";
+    card.innerHTML = `
+        <div class="card-body mb-4">
+        ${!customer.url.endsWith('/') && (customer.url.includes('.') || customer.url.endsWith('/')) ? `
+            <p class="card-text">${customer.name}</p>
+            <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${customer.url}')">Pobierz</button>
+                    <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${customer.url}">&nbsp;</label>
+                    <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${customer.url}" name="plik" value="${customer.url}">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${customer.url}')">Pobierz</button>
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${customer.name}')">Usuń</button>
                 <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="togglePodglad()">Podgląd</button>
-              </div>
-            </div>    
-        `;
-		container.appendChild(card);
-		wyslanePliki.push(customer.name);
-	});
+                ` : `
+                <div class="container text-center">
+                <p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${customer.name}</b></p>
+                  <div class="btn-group"></div>  
+                </div>
+                `}
+            </div>
+        </div>
+    `;
+    container.appendChild(card);
+    wyslanePliki.push(customer.name);
+});
 }
 
 function pobierzPlik(url) {
