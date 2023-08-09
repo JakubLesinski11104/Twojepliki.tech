@@ -76,8 +76,24 @@ public class KonfiguracjaZabezpieczenSieciowych extends WebSecurityConfigurerAda
 				
 				.anyRequest().permitAll()
 
-				.and().formLogin().loginPage("/login").usernameParameter("email").passwordParameter("haslo").defaultSuccessUrl("/glowna")
-				.permitAll().and().logout().logoutUrl("/wyloguj").logoutSuccessUrl("/").permitAll();
+				.and()
+				.formLogin()
+				.loginPage("/login")
+				.usernameParameter("email")
+				.passwordParameter("haslo")
+				.defaultSuccessUrl("/glowna")
+				.permitAll()
+				
+				.and()
+	            .rememberMe()
+	            .tokenValiditySeconds(7 * 24 * 60 * 60) // expiration time: 7 days
+	            .key("AbcdefghiJklmNoPqRstUvXyz")   // cookies will survive if restarted
+				
+	            .and()
+				.logout()
+				.logoutUrl("/wyloguj")
+				.logoutSuccessUrl("/")
+				.permitAll();
 
 		http.csrf().disable();
 		http.cors().disable();

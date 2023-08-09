@@ -29,6 +29,7 @@ async function fetchData() {
                   <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${customer.url}')">Pobierz</button>
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${customer.name}')">Usuń</button>
+                <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="togglePodglad()">Podgląd</button>
               </div>
             </div>    
         `;
@@ -229,6 +230,87 @@ async function showReplacementPrompt(fileName) {
 
 //Podglad pliku
 
+let isPodgladOpen = false;
+
+function togglePodglad() {
+    const lightboxContainer = document.getElementById('lightbox-container');
+    const podgladButton = document.getElementById('podglad');
+    const closeButton = document.getElementById('close-btn');
+
+    if (isPodgladOpen) {
+        lightboxContainer.style.display = 'none';
+        podgladButton.textContent = 'Podgląd';
+   	
+   const checkedCheckbox = document.querySelector('input[name="plik"]:checked');
+        if (checkedCheckbox) {
+            checkedCheckbox.checked = false;
+        }
+    } else {
+        const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
+            return checkbox.value;
+        });
+
+        if (zaznaczonePliki.length === 1) {
+            const podgladUrl = zaznaczonePliki[0];
+
+            const extension = podgladUrl.slice(-3).toLowerCase();
+
+            axios.get(podgladUrl, { responseType: 'blob' })
+                .then(response => {
+                    const blob = new Blob([response.data], { type: response.headers['content-type'] });
+
+                    const fileUrl = URL.createObjectURL(blob);
+
+                    lightboxContainer.innerHTML = '';
+
+                    let fileContent;
+
+                    if (extension === 'mp3' || extension === 'wav' || extension === 'flac' || extension === 'ogg' || extension === 'aac' || extension === 'wma' || extension === 'ape') {
+                        fileContent = document.createElement('audio');
+                        fileContent.src = fileUrl;
+                        fileContent.controls = true;
+                    } else if (extension === 'txt' || extension === 'cmd' || extension === 'bat') {
+                        fileContent = document.createElement('iframe');
+                        fileContent.src = fileUrl;
+                        fileContent.style.width = '800px';
+                        fileContent.style.height = '600px';
+                    } else if (['jpg', 'png', 'jpeg', 'gif', 'bmp', 'tiff', 'webp', 'svg', 'psd', 'ico', 'jp2'].includes(extension)) {
+                        fileContent = document.createElement('img');
+                        fileContent.src = fileUrl;
+                        fileContent.style.maxWidth = '800px';
+                        fileContent.style.maxHeight = '600px';
+                    } else if (['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', 'm4v', '3gp', 'rm'].includes(extension)) {
+                        fileContent = document.createElement('video');
+                        fileContent.src = fileUrl;
+                        fileContent.controls = true;
+                        fileContent.style.maxWidth = '800px';
+                        fileContent.style.maxHeight = '600px';
+                    } else if (extension === 'pdf' || extension === 'doc' || extension === 'ppt' || extension === 'xls'  || extension === 'xml' || extension === 'odt' || extension === 'zip' || extension === 'rar'|| extension === 'exe') {
+                        showMessage('Nieobsługiwany plik.');
+                    } else {
+                        fileContent = document.createElement('iframe');
+                        fileContent.src = fileUrl;
+                        fileContent.style.width = '800px';
+                        fileContent.style.height = '600px';
+                    }
+
+                    if (fileContent) {
+                        lightboxContainer.appendChild(fileContent);
+                        lightboxContainer.style.display = 'block';
+                        podgladButton.textContent = 'Zamknij podgląd';
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    showMessage('Wystąpił błąd podczas pobierania pliku.');
+                });
+        } else {
+            showMessage('Proszę zaznaczyć jeden plik do podglądu.');
+        }
+    }
+
+    isPodgladOpen = !isPodgladOpen;
+}
 
 //Podkatalog
 

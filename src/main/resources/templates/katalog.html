@@ -57,52 +57,8 @@
 
 <div class="container text-center">
     <div id="message-container"></div>  
-<button id="podglad" class="btn btn-sm btn-outline-secondary" onclick="podgladPliku()">Podgląd</button>
-<div id="lightbox-container" style="display: none;">        
-<button id="close-btn" onclick="closeLightbox()">Zamknij</button>
-</div>
-
-<script>
-
-function closeLightbox() {
-    const lightboxContainer = document.getElementById('lightbox-container');
-    lightboxContainer.style.display = 'none';
-}
-function podgladPliku() {
-    const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
-        return checkbox.value;
-    });
-
-    if (zaznaczonePliki.length === 1) {
-        const podgladUrl = zaznaczonePliki[0]; 
-
-        axios.get(podgladUrl, { responseType: 'blob' })
-            .then(response => {
-                const blob = new Blob([response.data], { type: response.headers['content-type'] });
-
-                const fileUrl = URL.createObjectURL(blob);
-
-                const lightboxContainer = document.getElementById('lightbox-container');
-                lightboxContainer.innerHTML = ''; 
-
-                const fileContent = document.createElement('iframe');
-                fileContent.src = fileUrl;
-                fileContent.style.width = '800px';
-                fileContent.style.height = '600px';
-
-                lightboxContainer.appendChild(fileContent);
-
-                lightboxContainer.style.display = 'block';
-            })
-            .catch(error => {
-                console.error(error);
-                showMessage('Wystąpił błąd podczas pobierania pliku.');
-            });
-    } else {
-        showMessage('Proszę zaznaczyć jeden plik do podglądu.');
-    }
-}
-</script>
+  
+<div id="lightbox-container" style="display: none;"></div>
 
      <form id="upload-form">
         <input type="file" id="file-input" name="file" multiple required>
