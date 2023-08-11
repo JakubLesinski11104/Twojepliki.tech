@@ -91,10 +91,10 @@
 								class="form-control" required minlength="6" maxlength="20"
 								title="Hasło musi zawierać małą i dużą literę a także znak specjalny lub cyfrę" />
 							<i class="password-toggle-icon fas fa-eye"
-								onclick="togglePasswordVisibility('haslo')"></i>
+								onclick="pokazHaslo('haslo')"></i>
 						</div>
 						<p th:text="${komunikat_haslo}"></p>
-						<div id="hasloErrorMsg" style="color: red;"></div>
+						<div id="hasloPowiadomienieBlad" style="color: red;"></div>
 					</div>
 				</div>
 				
@@ -106,10 +106,10 @@
 								title="Hasło musi zawierać małą i dużą literę a także znak specjalny lub cyfrę"
 								required minlength="6" maxlength="20" /> <i
 								class="password-toggle-icon fas fa-eye"
-								onclick="togglePasswordVisibility('hasloPowtorzone')"></i>
+								onclick="pokazHaslo('hasloPowtorzone')"></i>
 						</div>
 						<p th:text="${komunikat_haslo}"></p>
-						<div id="hasloPowtorzoneErrorMsg" style="color: red;"></div>
+						<div id="hasloPowtorzonePowiadomienieBlad" style="color: red;"></div>
 					</div>
 				</div>
 				

@@ -1,31 +1,31 @@
-const NotatnikapiBaseUrl = 'https://localhost:443';
-//const NotatnikapiBaseUrl = 'https://twojepliki.tech:443';
-const NotatnikgetFileUrl = `${NotatnikapiBaseUrl}/pliki/Twoja_notatka.txt`;
-const NotatnikdeleteFileUrl = `${NotatnikapiBaseUrl}/pliki/Twoja_notatka.txt`;
-const NotatnikuploadUrl = `${NotatnikapiBaseUrl}/wyslij`;
+const NotatnikURL = 'https://localhost:443';
+//const NotatnikURL = 'https://twojepliki.tech:443';
+const NotatnikURLPlik = `${NotatnikURL}/pliki/Twoja_notatka.txt`;
+const NotatnikURLUsuniecie = `${NotatnikURL}/pliki/Twoja_notatka.txt`;
+const NotatnikURLWyslij = `${NotatnikURL}/wyslij`;
 
-const backButton = document.getElementById('backButton');
-backButton.addEventListener('click', function() {
+const cofnijSidebarPrzycisk = document.getElementById('cofnijSidebarPrzycisk');
+cofnijSidebarPrzycisk.addEventListener('click', function() {
 	const sidebar = document.getElementById('sidebar');
 	sidebar.classList.remove('show');
-	backButton.classList.add('hidden');
-	toggleSidebarButton.classList.remove('hidden');
+	cofnijSidebarPrzycisk.classList.add('hidden');
+	sidebarNotatnikPrzycisk.classList.remove('hidden');
 });
 
-function toggleSidebar() {
+function pokazSidebar() {
 	const sidebar = document.getElementById('sidebar');
 	sidebar.classList.toggle('show');
 }
 
-function hideSidebar() {
+function ukryjSidebar() {
 	const sidebar = document.getElementById('sidebar');
 	sidebar.style.transition = 'all 0.5s';
 	sidebar.style.right = '-300px';
 }
 
-async function getFileFromApi() {
+async function getPlikZApi() {
 	try {
-		const response = await fetch(NotatnikgetFileUrl);
+		const response = await fetch(NotatnikURLPlik);
 
 		if (response.status === 404) {
 			return null; 
@@ -42,12 +42,12 @@ async function getFileFromApi() {
 	}
 }
 
-async function saveNoteToServer(fileContent) {
+async function zapiszNotatke(fileContent) {
 	try {
 		const formData = new FormData();
 		formData.append('file', new Blob([fileContent], { type: 'text/plain' }), 'Twoja_notatka.txt');
 
-		const response = await fetch(NotatnikuploadUrl, {
+		const response = await fetch(NotatnikURLWyslij, {
 			method: 'POST',
 			body: formData
 		});
@@ -63,9 +63,9 @@ async function saveNoteToServer(fileContent) {
 	}
 }
 
-async function deleteFileFromApi() {
+async function usunNotatke() {
 	try {
-		const response = await fetch(NotatnikdeleteFileUrl, {
+		const response = await fetch(NotatnikURLUsuniecie, {
 			method: 'DELETE'
 		});
 
@@ -80,22 +80,22 @@ async function deleteFileFromApi() {
 	}
 }
 
-function displayFileContent(fileContent) {
-	const noteTextArea = document.getElementById('noteTextArea');
-	noteTextArea.value = fileContent || '';
+function pokazNotatke(fileContent) {
+	const notatkaTextArea = document.getElementById('notatkaTextArea');
+	notatkaTextArea.value = fileContent || '';
 }
 
-async function handleSaveButtonClick() {
-	const noteTextArea = document.getElementById('noteTextArea');
-	const fileContent = noteTextArea.value;
+async function zapisywanieNotatki() {
+	const notatkaTextArea = document.getElementById('notatkaTextArea');
+	const fileContent = notatkaTextArea.value;
 
 	try {
-		hideSidebar();
+		ukryjSidebar();
 		const sidebar = document.getElementById('sidebar');
 		sidebar.addEventListener('transitionend', async function onTransitionEnd() {
 		sidebar.removeEventListener('transitionend', onTransitionEnd);
-			await deleteFileFromApi();
-			await saveNoteToServer(fileContent);
+			await usunNotatke();
+			await zapiszNotatke(fileContent);
 			setTimeout(() => {
 				window.location.reload();
 			}, 750);
@@ -105,28 +105,28 @@ async function handleSaveButtonClick() {
 	}
 }
 
-async function initializeApp() {
+async function notatnik() {
 	try {
-		const fileContent = await getFileFromApi();
+		const fileContent = await getPlikZApi();
 		if (fileContent === null) {
-			await saveNoteToServer('');
+			await zapiszNotatke('');
 			window.location.reload();
 		} else {
-			displayFileContent(fileContent);
+			pokazNotatke(fileContent);
 		}
 	} catch (error) {
 		console.error('Wystąpił błąd podczas inicjalizacji aplikacji:', error);
 	}
 
-	const saveButton = document.getElementById('saveButton');
-	saveButton.addEventListener('click', handleSaveButtonClick);
-	const toggleSidebarButton = document.getElementById('toggleSidebarButton');
-	toggleSidebarButton.addEventListener('click', toggleSidebar);
+	const zapiszNotatkePrzycisk = document.getElementById('zapiszNotatkePrzycisk');
+	zapiszNotatkePrzycisk.addEventListener('click', zapisywanieNotatki);
+	const sidebarNotatnikPrzycisk = document.getElementById('sidebarNotatnikPrzycisk');
+	sidebarNotatnikPrzycisk.addEventListener('click', pokazSidebar);
 }
 
-initializeApp();
+notatnik();
 
-const toggleSidebarButton = document.getElementById('toggleSidebarButton');
-toggleSidebarButton.addEventListener('click', function() {
+const sidebarNotatnikPrzycisk = document.getElementById('sidebarNotatnikPrzycisk');
+sidebarNotatnikPrzycisk.addEventListener('click', function() {
 	this.classList.add('hidden');
 });

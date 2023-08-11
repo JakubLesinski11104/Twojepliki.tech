@@ -45,61 +45,62 @@
 
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${#request.userPrincipal.principal.ImieNazwisko}]]</b> </p>
     <div class="container text-center">
-        <button id="expand-button" class="btn btn-primary">Stwórz folder i/lub przejdz do niego:</button>
-        <div id="hidden-div" style="display: none;">
-			<form id="value-form">
-				<input type="text" id="value-input" placeholder="Wprowadź nazwę folderu" required>
+    
+        <button id="podktalogButton" class="btn btn-primary">Stwórz folder i/lub przejdz do niego:</button>
+        <div id="podkatalogDiv" style="display: none;">
+			<form id="podkatalogForm">
+				<input type="text" id="podkatalogInput" placeholder="Wprowadź nazwę folderu" required>
 				<button type="submit" class="btn btn-primary">Zatwierdz</button>
-				<button type="button" id="back-button" class="btn btn-primary btn-podfolder">Wróć</button>
+				<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Wróć</button>
 			</form>
     	</div>
     </div>
 
 <div class="container text-center">
-    <div id="message-container"></div>  
+    <div id="divPowiadomienie"></div>  
   
-<div id="lightbox-container" style="display: none;"></div>
+<div id="lightboxDiv" style="display: none;"></div>
 
-     <form id="upload-form">
-        <input type="file" id="file-input" name="file" multiple required>
+     <form id="wysylaniePlikowForm">
+        <input type="file" id="plikInput" name="file" multiple required>
         <button type="submit" class="btn btn-primary">Wyślij plik</button>
     </form>
 </br>
      <button id="pobierz">Pobierz zaznaczone pliki</button>
      <hr />
-    <div class="row" id="data"></div>
+    <div class="row" id="listaPlikow"></div>
  <hr />
  
-         <div class="modal" id="confirmationModal">
+         <div class="modal" id="oknoPotwierdzenia">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Potwierdzenie usunięcia pliku</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body" id="confirmationMessage">
+            <div class="modal-body" id="potwierdzeniePowiadomienie">
                 Czy na pewno chcesz usunąć plik?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="confirmDelete">Tak, chcę usunąć</button>
+                <button type="button" class="btn btn-success" id="potwierdzUsuniecie">Tak, chcę usunąć</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie, nie chcę usunąć</button>
             </div>
         </div>
     </div>
 </div>
-   <div class="modal" id="replacementModal" tabindex="-1" role="dialog">
+   <div class="modal" id="zamianaModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Potwierdzenie zastąpienia pliku</h5>
+                <h5 class="modal-title">Plik już istnieje!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="replacementMessage">
+            <div class="modal-body" id="istniejePlikPowiadomienie">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelReplace" data-dismiss="modal">Anuluj</button>
+                <button type="button" class="btn btn-secondary" id="anulujIstniejePlik" data-dismiss="modal">Anuluj</button>
             </div>
         </div>
     </div>
@@ -109,7 +110,7 @@
   <script type="text/javascript" src="js/katalog.js"></script>
   
     <div class="container vertical-btn-container">
-  <div class="toggle-button" id="toggleSidebarButton">Notatnik</div>
+  <div class="toggle-button" id="sidebarNotatnikPrzycisk">Notatnik</div>
 </div>
   <div class="sidebar" id="sidebar">
     <div class="container mt-5">
@@ -117,9 +118,9 @@
         <div class="col-md-8 offset-md-2">
           <h1 class="text-center mb-4">Notatnik</h1>
           <div class="note-container">
-            <textarea id="noteTextArea" class="form-control mb-3" rows="10" cols="50"></textarea>
-            <button id="saveButton" class="btn btn-primary">Zapisz</button>
-            <button id="backButton" class="btn btn-secondary">Powrót</button> 
+            <textarea id="notatkaTextArea" class="form-control mb-3" rows="10" cols="50"></textarea>
+            <button id="zapiszNotatkePrzycisk" class="btn btn-primary">Zapisz</button>
+            <button id="cofnijSidebarPrzycisk" class="btn btn-secondary">Powrót</button> 
           </div>
         </div>
       </div>

@@ -55,22 +55,11 @@
 		</div>
 	</div>
 	
-		<div class="container text-center">
-			<div>
-				<form th:action="@{/logout}" method="post">
-					<p>
+		<div class="container text-center">					
 					<div
 						th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}">
 						<p>Jesteś zalogowany jako admininistator.</p>
-					</div>
-					<p>
-						Witaj <b>[[${#request.userPrincipal.principal.ImieNazwisko}]]</b>
-						Witaj <b>[[${#request.userPrincipal.principal.username}]]</b>
-					</p>
-					<input type="submit" value="Wyloguj się" />
-				</form>
-			</div>
-			
+					</div>				
 			<div>
 				<h1>Lista uzytkownikow</h1>
 			</div>
@@ -100,14 +89,16 @@
 		
 		<div class="container text-center">
 			<h1>Pliki użytkowników:</h1>
-			<form id="value-form">
-				<input type="text" id="value-input" placeholder="Wprowadź wartość"
+			<form id="admin_form">
+				<input type="text" id="admin_input" placeholder="Wprowadź wartość"
 					required>
 				<button type="submit" class="btn btn-primary">Wyślij</button>
 			</form>
-			<div id="error-message" style="display: none;"
+			
+			<div id="powiadomienie_bledu" style="display: none;"
 				class="alert alert-danger"></div>
-			<table id="fileList" class="table table-striped table-bordered">
+				
+			<table id="tabelkaListaPlikow" class="table table-striped table-bordered">
 				<thead class="thead-dark">
 					<tr>
 						<th>Nazwa pliku</th>
@@ -118,7 +109,7 @@
 			</table>
 		</div>
 
-		<script  type="text/javascript" src="js/plikiadmina.js"></script>
+		<script type="text/javascript" src="js/plikiadmina.js"></script>
 		
 <footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>

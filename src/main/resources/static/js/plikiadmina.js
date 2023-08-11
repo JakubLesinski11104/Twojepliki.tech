@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	$('#value-form').submit(function(event) {
+	$('#admin_form').submit(function(event) {
 		event.preventDefault();
 
-		var value = $('#value-input').val();
+		var value = $('#admin_input').val();
 
 		if (value) {
 			$.ajax({
@@ -10,37 +10,37 @@ $(document).ready(function() {
 				type: 'POST',
 				data: { adminpliki: value },
 				success: function(response) {
-					fetchFiles();
-					hideErrorMessage();
+					listaPlikow();
+					ukryjPowiadomienieBlad();
 				},
 				error: function(error) {
-					displayErrorMessage("Wystąpił błąd podczas wysyłania danych: " + error);
+					pokazPowiadomienieBlad("Wystąpił błąd podczas wysyłania danych: " + error);
 				}
 			});
 		}
 	});
 });
 
-const apiUrl = "https://localhost:443/plikiAdmin";
-//const apiUrl = "https://twojepliki.tech:443/plikiAdmin";
+const plikiAdminaUrl = "https://localhost:443/plikiAdmin";
+//const plikiAdminaUrl = "https://twojepliki.tech:443/plikiAdmin";
 
-const fileListDiv = document.getElementById("fileList");
+const tabelaPlikow = document.getElementById("tabelkaListaPlikow");
 
-async function fetchFiles() {
+async function listaPlikow() {
 	try {
-		const response = await fetch(apiUrl);
+		const response = await fetch(plikiAdminaUrl);
 		const data = await response.json();
-		displayFiles(data);
+		wyswietlPliki(data);
 	} catch (error) {
-		displayErrorMessage("Wystąpił błąd podczas pobierania danych z API lub nie znaleziono użytkownika.");
+		pokazPowiadomienieBlad("Wystąpił błąd podczas pobierania danych z API lub nie znaleziono użytkownika.");
 	}
 }
 
-function displayFiles(files) {
-	const tbody = document.getElementById("fileList").getElementsByTagName('tbody')[0];
+function wyswietlPliki(pliki) {
+	const tbody = document.getElementById("tabelkaListaPlikow").getElementsByTagName('tbody')[0];
 	tbody.innerHTML = "";
 
-	if (files.length === 0) {
+	if (pliki.length === 0) {
 		const emptyRow = tbody.insertRow();
 		const emptyCell = emptyRow.insertCell();
 		emptyCell.colSpan = 1;
@@ -48,23 +48,23 @@ function displayFiles(files) {
 		return;
 	}
 
-	files.forEach((file) => {
+	pliki.forEach((plik) => {
 		const row = tbody.insertRow();
 		const nameCell = row.insertCell();
 
-		nameCell.textContent = file.name;
+		nameCell.textContent = plik.name;
 	});
 }
 
-function displayErrorMessage(message) {
-	const errorMessageDiv = document.getElementById("error-message");
-	errorMessageDiv.textContent = message;
-	errorMessageDiv.style.display = "block";
+function pokazPowiadomienieBlad(powiadomienie) {
+	const DivPowiadomienieBlad = document.getElementById("powiadomienie_bledu");
+	DivPowiadomienieBlad.textContent = powiadomienie;
+	DivPowiadomienieBlad.style.display = "block";
 }
 
-function hideErrorMessage() {
-	const errorMessageDiv = document.getElementById("error-message");
-	errorMessageDiv.style.display = "none";
+function ukryjPowiadomienieBlad() {
+	const DivPowiadomienieBlad = document.getElementById("powiadomienie_bledu");
+	DivPowiadomienieBlad.style.display = "none";
 }
 
-fetchFiles();
+listaPlikow();
