@@ -105,6 +105,20 @@ function pobierzZip(urls) {
 	});
 }
 
+ document.getElementById("plikInput").addEventListener("change", function (e) {
+        var plikWyslijPokaz = document.getElementById("plikWyslijPokaz");
+        var wyslijPlikButton = document.getElementById("wyslijPlikButton");
+        plikWyslijPokaz.innerHTML = "";
+        for (var i = 0; i < e.target.files.length; i++) {
+            var plikNazwa = e.target.files[i].name;
+            var plikInfo = document.createElement("p");
+            plikInfo.textContent = "Wybrany plik: " + plikNazwa;
+            plikWyslijPokaz.appendChild(plikInfo);
+        }
+        plikWyslijPokaz.style.display = "block";
+        wyslijPlikButton.style.display = "block";
+    });
+    
 let czyZastapicPlik = null;
 
 async function wyslijPliki(files) {
@@ -243,38 +257,27 @@ async function pokazPodpowiedzZastapienia(nazwaPliku) {
 
 let czyPodgladWlaczony = false;
 
+
 function pokazPodglad() {
-    const LightboxDiv = document.getElementById('lightboxDiv');
-    const podgladButton = document.getElementById('podglad');
-    const zamknijButton = document.getElementById('zamknij-btn');
+    const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
+        return checkbox.value;
+    });
 
-    if (czyPodgladWlaczony) {
-        LightboxDiv.style.display = 'none';
-        podgladButton.textContent = 'Podgląd';
-   	
-   const zaznaczonyCheckbox = document.querySelector('input[name="plik"]:checked');
-        if (zaznaczonyCheckbox) {
-            zaznaczonyCheckbox.checked = false;
-        }
-    } else {
-        const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
-            return checkbox.value;
-        });
+    if (zaznaczonePliki.length === 1) {
+        const podgladUrl = zaznaczonePliki[0];
+        const rozszerzenie = podgladUrl.slice(-3).toLowerCase();
 
-        if (zaznaczonePliki.length === 1) {
-            const podgladUrl = zaznaczonePliki[0];
+        axios.get(podgladUrl, { responseType: 'blob' })
+            .then(response => {
+                const blob = new Blob([response.data], { type: response.headers['content-type'] });
+                const plikUrl = URL.createObjectURL(blob);
 
-            const rozszerzenie = podgladUrl.slice(-3).toLowerCase();
+                const LightboxDiv = document.getElementById('lightboxDiv');
+                const lightboxZawartosc = document.getElementById('lightboxZawartosc');
+                
+                lightboxZawartosc.innerHTML = '';
 
-            axios.get(podgladUrl, { responseType: 'blob' })
-                .then(response => {
-                    const blob = new Blob([response.data], { type: response.headers['content-type'] });
-
-                    const plikUrl = URL.createObjectURL(blob);
-
-                    LightboxDiv.innerHTML = '';
-
-                    let zawartoscPliku;
+                let zawartoscPliku;
 
                     if (rozszerzenie === 'mp3' || rozszerzenie === 'wav' || rozszerzenie === 'flac' || rozszerzenie === 'ogg' || rozszerzenie === 'aac' || rozszerzenie === 'wma' || rozszerzenie === 'ape') {
                         zawartoscPliku = document.createElement('audio');
@@ -306,21 +309,37 @@ function pokazPodglad() {
                     }
 
                     if (zawartoscPliku) {
-                        LightboxDiv.appendChild(zawartoscPliku);
-                        LightboxDiv.style.display = 'block';
-                        podgladButton.textContent = 'Zamknij podgląd';
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    pokazPowiadomienie('Wystąpił błąd podczas pobierania pliku.');
-                });
-        } else {
-            pokazPowiadomienie('Proszę zaznaczyć jeden plik do podglądu.');
-        }
+                    lightboxZawartosc.appendChild(zawartoscPliku);
+                    
+                    LightboxDiv.style.display = 'flex';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                pokazPowiadomienie('Wystąpił błąd podczas pobierania pliku.');
+            });
+    } else {
+        pokazPowiadomienie('Proszę zaznaczyć jeden plik do podglądu.');
     }
 
     czyPodgladWlaczony = !czyPodgladWlaczony;
+    
+    document.addEventListener("click", function(event) {
+    const LightboxDiv = document.getElementById('lightboxDiv');
+    const czyPodgladWlaczony = LightboxDiv.style.display === 'flex';
+
+    if (czyPodgladWlaczony && !event.target.closest("#lightboxZawartosc")) {
+        const podgladButton = document.getElementById('podglad');
+        const zaznaczonyCheckbox = document.querySelector('input[name="plik"]:checked');
+
+        LightboxDiv.style.display = 'none';
+        podgladButton.textContent = 'Podgląd';
+
+        if (zaznaczonyCheckbox) {
+            zaznaczonyCheckbox.checked = false;
+        }
+    }
+});
 }
 
 //Podkatalog
