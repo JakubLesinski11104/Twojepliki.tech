@@ -54,8 +54,11 @@
 		<h3>
 			<a th:href="@{/glowna}">Wróć do strony głównej</a>
 		</h3>
+		<div sec:authorize="isAuthenticated()">
 		<a th:href="@{/kontakt/JL}">JL</a> <a th:href="@{/kontakt/JP}">JP</a>
+		 </div>
 	</div>
+
 
 	<footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
