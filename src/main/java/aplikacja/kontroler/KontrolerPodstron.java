@@ -129,7 +129,7 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 		
 		podfolderUsun = pod_folderUsun;
 		
-		return "katalog";
+		return "usuwanie";
 	}
 	
 	@GetMapping("/regulamin")
