@@ -70,6 +70,8 @@ public class KonfiguracjaZabezpieczenSieciowych extends WebSecurityConfigurerAda
 				
 				.antMatchers("/katalog").authenticated()
 				
+				.antMatchers("/usuwanie").authenticated()
+				
 				.antMatchers("/udostepnijplik").authenticated()
 				
 				.antMatchers("/udostepnij").authenticated()

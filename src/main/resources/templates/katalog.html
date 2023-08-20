@@ -46,17 +46,19 @@
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${#request.userPrincipal.principal.ImieNazwisko}]]</b> </p>
     <div class="container text-center">
     
-        <button id="podktalogButton" class="btn btn-primary">Stwórz folder i/lub przejdz do niego:</button>
+        <button id="podktalogButton" class="btn btn-primary">Przejdz do katalogu:</button>
         <div id="podkatalogDiv" class="podkatalog" style="display: none;">
         
 			<form id="podkatalogForm">
+			Chcesz przejsc do katalogu lub go utworzyć?
 				<input type="text" id="podkatalogInput" placeholder="Wprowadź nazwę folderu" required>
-				<button type="submit" class="btn btn-primary">Zatwierdz</button>
-				<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Wróć</button>
+				<button type="submit" class="btn btn-primary">Zatwierdz</button><br/>
+				<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Powrót do katalogu nadrzednego</button>
 			</form>
     	</div>
     </div>
 <br/>
+
 <div class="container text-center">
     <div id="divPowiadomienie"></div>  
   

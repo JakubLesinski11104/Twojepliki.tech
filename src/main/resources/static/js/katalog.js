@@ -39,6 +39,7 @@ async function fetchData() {
 					<div class="container text-center">
 					<p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
 					<div class="btn-group"></div>  
+					<button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usun</button>
 					</div>
 					`}
 				</div>
@@ -360,7 +361,7 @@ function pokazPodglad() {
                 $.ajax({
                     url: '/katalog',
                     type: 'POST',
-                    data: { pod_folder: value },
+                    data: { pod_folder: value},
                     success: function (response) {
                         FetchFiles();
                         ukryjPowiadomienieBledne();
@@ -377,10 +378,11 @@ function pokazPodglad() {
  
         $('#podkatalogCofnijButton').click(function () {
             $('#podkatalogInput').val('');
+             $('#podkatalogUsunInput').val('')
             $.ajax({
                 url: '/katalog',
                 type: 'POST',
-                data: { pod_folder: null },
+                data: { pod_folder: null},
                 success: function (response) {
                     FetchFiles();
                     ukryjPowiadomienieBledne();
@@ -405,4 +407,4 @@ function pokazPodglad() {
 		            } else {
 		                PodkatalogDiv.style.display = "none";
 		            }
-		        });
+		        });       
