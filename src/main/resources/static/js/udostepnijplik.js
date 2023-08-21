@@ -61,6 +61,43 @@ async function fetchData() {
 
 fetchData();
 
+/*Linux
+async function fetchData() {
+	const response = await fetch(url);
+	const data = await response.json();
+	const container = document.getElementById("PlikiDoUdostepnienia");
+
+	data.forEach((plik) => {
+		if (plik.name === "Twoja_notatka.txt") {
+        return;
+    }
+    
+    const fileNameParts = plik.name.split('.');
+    const fileExtension = fileNameParts.length > 1 ? fileNameParts[fileNameParts.length - 1] : '';
+
+    const card = document.createElement("div");
+    card.className = "col-md-4 ";
+
+    card.innerHTML = `
+        <div class="card-body mb-4">
+            ${fileExtension !== '' ? `
+                <p class="card-text">${plik.name}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-primary btn-block" onclick="udostepnijPlik('${plik.url}', '${plik.name}')">Udostępnij</button>
+                </div>` : `
+                <div class="container text-center">
+                    <p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
+                    <div class="btn-group"></div>  
+                </div>`}
+        </div>
+    </div>`;
+
+    container.appendChild(card);
+    wyslanePliki.push(plik.name);
+});
+}
+*/
+
 function udostepnijPlik(url, nazwaPliku) {
 	fetch(url)
 		.then(response => response.blob())

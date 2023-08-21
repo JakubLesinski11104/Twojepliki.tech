@@ -18,6 +18,7 @@ async function fetchData() {
 		if (plik.name === "Twoja_notatka.txt") {
 			return;
 		}
+    const isUdostepnioneFolder = plik.name === "Udostepnione";
 
 		const card = document.createElement("div");
 		card.className = "col-md-4 ";
@@ -25,30 +26,82 @@ async function fetchData() {
 			<div class="card-body mb-4">
 				${!plik.url.endsWith('/') && (plik.url.includes('.') || plik.url.endsWith('/')) ? `
 					<p class="card-text">${plik.name}</p>
-					<div class="d-flex justify-content-between align-items-center">
-						<div class="btn-group">
-							<label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
-							<input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
-						</div>
-						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
-						</div>
-						<button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-						<button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
-					</div>` : `
-					<div class="container text-center">
-					<p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
-					<div class="btn-group"></div>  
-					<button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usun</button>
-					</div>
-					`}
-				</div>
-			</div>
-		`;
-		container.appendChild(card);
-		wyslanePliki.push(plik.name);
-	});
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
+                        <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
+                    </div>
+                    ${isUdostepnioneFolder ? '' : `
+                        <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
+                        <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
+                    `}
+                </div>` : `
+                <div class="container text-center">
+                    <p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
+                    <div class="btn-group"></div>  
+                    ${isUdostepnioneFolder ? '' : `
+                        <button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usuń</button>
+                    `}
+                </div>`}
+        </div>
+    </div>`;
+
+    container.appendChild(card);
+    wyslanePliki.push(plik.name);
+});
 }
+
+/*Linux
+async function fetchData() {
+	const response = await fetch(plikiurl);
+	const data = await response.json();
+	const container = document.getElementById("listaPlikow");
+
+	data.forEach((plik) => {
+    if (plik.name === "Twoja_notatka.txt") {
+        return;
+    }
+    
+ const fileNameParts = plik.name.split('.');
+    const fileExtension = fileNameParts.length > 1 ? fileNameParts[fileNameParts.length - 1] : '';
+        const isUdostepnioneFolder = plik.name === "Udostepnione";
+    const card = document.createElement("div");
+    card.className = "col-md-4 ";
+    card.innerHTML = `
+        <div class="card-body mb-4">
+           ${fileExtension !== '' ? `
+                <p class="card-text">${plik.name}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
+                        <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
+                    </div>
+                    ${isUdostepnioneFolder ? '' : `
+                        <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
+                        <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
+                    `}
+                </div>` : `
+                <div class="container text-center">
+                    <p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
+                    <div class="btn-group"></div>  
+                    ${isUdostepnioneFolder ? '' : `
+                        <button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usuń</button>
+                    `}
+                </div>`}
+        </div>
+    </div>`;
+
+    container.appendChild(card);
+    wyslanePliki.push(plik.name);
+});
+}
+*/
 
 function pobierzPlik(url) {
 	const elementA = document.createElement('a');

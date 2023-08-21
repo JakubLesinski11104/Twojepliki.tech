@@ -109,7 +109,9 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	@PostMapping("/katalog")
 	@ResponseBody
 	public String katalogPost(@RequestParam("pod_folder") String pod_folder) {
-		
+		if (pod_folder == null || pod_folder.isEmpty()) {
+			return "katalog";
+		}
 		podfolder = pod_folder;
 		
 		return "katalog";
@@ -125,7 +127,14 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	
 	@PostMapping("/usuwanie")
 	@ResponseBody
-	public String usuwaniePost(@RequestParam("pod_folderUsun") String pod_folderUsun) {
+	public String usuwaniePost(@RequestParam("pod_folderUsun") String pod_folderUsun, Model model) {
+		if(pod_folderUsun == "Udostepnione") {
+			return "usuwanie";
+		}
+		
+		if (pod_folderUsun == null || pod_folderUsun.isEmpty()) {
+			return "katalog";
+		}
 		
 		podfolderUsun = pod_folderUsun;
 		
@@ -149,14 +158,18 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	@PostMapping("/udostepnij")
 	@ResponseBody
 	public String udostepnijplik(@RequestParam("udostepnij") String udostepnij) {
-		udostepnijplik = udostepnij;
 		
+		if (udostepnij == null || udostepnij.isEmpty()) {
+			return "katalog";
+		}
+		
+		udostepnijplik = udostepnij;
 		
 		return "udostepnij";
 	}
 
 	public Path getUdostepnijUzytkownika() {
-		var udostepnij_folder = Paths.get("Wyslane_pliki", udostepnijplik, "/Udostępnione");
+		var udostepnij_folder = Paths.get("Wyslane_pliki", udostepnijplik, "/Udostepnione");
 		return udostepnij_folder;
 	}
 	
@@ -191,7 +204,7 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 		}
 		
 			var username_folder = Paths.get("Wyslane_pliki", username);
-			var Udostepnioneusername_folder = Paths.get("Wyslane_pliki", username, "/Udostępnione");
+			var Udostepnioneusername_folder = Paths.get("Wyslane_pliki", username, "/Udostepnione");
 			try {
 
 				Files.createDirectories(username_folder);
