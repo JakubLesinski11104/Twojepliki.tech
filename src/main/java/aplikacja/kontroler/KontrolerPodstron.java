@@ -109,9 +109,7 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	@PostMapping("/katalog")
 	@ResponseBody
 	public String katalogPost(@RequestParam("pod_folder") String pod_folder) {
-		if (pod_folder == null || pod_folder.isEmpty()) {
-			return "katalog";
-		}
+		
 		podfolder = pod_folder;
 		
 		return "katalog";

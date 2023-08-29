@@ -248,14 +248,7 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 	display: block;
 }
 
-/*Ukryty Div Kontakt */
- .ukrytyDivKontakt {
-        display: none;
-        width: 200px;
-        height: 100px;
-        padding: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+.list-group-item {
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
