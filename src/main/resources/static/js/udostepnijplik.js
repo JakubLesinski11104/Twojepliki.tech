@@ -96,6 +96,8 @@ async function fetchData() {
 	wyslanePliki.push(plik.name);
 });
 }
+
+fetchData();
 */
 
 function udostepnijPlik(url, nazwaPliku) {
