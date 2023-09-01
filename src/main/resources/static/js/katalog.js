@@ -18,7 +18,7 @@ async function fetchData() {
 		if (plik.name === "Twoja_notatka.txt") {
 			return;
 		}
-    const isUdostepnioneFolder = plik.name === "Udostepnione";
+		const isUdostepnioneFolder = plik.name === "Udostepnione";
 
 		const card = document.createElement("div");
 		card.className = "col-md-4 ";
@@ -49,9 +49,9 @@ async function fetchData() {
         </div>
     </div>`;
 
-    container.appendChild(card);
-    wyslanePliki.push(plik.name);
-});
+		container.appendChild(card);
+		wyslanePliki.push(plik.name);
+	});
 }
 
 /*Linux
@@ -61,44 +61,44 @@ async function fetchData() {
 	const container = document.getElementById("listaPlikow");
 
 	data.forEach((plik) => {
-    if (plik.name === "Twoja_notatka.txt") {
-        return;
-    }
+	if (plik.name === "Twoja_notatka.txt") {
+		return;
+	}
     
  const fileNameParts = plik.name.split('.');
-    const fileExtension = fileNameParts.length > 1 ? fileNameParts[fileNameParts.length - 1] : '';
-        const isUdostepnioneFolder = plik.name === "Udostepnione";
-    const card = document.createElement("div");
-    card.className = "col-md-4 ";
-    card.innerHTML = `
-        <div class="card-body mb-4">
-           ${fileExtension !== '' ? `
-                <p class="card-text">${plik.name}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
-                        <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
-                    </div>
-                    ${isUdostepnioneFolder ? '' : `
-                        <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-                        <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
-                    `}
-                </div>` : `
-                <div class="container text-center">
-                    <p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
-                    <div class="btn-group"></div>  
-                    ${isUdostepnioneFolder ? '' : `
-                        <button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usuń</button>
-                    `}
-                </div>`}
-        </div>
-    </div>`;
+	const fileExtension = fileNameParts.length > 1 ? fileNameParts[fileNameParts.length - 1] : '';
+		const isUdostepnioneFolder = plik.name === "Udostepnione";
+	const card = document.createElement("div");
+	card.className = "col-md-4 ";
+	card.innerHTML = `
+		<div class="card-body mb-4">
+		   ${fileExtension !== '' ? `
+				<p class="card-text">${plik.name}</p>
+				<div class="d-flex justify-content-between align-items-center">
+					<div class="btn-group">
+						<label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
+						<input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
+					</div>
+					${isUdostepnioneFolder ? '' : `
+						<button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
+						<button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
+					`}
+				</div>` : `
+				<div class="container text-center">
+					<p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
+					<div class="btn-group"></div>  
+					${isUdostepnioneFolder ? '' : `
+						<button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usuń</button>
+					`}
+				</div>`}
+		</div>
+	</div>`;
 
-    container.appendChild(card);
-    wyslanePliki.push(plik.name);
+	container.appendChild(card);
+	wyslanePliki.push(plik.name);
 });
 }
 */
@@ -159,20 +159,20 @@ function pobierzZip(urls) {
 	});
 }
 
- document.getElementById("plikInput").addEventListener("change", function (e) {
-        var plikWyslijPokaz = document.getElementById("plikWyslijPokaz");
-        var wyslijPlikButton = document.getElementById("wyslijPlikButton");
-        plikWyslijPokaz.innerHTML = "";
-        for (var i = 0; i < e.target.files.length; i++) {
-            var plikNazwa = e.target.files[i].name;
-            var plikInfo = document.createElement("p");
-            plikInfo.textContent = "Wybrany plik: " + plikNazwa;
-            plikWyslijPokaz.appendChild(plikInfo);
-        }
-        plikWyslijPokaz.style.display = "block";
-        wyslijPlikButton.style.display = "block";
-    });
-    
+document.getElementById("plikInput").addEventListener("change", function(e) {
+	var plikWyslijPokaz = document.getElementById("plikWyslijPokaz");
+	var wyslijPlikButton = document.getElementById("wyslijPlikButton");
+	plikWyslijPokaz.innerHTML = "";
+	for (var i = 0; i < e.target.files.length; i++) {
+		var plikNazwa = e.target.files[i].name;
+		var plikInfo = document.createElement("p");
+		plikInfo.textContent = "Wybrany plik: " + plikNazwa;
+		plikWyslijPokaz.appendChild(plikInfo);
+	}
+	plikWyslijPokaz.style.display = "block";
+	wyslijPlikButton.style.display = "block";
+});
+
 let czyZastapicPlik = null;
 
 async function wyslijPliki(files) {
@@ -313,151 +313,151 @@ let czyPodgladWlaczony = false;
 
 
 function pokazPodglad() {
-    const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
-        return checkbox.value;
-    });
+	const zaznaczonePliki = Array.from(document.querySelectorAll('input[name="plik"]:checked')).map(function(checkbox) {
+		return checkbox.value;
+	});
 
-    if (zaznaczonePliki.length === 1) {
-        const podgladUrl = zaznaczonePliki[0];
-        const rozszerzenie = podgladUrl.slice(-3).toLowerCase();
+	if (zaznaczonePliki.length === 1) {
+		const podgladUrl = zaznaczonePliki[0];
+		const rozszerzenie = podgladUrl.slice(-3).toLowerCase();
 
-        axios.get(podgladUrl, { responseType: 'blob' })
-            .then(response => {
-                const blob = new Blob([response.data], { type: response.headers['content-type'] });
-                const plikUrl = URL.createObjectURL(blob);
+		axios.get(podgladUrl, { responseType: 'blob' })
+			.then(response => {
+				const blob = new Blob([response.data], { type: response.headers['content-type'] });
+				const plikUrl = URL.createObjectURL(blob);
 
-                const LightboxDiv = document.getElementById('lightboxDiv');
-                const lightboxZawartosc = document.getElementById('lightboxZawartosc');
-                
-                lightboxZawartosc.innerHTML = '';
+				const LightboxDiv = document.getElementById('lightboxDiv');
+				const lightboxZawartosc = document.getElementById('lightboxZawartosc');
 
-                let zawartoscPliku;
+				lightboxZawartosc.innerHTML = '';
 
-                    if (rozszerzenie === 'mp3' || rozszerzenie === 'wav' || rozszerzenie === 'flac' || rozszerzenie === 'ogg' || rozszerzenie === 'aac' || rozszerzenie === 'wma' || rozszerzenie === 'ape') {
-                        zawartoscPliku = document.createElement('audio');
-                        zawartoscPliku.src = plikUrl;
-                        zawartoscPliku.controls = true;
-                    } else if (rozszerzenie === 'txt' || rozszerzenie === 'cmd' || rozszerzenie === 'bat') {
-                        zawartoscPliku = document.createElement('iframe');
-                        zawartoscPliku.src = plikUrl;
-                        zawartoscPliku.style.width = '800px';
-                        zawartoscPliku.style.height = '600px';
-                    } else if (['jpg', 'png', 'jpeg', 'gif', 'bmp', 'tiff', 'webp', 'svg', 'psd', 'ico', 'jp2'].includes(rozszerzenie)) {
-                        zawartoscPliku = document.createElement('img');
-                        zawartoscPliku.src = plikUrl;
-                        zawartoscPliku.style.maxWidth = '800px';
-                        zawartoscPliku.style.maxHeight = '600px';
-                    } else if (['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', 'm4v', '3gp', 'rm'].includes(rozszerzenie)) {
-                        zawartoscPliku = document.createElement('video');
-                        zawartoscPliku.src = plikUrl;
-                        zawartoscPliku.controls = true;
-                        zawartoscPliku.style.maxWidth = '800px';
-                        zawartoscPliku.style.maxHeight = '600px';
-                    } else if (rozszerzenie === 'pdf' || rozszerzenie === 'doc' || rozszerzenie === 'ppt' || rozszerzenie === 'xls'  || rozszerzenie === 'xml' || rozszerzenie === 'odt' || rozszerzenie === 'zip' || rozszerzenie === 'rar'|| rozszerzenie === 'exe') {
-                        pokazPowiadomienie('Nieobsługiwany plik.');
-                    } else {
-                        zawartoscPliku = document.createElement('iframe');
-                        zawartoscPliku.src = plikUrl;
-                        zawartoscPliku.style.width = '800px';
-                        zawartoscPliku.style.height = '600px';
-                    }
+				let zawartoscPliku;
 
-                    if (zawartoscPliku) {
-                    lightboxZawartosc.appendChild(zawartoscPliku);
-                    
-                    LightboxDiv.style.display = 'flex';
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                pokazPowiadomienie('Wystąpił błąd podczas pobierania pliku.');
-            });
-    } else {
-        pokazPowiadomienie('Proszę zaznaczyć jeden plik do podglądu.');
-    }
+				if (rozszerzenie === 'mp3' || rozszerzenie === 'wav' || rozszerzenie === 'flac' || rozszerzenie === 'ogg' || rozszerzenie === 'aac' || rozszerzenie === 'wma' || rozszerzenie === 'ape') {
+					zawartoscPliku = document.createElement('audio');
+					zawartoscPliku.src = plikUrl;
+					zawartoscPliku.controls = true;
+				} else if (rozszerzenie === 'txt' || rozszerzenie === 'cmd' || rozszerzenie === 'bat') {
+					zawartoscPliku = document.createElement('iframe');
+					zawartoscPliku.src = plikUrl;
+					zawartoscPliku.style.width = '800px';
+					zawartoscPliku.style.height = '600px';
+				} else if (['jpg', 'png', 'jpeg', 'gif', 'bmp', 'tiff', 'webp', 'svg', 'psd', 'ico', 'jp2'].includes(rozszerzenie)) {
+					zawartoscPliku = document.createElement('img');
+					zawartoscPliku.src = plikUrl;
+					zawartoscPliku.style.maxWidth = '800px';
+					zawartoscPliku.style.maxHeight = '600px';
+				} else if (['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', 'm4v', '3gp', 'rm'].includes(rozszerzenie)) {
+					zawartoscPliku = document.createElement('video');
+					zawartoscPliku.src = plikUrl;
+					zawartoscPliku.controls = true;
+					zawartoscPliku.style.maxWidth = '800px';
+					zawartoscPliku.style.maxHeight = '600px';
+				} else if (rozszerzenie === 'pdf' || rozszerzenie === 'doc' || rozszerzenie === 'ppt' || rozszerzenie === 'xls' || rozszerzenie === 'xml' || rozszerzenie === 'odt' || rozszerzenie === 'zip' || rozszerzenie === 'rar' || rozszerzenie === 'exe') {
+					pokazPowiadomienie('Nieobsługiwany plik.');
+				} else {
+					zawartoscPliku = document.createElement('iframe');
+					zawartoscPliku.src = plikUrl;
+					zawartoscPliku.style.width = '800px';
+					zawartoscPliku.style.height = '600px';
+				}
 
-    czyPodgladWlaczony = !czyPodgladWlaczony;
-    
-    document.addEventListener("click", function(event) {
-    const LightboxDiv = document.getElementById('lightboxDiv');
-    const czyPodgladWlaczony = LightboxDiv.style.display === 'flex';
+				if (zawartoscPliku) {
+					lightboxZawartosc.appendChild(zawartoscPliku);
 
-    if (czyPodgladWlaczony && !event.target.closest("#lightboxZawartosc")) {
-        const podgladButton = document.getElementById('podglad');
-        const zaznaczonyCheckbox = document.querySelector('input[name="plik"]:checked');
+					LightboxDiv.style.display = 'flex';
+				}
+			})
+			.catch(error => {
+				console.error(error);
+				pokazPowiadomienie('Wystąpił błąd podczas pobierania pliku.');
+			});
+	} else {
+		pokazPowiadomienie('Proszę zaznaczyć jeden plik do podglądu.');
+	}
 
-        LightboxDiv.style.display = 'none';
-        podgladButton.textContent = 'Podgląd';
+	czyPodgladWlaczony = !czyPodgladWlaczony;
 
-        if (zaznaczonyCheckbox) {
-            zaznaczonyCheckbox.checked = false;
-        }
-    }
-});
+	document.addEventListener("click", function(event) {
+		const LightboxDiv = document.getElementById('lightboxDiv');
+		const czyPodgladWlaczony = LightboxDiv.style.display === 'flex';
+
+		if (czyPodgladWlaczony && !event.target.closest("#lightboxZawartosc")) {
+			const podgladButton = document.getElementById('podglad');
+			const zaznaczonyCheckbox = document.querySelector('input[name="plik"]:checked');
+
+			LightboxDiv.style.display = 'none';
+			podgladButton.textContent = 'Podgląd';
+
+			if (zaznaczonyCheckbox) {
+				zaznaczonyCheckbox.checked = false;
+			}
+		}
+	});
 }
 
 //Podkatalog
 
- function FetchFiles() {}
+function FetchFiles() { }
 
-    function ukryjPowiadomienieBledne() {}
+function ukryjPowiadomienieBledne() { }
 
-    function pokazPowiadomienieBledne(powiadomienie) {}
+function pokazPowiadomienieBledne(powiadomienie) { }
 
-    $(document).ready(function () {
-        $('#podkatalogForm').submit(function (event) {
-            event.preventDefault();
+$(document).ready(function() {
+	$('#podkatalogForm').submit(function(event) {
+		event.preventDefault();
 
-            var value = $('#podkatalogInput').val();
+		var value = $('#podkatalogInput').val();
 
-            if (value) {
-                $.ajax({
-                    url: '/katalog',
-                    type: 'POST',
-                    data: { pod_folder: value},
-                    success: function (response) {
-                        FetchFiles();
-                        ukryjPowiadomienieBledne();
-                    },
-                    error: function (error) {
-                        pokazPowiadomienieBledne("Wystąpił błąd podczas wysyłania danych: " + error);
-                    },
-                    complete: function () {
-                        location.reload();
-                    }
-                });
-            }
-        });
- 
-        $('#podkatalogCofnijButton').click(function () {
-            $('#podkatalogInput').val('');
-             $('#podkatalogUsunInput').val('')
-            $.ajax({
-                url: '/katalog',
-                type: 'POST',
-                data: { pod_folder: null},
-                success: function (response) {
-                    FetchFiles();
-                    ukryjPowiadomienieBledne();
-                },
-                error: function (error) {
-                    pokazPowiadomienieBledne("Wystąpił błąd podczas wysyłania danych: " + error);
-                },
-                complete: function () {
-                    location.reload();
-                }
-            });
-        });
-    });
-  
+		if (value) {
+			$.ajax({
+				url: '/katalog',
+				type: 'POST',
+				data: { pod_folder: value },
+				success: function(response) {
+					FetchFiles();
+					ukryjPowiadomienieBledne();
+				},
+				error: function(error) {
+					pokazPowiadomienieBledne("Wystąpił błąd podczas wysyłania danych: " + error);
+				},
+				complete: function() {
+					location.reload();
+				}
+			});
+		}
+	});
+
+	$('#podkatalogCofnijButton').click(function() {
+		$('#podkatalogInput').val('');
+		$('#podkatalogUsunInput').val('')
+		$.ajax({
+			url: '/katalog',
+			type: 'POST',
+			data: { pod_folder: null },
+			success: function(response) {
+				FetchFiles();
+				ukryjPowiadomienieBledne();
+			},
+			error: function(error) {
+				pokazPowiadomienieBledne("Wystąpił błąd podczas wysyłania danych: " + error);
+			},
+			complete: function() {
+				location.reload();
+			}
+		});
+	});
+});
+
 //Wysuwany formularz do podkatalogu  
-    
-    const PodktalogButton = document.getElementById("podktalogButton");
-	const PodkatalogDiv = document.getElementById("podkatalogDiv");
-	PodktalogButton.addEventListener("click", () => {
-		            if (PodkatalogDiv.style.display === "none") {
-		                PodkatalogDiv.style.display = "block";
-		            } else {
-		                PodkatalogDiv.style.display = "none";
-		            }
-		        });       
+
+const PodktalogButton = document.getElementById("podktalogButton");
+const PodkatalogDiv = document.getElementById("podkatalogDiv");
+PodktalogButton.addEventListener("click", () => {
+	if (PodkatalogDiv.style.display === "none") {
+		PodkatalogDiv.style.display = "block";
+	} else {
+		PodkatalogDiv.style.display = "none";
+	}
+});       

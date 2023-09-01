@@ -32,7 +32,7 @@
           <a class="nav-link" href="/udostepnij">Udostępnij</a>
         </li>  
     </ul>
-    <div th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}" class="ml-auto">
+    <div th:if="${username == 'admin'}" class="ml-auto">
   <a class="nav-link custom-link" href="/Panel_Administatora">Panel Administratora</a>
 </div>
     <ul class="navbar-nav">

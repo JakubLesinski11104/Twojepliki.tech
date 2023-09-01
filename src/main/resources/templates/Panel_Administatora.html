@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Lista użytkowników</title>
+<title>Panel Administratora</title>
  <link rel="icon" href="assets/icons8-disk-32.png" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
@@ -40,7 +40,7 @@
   </div>
 </nav>
 
-	<div th:if="${#httpServletRequest.userPrincipal.getName() != 'admin'}">
+	<div th:if="${username != 'admin'}">
 		<div class="container text-center">
 			<p>Za chwilę zostaniesz przekierowany na inną stronę...</p>
 			<script type="text/javascript">
@@ -56,10 +56,7 @@
 	</div>
 	
 		<div class="container text-center">					
-					<div
-						th:if="${#httpServletRequest.userPrincipal.getName() == 'admin'}">
-						<p>Jesteś zalogowany jako admininistator.</p>
-					</div>				
+							
 			<div>
 				<h1>Lista uzytkownikow</h1>
 			</div>

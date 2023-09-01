@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Lista plików [[${#request.userPrincipal.principal.username}]]</title>
+<title>Lista plików [[${username}]]</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <link rel="icon" href="assets/icons8-disk-32.png" type="image/png">
 <link rel="stylesheet" type="text/css"
@@ -43,17 +43,16 @@
   </div>
 </nav>
 
-<p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${#request.userPrincipal.principal.ImieNazwisko}]]</b> </p>
     <div class="container text-center">
     
-        <button id="podktalogButton" class="btn btn-primary">Przejdz do katalogu:</button>
+        <button id="podktalogButton" class="btn btn-primary">Przejdź do katalogu:</button>
         <div id="podkatalogDiv" class="podkatalog" style="display: none;">
         
 			<form id="podkatalogForm">
-			Chcesz przejsc do katalogu lub go utworzyć?
+			Chcesz przejść do katalogu lub go utworzyć?
 				<input type="text" id="podkatalogInput" placeholder="Wprowadź nazwę folderu" required>
-				<button type="submit" class="btn btn-primary">Zatwierdz</button><br/>
-				<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Powrót do katalogu nadrzednego</button>
+				<button type="submit" class="btn btn-primary">Zatwierdź</button><br/>
+				<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Powrót do katalogu nadrzędnego</button>
 			</form>
     	</div>
     </div>
@@ -71,7 +70,7 @@
             <form id="wysylaniePlikowForm">
                 <div class="form-group">
                     <label for="plikInput" class="drag-drop-area">
-                        Przeciągnij pliki tutaj lub wybierz je klikając
+                        Wybierz plik/pliki do wysłania:
                         <input type="file" class="custom-file-input" id="plikInput" name="file" multiple required>
                     </label>
                 </div>

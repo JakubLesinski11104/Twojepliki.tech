@@ -1,11 +1,11 @@
 package aplikacja.logowanie;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Uzytkownik")
@@ -29,12 +29,12 @@ public class Uzytkownik {
 
 	@Column(name = "nazwisko", nullable = false, length = 20)
 	private String nazwisko;
-	
+
 	@Column(name = "kod_weyfikacyjny", length = 64)
 	private String kod_weyfikacyjny;
 
 	private boolean enabled;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -82,7 +82,7 @@ public class Uzytkownik {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getKodWeyfikacyjny() {
 		return kod_weyfikacyjny;
 	}
@@ -90,7 +90,7 @@ public class Uzytkownik {
 	public void setKodWeyfikacyjny(String kod_weyfikacyjny) {
 		this.kod_weyfikacyjny = kod_weyfikacyjny;
 	}
-	
+
 	public String getPelneDane() {
 		return this.imie + " " + this.nazwisko;
 	}

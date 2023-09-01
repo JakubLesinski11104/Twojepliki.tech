@@ -28,7 +28,7 @@ async function getPlikZApi() {
 		const response = await fetch(NotatnikURLPlik);
 
 		if (response.status === 404) {
-			return null; 
+			return null;
 		}
 
 		if (!response.ok) {
@@ -93,7 +93,7 @@ async function zapisywanieNotatki() {
 		ukryjSidebar();
 		const sidebar = document.getElementById('sidebar');
 		sidebar.addEventListener('transitionend', async function onTransitionEnd() {
-		sidebar.removeEventListener('transitionend', onTransitionEnd);
+			sidebar.removeEventListener('transitionend', onTransitionEnd);
 			await usunNotatke();
 			await zapiszNotatke(fileContent);
 			setTimeout(() => {
