@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import aplikacja.logowanie.RepozytoriumLogowania;
+import aplikacja.logowanie.SzczegolyUzytkownika;
 import aplikacja.logowanie.Uzytkownik;
 import aplikacja.usluga.UsługaPrzechowywaniaPlikow;
 
@@ -99,6 +100,13 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	public String katalog(Model model, HttpServletRequest request) {
 		
 		model.addAttribute("username", request.getUserPrincipal().getName());
+		
+		SzczegolyUzytkownika userDetails = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+	    if (userDetails instanceof SzczegolyUzytkownika) {
+	        SzczegolyUzytkownika szczegolyUzytkownika = (SzczegolyUzytkownika) userDetails;
+	        model.addAttribute("ImieNazwisko", szczegolyUzytkownika.getImieNazwisko());
+	    }
 		
 		return "katalog";
 		
