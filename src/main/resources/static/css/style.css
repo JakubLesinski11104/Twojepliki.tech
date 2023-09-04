@@ -284,3 +284,14 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
   color: yellow;
   font-weight: bold;
 }
+
+.panelKontakt {
+   
+      background: none;
+      padding: 40px;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      box-shadow: none;
+      
+      
+    }
