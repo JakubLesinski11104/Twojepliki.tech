@@ -141,10 +141,6 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	
 	public String usuwaniePost(@RequestParam String pod_folderUsun, Model model) {
 
-		if(pod_folderUsun == "Udostepnione") {
-			
-			return "katalog";
-		}
 		
 		if (pod_folderUsun == null || pod_folderUsun.isEmpty()) {
 			
@@ -225,9 +221,13 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 			
 			var username_folder = Paths.get("Wyslane_pliki", username, podfolder);
 			
+			var Udostepnioneusername_folder = Paths.get("Wyslane_pliki", username, "/Udostepnione");
+			
 			try {
 
 				Files.createDirectories(username_folder);
+				
+				Files.createDirectories(Udostepnioneusername_folder);
 
 			} catch (IOException e) {
 
