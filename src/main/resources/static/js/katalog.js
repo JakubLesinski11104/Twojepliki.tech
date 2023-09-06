@@ -353,13 +353,8 @@ function pokazPodglad() {
 					zawartoscPliku.controls = true;
 					zawartoscPliku.style.maxWidth = '800px';
 					zawartoscPliku.style.maxHeight = '600px';
-				} else if (rozszerzenie === 'pdf' || rozszerzenie === 'doc' || rozszerzenie === 'ppt' || rozszerzenie === 'xls' || rozszerzenie === 'xml' || rozszerzenie === 'odt' || rozszerzenie === 'zip' || rozszerzenie === 'rar' || rozszerzenie === 'exe') {
-					pokazPowiadomienie('Nieobsługiwany plik.');
 				} else {
-					zawartoscPliku = document.createElement('iframe');
-					zawartoscPliku.src = plikUrl;
-					zawartoscPliku.style.width = '800px';
-					zawartoscPliku.style.height = '600px';
+					pokazPowiadomienie('Nieobsługiwany plik.');
 				}
 
 				if (zawartoscPliku) {
