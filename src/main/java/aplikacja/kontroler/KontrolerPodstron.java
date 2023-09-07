@@ -96,34 +96,43 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	}
 
 	@GetMapping("/katalog")
-	
 	public String katalog(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("username", request.getUserPrincipal().getName());
-		
-		SzczegolyUzytkownika userDetails = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    String username = request.getUserPrincipal().getName();
+	    String username_folder = getUsernameFolder(request);
+
+	    model.addAttribute("username_folder", username_folder);
+
+	    SzczegolyUzytkownika userDetails = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 	    if (userDetails instanceof SzczegolyUzytkownika) {
 	        SzczegolyUzytkownika szczegolyUzytkownika = (SzczegolyUzytkownika) userDetails;
 	        model.addAttribute("ImieNazwisko", szczegolyUzytkownika.getImieNazwisko());
 	    }
-		
-		return "katalog";
-		
-	}
 
-	private String podfolder;
+	    return "katalog";
+	}
+	
+	private String podfolder_przechodzenie;
 
 	@PostMapping("/katalog")
 	@ResponseBody
-	
-	public String katalogPost(@RequestParam String pod_folder) {
-
-		podfolder = pod_folder;
-
-		return "katalog";
-		
+	public String katalogPost(@RequestParam String pod_folder, HttpServletRequest request) {
+	    request.getSession().setAttribute("podfolder", pod_folder);
+	    podfolder_przechodzenie = pod_folder;
+	    return "success";
 	}
+
+	private String getUsernameFolder(HttpServletRequest request) {
+	    String username = "Katalog domowy";
+	    String podfolder = (String) request.getSession().getAttribute("podfolder");
+
+	    if (podfolder != null && !podfolder.isEmpty()) {
+	        return podfolder;
+	    } else {
+	        return username;
+	    }
+	}
+
 
 	@GetMapping("/usuwanie")
 	
@@ -217,9 +226,9 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 			}
 		}
 
-		if (podfolder != null) {
+		if (podfolder_przechodzenie != null) {
 			
-			var username_folder = Paths.get("Wyslane_pliki", username, podfolder);
+			var username_folder = Paths.get("Wyslane_pliki", username, podfolder_przechodzenie	);
 			
 			var Udostepnioneusername_folder = Paths.get("Wyslane_pliki", username, "/Udostepnione");
 			

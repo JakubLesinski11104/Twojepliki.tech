@@ -15,17 +15,15 @@ async function fetchData() {
 	const container = document.getElementById("listaPlikow");
 
 	data.forEach((plik) => {
-		if (plik.name === "Twoja_notatka.txt") {
+		if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
 			return;
 		}
-		const isUdostepnioneFolder = plik.name === "Udostepnione";
 
 		const card = document.createElement("div");
 		card.className = "col-md-4 ";
 		card.innerHTML = `
 			<div class="card-body mb-4">
-				${!plik.url.endsWith('/') && (plik.url.includes('.') || plik.url.endsWith('/')) ? `
-					<p class="card-text">${plik.name}</p>
+				<p class="card-text">${plik.name}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
@@ -34,20 +32,11 @@ async function fetchData() {
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
                     </div>
-                    ${isUdostepnioneFolder ? '' : `
-                        <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-                        <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
-                    `}
-                </div>` : `
-                <div class="container text-center">
-                    <p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
-                    <div class="btn-group"></div>  
-                    ${isUdostepnioneFolder ? '' : `
-                        <button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usuń</button>
-                    `}
-                </div>`}
-        </div>
-    </div>`;
+                    <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
+                    <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
+                </div>
+            </div>
+        </div>`;
 
 		container.appendChild(card);
 		wyslanePliki.push(plik.name);
@@ -61,9 +50,9 @@ async function fetchData() {
 	const container = document.getElementById("listaPlikow");
 
 	data.forEach((plik) => {
-	if (plik.name === "Twoja_notatka.txt") {
-		return;
-	}
+	if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
+			return;
+		}
     
  const fileNameParts = plik.name.split('.');
 	const fileExtension = fileNameParts.length > 1 ? fileNameParts[fileNameParts.length - 1] : '';

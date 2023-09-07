@@ -42,14 +42,20 @@
     </ul>
   </div>
 </nav>
+
+
+<p>Jesteś w: <b th:text="${username_folder}"></b></p>
+
+
+
+
+
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${ImieNazwisko}]]</b> </p>
     <div class="container text-center">
     
-        <button id="podktalogButton" class="btn btn-primary">Przejdź do katalogu:</button>
-        <div id="podkatalogDiv" class="podkatalog" style="display: none;">
-        
+        <button id="podktalogButton" class="btn btn-primary">Utwórz katalog</button>
+        <div id="podkatalogDiv" class="podkatalog" style="display: none;">      
 			<form id="podkatalogForm">
-			Chcesz przejść do katalogu lub go utworzyć?
 				<input type="text" id="podkatalogInput" placeholder="Wprowadź nazwę folderu" required>
 				<button type="submit" class="btn btn-primary">Zatwierdź</button><br/>
 				<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Powrót do katalogu nadrzędnego</button>
