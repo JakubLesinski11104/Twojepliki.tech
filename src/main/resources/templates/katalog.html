@@ -43,26 +43,27 @@
   </div>
 </nav>
 
+<!--Do dostosowania-->
+<div class="float-left">
 
 <p>Jesteś w: <b th:text="${username_folder}"></b></p>
 
+<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Powrót do katalogu nadrzędnego</button>
 
+<ul id="podkatalogHiperlaczeLista"></ul>
 
-
-
-<p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${ImieNazwisko}]]</b> </p>
-    <div class="container text-center">
-    
-        <button id="podktalogButton" class="btn btn-primary">Utwórz katalog</button>
+ <button id="podktalogButton" class="btn btn-primary">Utwórz katalog</button>
         <div id="podkatalogDiv" class="podkatalog" style="display: none;">      
 			<form id="podkatalogForm">
 				<input type="text" id="podkatalogInput" placeholder="Wprowadź nazwę folderu" required>
-				<button type="submit" class="btn btn-primary">Zatwierdź</button><br/>
-				<button type="button" id="podkatalogCofnijButton" class="btn btn-primary btn-podfolder">Powrót do katalogu nadrzędnego</button>
+				<button type="submit" class="btn btn-primary">Zatwierdź</button><br/>		
 			</form>
     	</div>
-    </div>
-<br/>
+
+</div>	
+<!--Do dostosowania-->
+
+<p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${ImieNazwisko}]]</b> </p>
 
 <div class="container text-center">
     <div id="divPowiadomienie"></div>  

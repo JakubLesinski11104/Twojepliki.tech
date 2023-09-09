@@ -7,6 +7,9 @@ const wyslijUrl = "https://localhost:443/wyslij";
 const usunUrl = "https://localhost:443/pliki";
 //const usunUrl = "https://twojepliki.tech:443/pliki";
 
+const podkatalogHiperlaczeUrl = 'https://localhost:443/pliki';
+//const podkatalogHiperlaczeUrl = 'https://twojepliki.tech:443/pliki';
+
 let wyslanePliki = [];
 
 async function fetchData() {
@@ -444,4 +447,44 @@ PodktalogButton.addEventListener("click", () => {
 	} else {
 		PodkatalogDiv.style.display = "none";
 	}
-});       
+});
+
+//Odnosniki podkatalogi
+fetch(podkatalogHiperlaczeUrl)
+	.then(response => response.json())
+	.then(data => {
+		const elementListy = document.getElementById('podkatalogHiperlaczeLista');
+
+		data.forEach(odnosnikPodkatalog => {
+			if (!odnosnikPodkatalog.name.includes('.')) {
+				const liPodkatalog = document.createElement('li');
+				const button = document.createElement('button');
+				button.classList.add('btn', 'btn-primary', 'hiperlaczaPodkatalogi');
+
+				button.textContent = `Katalog: ${odnosnikPodkatalog.name}`;
+				button.addEventListener('click', function() {
+					const nazwaPliku = odnosnikPodkatalog.name;
+					wyslijDoKontrolera(nazwaPliku);
+				});
+
+				liPodkatalog.appendChild(button);
+				elementListy.appendChild(liPodkatalog);
+			}
+		});
+	})
+	.catch(error => console.error('Error:', error));
+
+function wyslijDoKontrolera(nazwaPliku) {
+	const xhr = new XMLHttpRequest();
+	xhr.open('POST', '/katalog', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === XMLHttpRequest.DONE) {
+			if (xhr.status === 200) {
+				location.reload();
+			} else {
+			}
+		}
+	};
+	xhr.send(`pod_folder=${encodeURIComponent(nazwaPliku)}`);
+}

@@ -250,48 +250,43 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 }
 
 .list-group-item {
-  
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-  
-   .panel {
-   
-      background: #1978a5;
-      padding: 40px;
-      margin-bottom: 20px;
-      border-radius: 20px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-      
-      
-    }
-    
-    .panelwew {
-      background: #146084;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-      
-    }
-    
-    .paneleglowne {
-    
-    color:white;
-    
-    }
 
-  .custom-link {
-  color: yellow;
-  font-weight: bold;
+.panel {
+	background: #1978a5;
+	padding: 40px;
+	margin-bottom: 20px;
+	border-radius: 20px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.panelwew {
+	background: #146084;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+.paneleglowne {
+	color: white;
+}
+
+.custom-link {
+	color: yellow;
+	font-weight: bold;
 }
 
 .panelKontakt {
-   
-      background: none;
-      padding: 40px;
-      margin-bottom: 20px;
-      border-radius: 20px;
-      box-shadow: none;
-      
-      
-    }
+	background: none;
+	padding: 40px;
+	margin-bottom: 20px;
+	border-radius: 20px;
+	box-shadow: none;
+}
+
+.hiperlaczaPodkatalogi {
+    background-color: navy;
+  	margin-bottom: 5px;
+}
