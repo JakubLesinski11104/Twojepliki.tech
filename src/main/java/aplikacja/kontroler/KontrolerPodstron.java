@@ -104,15 +104,16 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 
 		model.addAttribute("username_folder", username_folder);
 
-		SzczegolyUzytkownika userDetails = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication()
+		SzczegolyUzytkownika uzytkownikSzczegoly = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
-		if (userDetails instanceof SzczegolyUzytkownika) {
+		if (uzytkownikSzczegoly instanceof SzczegolyUzytkownika) {
 
-			SzczegolyUzytkownika szczegolyUzytkownika = (SzczegolyUzytkownika) userDetails;
+			SzczegolyUzytkownika szczegolyUzytkownika = (SzczegolyUzytkownika) uzytkownikSzczegoly;
 
 			model.addAttribute("ImieNazwisko", szczegolyUzytkownika.getImieNazwisko());
-
+			
+			model.addAttribute("username", szczegolyUzytkownika.getUsername());
 		}
 
 		return "katalog";
@@ -189,8 +190,19 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 
 	@GetMapping("/udostepnij")
 
-	public String udostepnijplik() {
+	public String udostepnijplik(Model model, HttpServletRequest request) {
+		
+		SzczegolyUzytkownika uzytkownikSzczegoly = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		
+		if (uzytkownikSzczegoly instanceof SzczegolyUzytkownika) {
 
+			SzczegolyUzytkownika szczegolyUzytkownika = (SzczegolyUzytkownika) uzytkownikSzczegoly;
+
+			model.addAttribute("ImieNazwisko", szczegolyUzytkownika.getImieNazwisko());
+			
+			model.addAttribute("username", szczegolyUzytkownika.getUsername());
+		}
 		return "udostepnij";
 
 	}
