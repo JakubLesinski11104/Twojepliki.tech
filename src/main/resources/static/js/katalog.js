@@ -453,15 +453,24 @@ PodktalogButton.addEventListener("click", () => {
 fetch(podkatalogHiperlaczeUrl)
 	.then(response => response.json())
 	.then(data => {
-		const elementListy = document.getElementById('podkatalogHiperlaczeLista');
-
+const elementListy = document.getElementById('podkatalogHiperlaczeLista');
+    const liNadrzedny = document.createElement('li');
+    const buttonNadrzedny = document.createElement('button');
+    buttonNadrzedny.classList.add('btn', 'btn-primary', 'hiperlaczaPodkatalogiDomowy');
+    buttonNadrzedny.textContent = 'Katalog domowy';
+    buttonNadrzedny.addEventListener('click', function() {
+        const nazwaPliku = '';
+        wyslijDoKontrolera(nazwaPliku);
+    });
+    liNadrzedny.appendChild(buttonNadrzedny);
+    elementListy.insertBefore(liNadrzedny, elementListy.firstChild);
 		data.forEach(odnosnikPodkatalog => {
 			if (!odnosnikPodkatalog.name.includes('.')) {
 				const liPodkatalog = document.createElement('li');
 				const button = document.createElement('button');
 				button.classList.add('btn', 'btn-primary', 'hiperlaczaPodkatalogi');
 
-				button.textContent = `Katalog: ${odnosnikPodkatalog.name}`;
+				button.textContent = `Podkatalog: ${odnosnikPodkatalog.name}`;
 				button.addEventListener('click', function() {
 					const nazwaPliku = odnosnikPodkatalog.name;
 					wyslijDoKontrolera(nazwaPliku);

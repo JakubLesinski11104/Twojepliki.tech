@@ -287,6 +287,13 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 }
 
 .hiperlaczaPodkatalogi {
-    background-color: navy;
-  	margin-bottom: 5px;
+	background-color: navy;
+	margin-bottom: 5px;
+	margin-left: 30px;
+}
+
+.hiperlaczaPodkatalogiDomowy {
+	background-color: green;
+	margin-bottom: 5px;
+	margin-left: 10px;
 }
