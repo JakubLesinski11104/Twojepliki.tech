@@ -401,7 +401,7 @@ $(document).ready(function() {
 			$.ajax({
 				url: '/katalog',
 				type: 'POST',
-				data: { pod_folder: value },
+				data: { pod_folder: value, pod_folderUsun: null },
 				success: function(response) {
 					FetchFiles();
 					ukryjPowiadomienieBledne();
@@ -495,5 +495,34 @@ function wyslijDoKontrolera(nazwaPliku) {
 			}
 		}
 	};
-	xhr.send(`pod_folder=${encodeURIComponent(nazwaPliku)}`);
+   const params = `pod_folder=${encodeURIComponent(nazwaPliku)}&pod_folderUsun=`;
+
+        xhr.send(params);
+
 }
+
+	$(document).ready(function() {
+    $('#podkatalogUsunForm').submit(function(event) {
+        event.preventDefault();
+
+        var value = $('#podkatalogUsunInput').val();
+
+        if (value) {
+            $.ajax({
+                url : '/katalog',
+                type : 'POST',
+                data : {
+                    pod_folderUsun : value, pod_folder: null
+                },
+                success : function(response) {
+
+                },
+                error : function(error) {
+                },
+                complete : function() {
+                    window.location.href = '/katalog';
+                }
+            });
+        }
+    });
+});

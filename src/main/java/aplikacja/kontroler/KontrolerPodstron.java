@@ -130,15 +130,24 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	}
 
 	private String podfolder_przechodzenie;
+	private String podfolderUsun;
 
 	@PostMapping("/katalog")
 	@ResponseBody
 
-	public String katalogPost(@RequestParam String pod_folder, HttpServletRequest request) {
+	public String katalogPost(@RequestParam String pod_folder, HttpServletRequest request, @RequestParam String pod_folderUsun) {
 
 		request.getSession().setAttribute("podfolder", pod_folder);
 
 		podfolder_przechodzenie = pod_folder;
+		
+		if (pod_folderUsun == null || pod_folderUsun.isEmpty()) {
+
+			return "katalog";
+
+		}
+
+		podfolderUsun = pod_folderUsun;
 
 		return "success";
 
@@ -159,34 +168,6 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 			return username;
 
 		}
-
-	}
-
-	@GetMapping("/usuwanie")
-
-	public String usuwanie(Model model, HttpServletRequest request) {
-
-		model.addAttribute("username", request.getUserPrincipal().getName());
-
-		return "usuwanie";
-	}
-
-	private String podfolderUsun;
-
-	@PostMapping("/usuwanie")
-	@ResponseBody
-
-	public String usuwaniePost(@RequestParam String pod_folderUsun, Model model) {
-
-		if (pod_folderUsun == null || pod_folderUsun.isEmpty()) {
-
-			return "katalog";
-
-		}
-
-		podfolderUsun = pod_folderUsun;
-
-		return "usuwanie";
 
 	}
 
@@ -225,9 +206,9 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	public String udostepnijplik(Model model, HttpServletRequest request, @RequestParam String udostepnij, @RequestParam String email, @RequestParam String nowaNazwaPliku) {
 		 String username = null;
 	
-	if(udostepnij == null) {
-		return "katalog";
-	}
+		 if (email == null || email.isEmpty() || udostepnij == null || udostepnij.isEmpty()) {
+		        return "katalog";
+		    }
 		SzczegolyUzytkownika uzytkownikSzczegoly = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
