@@ -33,6 +33,15 @@ import aplikacja.logowanie.SzczegolyUzytkownika;
 import aplikacja.logowanie.Uzytkownik;
 import aplikacja.usluga.UsługaPrzechowywaniaPlikow;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
 @Controller
 @CrossOrigin("https://localhost:443")
 //Linux
@@ -41,6 +50,7 @@ import aplikacja.usluga.UsługaPrzechowywaniaPlikow;
 public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired
+    private JavaMailSender javaMailSender;
 
 	private RepozytoriumLogowania loginRepo;
 
@@ -212,17 +222,44 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	@PostMapping("/udostepnij")
 	@ResponseBody
 
-	public String udostepnijplik(@RequestParam String udostepnij) {
+	public String udostepnijplik(Model model, HttpServletRequest request, @RequestParam String udostepnij, @RequestParam String email, @RequestParam String nowaNazwaPliku) {
+		 String username = null;
+	
+	if(udostepnij == null) {
+		return "katalog";
+	}
+		SzczegolyUzytkownika uzytkownikSzczegoly = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 
-		if (udostepnij == null || udostepnij.isEmpty()) {
+		if (uzytkownikSzczegoly instanceof SzczegolyUzytkownika) {
 
-			return "katalog";
+			SzczegolyUzytkownika szczegolyUzytkownika = (SzczegolyUzytkownika) uzytkownikSzczegoly;
+
+			model.addAttribute("ImieNazwisko", szczegolyUzytkownika.getImieNazwisko());
+			
+			model.addAttribute("username", szczegolyUzytkownika.getUsername());
+	        username = szczegolyUzytkownika.getUsername();
 
 		}
-
+		
 		udostepnijplik = udostepnij;
+		
+		try {
+		    SimpleMailMessage message = new SimpleMailMessage();
+		    message.setFrom("obsluga@twojepliki.tech");
+		    message.setTo(email);
+		    message.setSubject("Udostępnioniono nowy plik");
+		    message.setText("Użytkownik " + username + " udostępnił Ci plik: " + nowaNazwaPliku + "!");
 
-		return "udostepnij";
+		    javaMailSender.send(message);
+
+		    return "udostepnij";
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return "błąd";
+		}
+		
+	
 
 	}
 

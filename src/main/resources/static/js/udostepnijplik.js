@@ -7,26 +7,29 @@ const udostepnijUrl = "https://localhost:443/udostepnijplik";
 let wyslanePliki = [];
 
 $(document).ready(function() {
-	$('#formularz_udostepnij').submit(function(event) {
-		event.preventDefault();
+    $('#formularz_udostepnij').submit(function(event) {
+        event.preventDefault();
 
-		var value = $('#udostepnij_input').val();
+        var email = $('#email_input').val();
+        var udostepnij = $('#udostepnij_input').val();
+var nowaNazwaPlikuvar = nazwaPliku;
 
-		if (value) {
-			$.ajax({
-				url: '/udostepnij',
-				type: 'POST',
-				data: { udostepnij: value },
-				success: function(response) {
-					fetchFiles();
-				},
-				error: function(error) {
-					console.error("Wystąpił błąd podczas wysyłania danych:", error);
-				}
-			});
-		}
-	});
+        if (email && udostepnij) {
+            $.ajax({
+                url: '/udostepnij',
+                type: 'POST',
+                data: { email: email, udostepnij: udostepnij, nowaNazwaPliku: nowaNazwaPlikuvar },
+                success: function(response) {
+                    fetchFiles();
+                },
+                error: function(error) {
+                    console.error("Wystąpił błąd podczas wysyłania danych:", error);
+                }
+            });
+        }
+    });
 });
+
 
 async function fetchData() {
 	const response = await fetch(url);
@@ -101,35 +104,51 @@ fetchData();
 */
 
 function udostepnijPlik(url, nazwaPliku) {
-	fetch(url)
-		.then(response => response.blob())
-		.then(blob => {
-			const obecnaData = new Date().toISOString().slice(0, 10);
-			const obecnyCzas = getObecnyCzas();
-			const nowaNazwaPliku = "UDOSTEPNIONE dnia " + obecnaData + " o godzinie " + obecnyCzas + " " + nazwaPliku;
-			const nowyPlik = new FormData();
-			nowyPlik.append('file', blob, nowaNazwaPliku);
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const obecnaData = new Date().toISOString().slice(0, 10);
+            const obecnyCzas = getObecnyCzas();
+            const nowaNazwaPliku = "UDOSTEPNIONE dnia " + obecnaData + " o godzinie " + obecnyCzas + " " + nazwaPliku;
+var nowaNazwaPlikuvar = "UDOSTEPNIONE dnia " + obecnaData + " o godzinie " + obecnyCzas + " " + nazwaPliku;
 
-			fetch(udostepnijUrl, {
-				method: 'POST',
-				body: nowyPlik
-			})
-				.then(response => {
-					if (response.ok) {
-						showPowiadomnienie("Plik został udostępniony!");
-					} else {
-						throw new Error(response.statusText);
-					}
-				})
-				.catch(error => {
-					console.error(error);
-					showPowiadomnienie("Wystąpił błąd. Plik nie został udostępniony.");
-				});
-		})
-		.catch(error => {
-			console.error(error);
-			showPowiadomnienie("Wystąpił błąd. Plik nie został pobrany.");
-		});
+            var udostepnij = $('#udostepnij_input').val();
+            var email = $('#email_input').val();
+            $.ajax({
+                url: 'udostepnij', 
+                type: 'POST',
+                data: { nowaNazwaPliku: nowaNazwaPlikuvar, udostepnij: udostepnij, email: email },
+                success: function(response) {
+                   
+                },
+                error: function(error) {
+                   
+                }
+            });
+
+            const nowyPlik = new FormData();
+            nowyPlik.append('file', blob, nowaNazwaPliku);
+
+            fetch(udostepnijUrl, {
+                method: 'POST',
+                body: nowyPlik
+            })
+                .then(response => {
+                    if (response.ok) {
+                        showPowiadomnienie("Plik został udostępniony!");
+                    } else {
+                        throw new Error(response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    showPowiadomnienie("Wystąpił błąd. Plik nie został udostępniony.");
+                });
+        })
+        .catch(error => {
+            console.error(error);
+            showPowiadomnienie("Wystąpił błąd. Plik nie został pobrany.");
+        });
 }
 
 function getObecnyCzas() {

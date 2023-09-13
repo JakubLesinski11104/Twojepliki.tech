@@ -48,7 +48,7 @@ public class SerwisRejestracji {
 			throws MessagingException, UnsupportedEncodingException {
 
 		String adresUzytkownika = uzytkownik.getEmail();
-		String adresWychodzacy = "rejestracja@twojepliki.tech";
+		String adresWychodzacy = "obsluga@twojepliki.tech";
 		String nazwaNadawcy = "Rejestracja konta w serwisie twojepliki.tech";
 		String tematEmaila = "Prosimy o weryfikację rejestracji konta";
 		String trescEmaila = """

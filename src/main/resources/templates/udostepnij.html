@@ -49,12 +49,19 @@
 	<h2>Wprowadź nazwę użytkownika któremu chcesz udostępnić plik:</h2>
 
 	<form id="formularz_udostepnij" >
-		<div class="form-group mb-2">
-			<input type="text" class="form-control" id="udostepnij_input"
-				placeholder="Wprowadź nazwę użytkownika któremu chcesz udostępnić plik">
-		</div>
-		<button type="submit" class="btn btn-primary mb-2">Zatwierdź</button>
-	</form>   
+    <div class="form-group mb-2">
+      Wprowadź nazwę użytkownika któremu chcesz udostępnić plik:
+        <input type="text" class="form-control" id="udostepnij_input" required
+            placeholder="Wprowadź nazwę użytkownika któremu chcesz udostępnić plik">
+    </div>
+    <div class="form-group mb-2">
+    
+             Wprowadź adres email użytkownika aby go powiadomić:  <input type="email" class="form-control" id="email_input"
+            placeholder="Wprowadź adres email użytkownika">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Zatwierdź</button>
+</form>
+
      <hr />
      
     <div class="row" id="PlikiDoUdostepnienia"></div>
