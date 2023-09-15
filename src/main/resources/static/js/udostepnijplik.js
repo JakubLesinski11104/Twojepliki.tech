@@ -10,7 +10,6 @@ $(document).ready(function() {
     $('#formularz_udostepnij').submit(function(event) {
         event.preventDefault();
 
-        var email = $('#email_input').val();
         var udostepnij = $('#udostepnij_input').val();
 var nowaNazwaPlikuvar = nazwaPliku;
 
@@ -18,7 +17,7 @@ var nowaNazwaPlikuvar = nazwaPliku;
             $.ajax({
                 url: '/udostepnij',
                 type: 'POST',
-                data: { email: email, udostepnij: udostepnij, nowaNazwaPliku: nowaNazwaPlikuvar },
+                data: {udostepnij: udostepnij, nowaNazwaPliku: nowaNazwaPlikuvar },
                 success: function(response) {
                     fetchFiles();
                 },
@@ -117,7 +116,7 @@ var nowaNazwaPlikuvar = "UDOSTEPNIONE dnia " + obecnaData + " o godzinie " + obe
             $.ajax({
                 url: 'udostepnij', 
                 type: 'POST',
-                data: { nowaNazwaPliku: nowaNazwaPlikuvar, udostepnij: udostepnij, email: email },
+                data: { nowaNazwaPliku: nowaNazwaPlikuvar, udostepnij: udostepnij},
                 success: function(response) {
                    
                 },

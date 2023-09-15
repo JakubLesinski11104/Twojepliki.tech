@@ -51,7 +51,8 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 
 	@Autowired
     private JavaMailSender javaMailSender;
-
+	
+	@Autowired
 	private RepozytoriumLogowania loginRepo;
 
 	@GetMapping("/Panel_Administatora")
@@ -203,10 +204,10 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	@PostMapping("/udostepnij")
 	@ResponseBody
 
-	public String udostepnijplik(Model model, HttpServletRequest request, @RequestParam String udostepnij, @RequestParam String email, @RequestParam String nowaNazwaPliku) {
+	public String udostepnijplik(Model model, HttpServletRequest request, @RequestParam String udostepnij,@RequestParam String nowaNazwaPliku) {
 		 String username = null;
 	
-		 if (email == null || email.isEmpty() || udostepnij == null || udostepnij.isEmpty()) {
+		 if (udostepnij == null || udostepnij.isEmpty()) {
 		        return "katalog";
 		    }
 		SzczegolyUzytkownika uzytkownikSzczegoly = (SzczegolyUzytkownika) SecurityContextHolder.getContext().getAuthentication()
@@ -226,19 +227,26 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 		udostepnijplik = udostepnij;
 		
 		try {
-		    SimpleMailMessage message = new SimpleMailMessage();
-		    message.setFrom("obsluga@twojepliki.tech");
-		    message.setTo(email);
-		    message.setSubject("Udostępnioniono nowy plik");
-		    message.setText("Użytkownik " + username + " udostępnił Ci plik: " + nowaNazwaPliku + "!");
+	        Uzytkownik uzytkownik = loginRepo.znajdzPoUsername(udostepnij);
+	        
+	        if (uzytkownik == null || uzytkownik.getEmail() == null || uzytkownik.getEmail().isEmpty()) {
+	            return "błąd";
+	        }
 
-		    javaMailSender.send(message);
+	        String emailUdo = uzytkownik.getEmail();
+	        SimpleMailMessage message = new SimpleMailMessage();
+	        message.setFrom("obsluga@twojepliki.tech");
+	        message.setTo(emailUdo);
+	        message.setSubject("Udostępnioniono nowy plik");
+	        message.setText("Użytkownik " + username + " udostępnił Ci plik: " + nowaNazwaPliku + "!");
+	        
+	        javaMailSender.send(message);
 
-		    return "udostepnij";
-		} catch (Exception e) {
-		    e.printStackTrace();
-		    return "błąd";
-		}
+	        return "udostepnij";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "error";
+	    }
 		
 	
 
@@ -313,11 +321,11 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 
 	}
 
-	@GetMapping("/error")
+	@GetMapping("/błąd")
 
-	public String error(HttpServletRequest request) {
+	public String błąd(HttpServletRequest request) {
 
-		String Strona_error = "error";
+		String Strona_błąd = "błąd";
 
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
@@ -327,22 +335,22 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 
 			if (statusCode == HttpStatus.NOT_FOUND.value()) {
 
-				Strona_error = "error/404";
+				Strona_błąd = "błąd/404";
 
 			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
 
-				Strona_error = "error/500";
+				Strona_błąd = "błąd/500";
 
 			}
 		}
 
-		return Strona_error;
+		return Strona_błąd;
 
 	}
 
-	public String sciezkaError() {
+	public String sciezkaBłąd() {
 
-		return "/error";
+		return "/błąd";
 
 	}
 
