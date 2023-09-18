@@ -80,14 +80,7 @@
           <p class="tekstglowna"><h3>
           <p>Wszelkie pytania lub wątpliwości dotyczące działania Witryny lub niniejszego regulaminu prosimy kierować na adres e-mail:<br> <b>kontakt@twojepliki.tech</b></p></h3>
 		<h3><p><b><a href="/regulamin">Regulamin</a></b> </p></h3> </p>
-		   </div>
-      </div>
-    </div>
-  </div>
-</main>
-	
-		<div sec:authorize="isAuthenticated()">
-		<br></br>
+			<div sec:authorize="isAuthenticated()">
 	<div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
@@ -112,33 +105,32 @@
         <div class="collapse mt-3" id="rightLinksCollapse">
           <ul class="list-group">
             <li class="list-group-item"><a href="mailto:11109@student.puzim.edu.pl">Mail kontaktowy: 11109@student.puzim.edu.pl</a></li>
-            <li class="list-group-item"><a href="https://github.com/JakubPilkowski11109">Github</a></li>
-            
-          </ul>
-          
+            <li class="list-group-item"><a href="https://github.com/JakubPilkowski11109">Github</a></li>        
+          </ul>   
+        </div>  
+      </div>    
+    </div>    
+  </div>  
+  </div>
+		   </div>
+		   <div sec:authorize="isAuthenticated()">
+		   <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#dzialanie_witryny">Działanie witryny</button>
+        <div id="dzialanie_witryny" class="collapse mt-3">
+        <p>Podgląd plików dziala na nastepujące rozszerzenia:.mp3, .wav, .flac, .ogg, .aac, .wma, .ape, .txt, .cmd, .bat, .jpg,</p>
+        <p>.png, .jpeg, .gif, .bmp, .tiff, .webp, .svg, .psd, .ico, .jp2, .mp4, .avi, .mkv, .mov, .wmv, .flv, .webm, .m4v, .3gp, .rm.</p>
+        	<p>Poprawne udostępnienie pliku oznacza wysłanie emaila z informacją dla użytkownika który otrzymał plik.</p>
+            <p>Udostepnione pliki znajduja sie w folderze Udostepnione.</p>
+            <p>Zawsze w katalogu bedzie się znajdował folder Udostepnione</p>
+            <p>Jezeli usuniesz pliki w katalogu Udostepnione to automatycznie ponownie się utworzy(bez wcześniejszych plików).</p>   
+            </div>	    
         </div>
-      </div>
+        
+      </div>  
     </div>
   </div>
-  
-  <div class="container mt-5">
-        <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#myDiv">[Niedokonczone]Działanie witryny</button>
-        <div id="myDiv" class="collapse mt-3">
-            <p>Udostepnione pliki dla ciebie znajduja sie w folderze Udostepnione.</p>
-            <p>Zawsze w katalogu bedzie sie znajdowal folder Udostepnione</p>
-            <p>jezeli chcesz usunac pliki udostpenione usun folder Udostepnione</p>
-            
-            
-        </div>
-    </div>
-  
-  </div>
-		 </div>
+</main>
+	<br/></div>
 		
-		 
-		
-
-
 	<footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
     </footer>

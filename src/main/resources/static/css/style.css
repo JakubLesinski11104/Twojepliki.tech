@@ -297,3 +297,15 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 	margin-bottom: 5px;
 	margin-left: 10px;
 }
+
+#dzialanie_witryny {
+    background-color: white;
+    padding: 10px;
+     border-radius: 10px;
+}
+
+#dzialanie_witryny p {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}

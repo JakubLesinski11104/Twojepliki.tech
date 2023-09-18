@@ -526,3 +526,15 @@ function wyslijDoKontrolera(nazwaPliku) {
         }
     });
 });
+
+//Wysuwany formularz do usuwania katalogow  
+const przycisk = document.getElementById('usunWysunForm');
+    const usunWysunDiv = document.getElementById('usunWysunDiv');
+
+    przycisk.addEventListener('click', function() {
+        if (usunWysunDiv.style.display === 'none' || usunWysunDiv.style.display === '') {
+            usunWysunDiv.style.display = 'block';
+        } else {
+            usunWysunDiv.style.display = 'none';
+        }
+    });
