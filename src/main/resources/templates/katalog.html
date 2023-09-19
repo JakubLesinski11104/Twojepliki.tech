@@ -45,9 +45,11 @@
 
 <!--Do dostosowania-->
 <div class="float-left">
+        <button id=podkatalogSidebar>Katalogi</button>
 
-<p>Jesteś w: <b th:text="${username_folder}"></b></p>
-
+<div class="sidebarKatalog">
+    <a class="katalogSidebarZamknij" id="katalogSidebarZamknij">×</a>
+<br/><br/><br/>
 <ul id="podkatalogHiperlaczeLista"></ul>
 
  <button id="podktalogButton" class="btn btn-primary">Utwórz katalog</button>
@@ -57,7 +59,7 @@
 				<button type="submit" class="btn btn-primary">Zatwierdź</button><br/>		
 			</form>
     	</div>
-    	
+    	<br/><br/>
 <button id="usunWysunForm" class="btn btn-primary">Usuń katalog</button>
 <div id="usunWysunDiv" style="display:none;">
     <form id="podkatalogUsunForm">
@@ -65,12 +67,12 @@
         <button type="submit" class="btn btn-primary">Zatwierdź</button>
     </form>
 </div>
-
-</div>	
+</div>
+</div>
 <!--Do dostosowania-->
 
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${ImieNazwisko}]]</b> </p>
-
+<p style="text-align: center;">Jesteś w: <b th:text="${username_folder}"></b></p>
 <div class="container text-center">
     <div id="divPowiadomienie"></div>  
   

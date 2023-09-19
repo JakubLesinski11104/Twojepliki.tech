@@ -453,17 +453,17 @@ PodktalogButton.addEventListener("click", () => {
 fetch(podkatalogHiperlaczeUrl)
 	.then(response => response.json())
 	.then(data => {
-const elementListy = document.getElementById('podkatalogHiperlaczeLista');
-    const liNadrzedny = document.createElement('li');
-    const buttonNadrzedny = document.createElement('button');
-    buttonNadrzedny.classList.add('btn', 'btn-primary', 'hiperlaczaPodkatalogiDomowy');
-    buttonNadrzedny.textContent = 'Katalog domowy';
-    buttonNadrzedny.addEventListener('click', function() {
-        const nazwaPliku = '';
-        wyslijDoKontrolera(nazwaPliku);
-    });
-    liNadrzedny.appendChild(buttonNadrzedny);
-    elementListy.insertBefore(liNadrzedny, elementListy.firstChild);
+		const elementListy = document.getElementById('podkatalogHiperlaczeLista');
+		const liNadrzedny = document.createElement('li');
+		const buttonNadrzedny = document.createElement('button');
+		buttonNadrzedny.classList.add('btn', 'btn-primary', 'hiperlaczaPodkatalogiDomowy');
+		buttonNadrzedny.textContent = 'Katalog domowy';
+		buttonNadrzedny.addEventListener('click', function() {
+			const nazwaPliku = '';
+			wyslijDoKontrolera(nazwaPliku);
+		});
+		liNadrzedny.appendChild(buttonNadrzedny);
+		elementListy.insertBefore(liNadrzedny, elementListy.firstChild);
 		data.forEach(odnosnikPodkatalog => {
 			if (!odnosnikPodkatalog.name.includes('.')) {
 				const liPodkatalog = document.createElement('li');
@@ -495,46 +495,71 @@ function wyslijDoKontrolera(nazwaPliku) {
 			}
 		}
 	};
-   const params = `pod_folder=${encodeURIComponent(nazwaPliku)}&pod_folderUsun=`;
+	const params = `pod_folder=${encodeURIComponent(nazwaPliku)}&pod_folderUsun=`;
 
-        xhr.send(params);
+	xhr.send(params);
 
 }
 
-	$(document).ready(function() {
-    $('#podkatalogUsunForm').submit(function(event) {
-        event.preventDefault();
+$(document).ready(function() {
+	$('#podkatalogUsunForm').submit(function(event) {
+		event.preventDefault();
 
-        var value = $('#podkatalogUsunInput').val();
+		var value = $('#podkatalogUsunInput').val();
 
-        if (value) {
-            $.ajax({
-                url : '/katalog',
-                type : 'POST',
-                data : {
-                    pod_folderUsun : value, pod_folder: null
-                },
-                success : function(response) {
+		if (value) {
+			$.ajax({
+				url: '/katalog',
+				type: 'POST',
+				data: {
+					pod_folderUsun: value, pod_folder: null
+				},
+				success: function(response) {
 
-                },
-                error : function(error) {
-                },
-                complete : function() {
-                    window.location.href = '/katalog';
-                }
-            });
-        }
-    });
+				},
+				error: function(error) {
+				},
+				complete: function() {
+					window.location.href = '/katalog';
+				}
+			});
+		}
+	});
 });
 
 //Wysuwany formularz do usuwania katalogow  
 const przycisk = document.getElementById('usunWysunForm');
-    const usunWysunDiv = document.getElementById('usunWysunDiv');
+const usunWysunDiv = document.getElementById('usunWysunDiv');
 
-    przycisk.addEventListener('click', function() {
-        if (usunWysunDiv.style.display === 'none' || usunWysunDiv.style.display === '') {
-            usunWysunDiv.style.display = 'block';
-        } else {
-            usunWysunDiv.style.display = 'none';
-        }
-    });
+przycisk.addEventListener('click', function() {
+	if (usunWysunDiv.style.display === 'none' || usunWysunDiv.style.display === '') {
+		usunWysunDiv.style.display = 'block';
+	} else {
+		usunWysunDiv.style.display = 'none';
+	}
+});
+
+//Sidebar podkatalogi    
+document.addEventListener('DOMContentLoaded', function() {
+	const podkatalogSidebar = document.getElementById('podkatalogSidebar');
+	const katalogSidebarZamknij = document.getElementById('katalogSidebarZamknij');
+	const sidebar = document.querySelector('.sidebarKatalog');
+
+	podkatalogSidebar.addEventListener('click', function() {
+		sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0';
+	});
+
+	katalogSidebarZamknij.addEventListener('click', function() {
+		sidebar.style.left = '-250px';
+	});
+
+	document.addEventListener('click', function(event) {
+		if (event.target !== podkatalogSidebar && event.target !== sidebar && event.target !== katalogSidebarZamknij) {
+			sidebar.style.left = '-250px';
+		}
+	});
+
+	sidebar.addEventListener('click', function(event) {
+		event.stopPropagation();
+	});
+});
