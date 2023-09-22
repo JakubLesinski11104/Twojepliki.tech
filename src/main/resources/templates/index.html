@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Logowanie</title>
+<meta charset="UTF-8">
+<title>Strona główna</title>
  <link rel="icon" href="assets/icons8-disk-32.png" type="image/png">
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script type="text/javascript"
 	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/F12_PPM.js"></script>
@@ -16,7 +15,6 @@
 </head>
 <body>
 
-<div sec:authorize="isAuthenticated()">
 <nav class="navbar navbar-expand-md navbar-dark mb-4">
    <a class="navbar-brand" style="background-image: url('/assets/icons8-disk-32.png'); background-size: 32px 32px; width: 32px; height: 32px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,74 +22,64 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse" bis_skin_checked="1">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/"> Strona główna <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="/katalog">Katalog Plików</a>
+        <a class="nav-link" href="/rejestracja">Rejestracja</a>
       </li>
         <li class="nav-item">
-          <a class="nav-link" href="/udostepnij">Udostepnij</a>
-        </li>
+          <a class="nav-link" href="/login">Login</a>
+        </li>  
     </ul>
     <ul class="navbar-nav">
     <li class="nav-item">
           <a class="nav-link" href="/kontakt">Kontakt</a>
         </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/wyloguj">Wyloguj</a>
-      </li>
     </ul>
   </div>
 </nav>
-</div>
 
-<div sec:authorize="!isAuthenticated()">
-<nav class="navbar navbar-expand-md navbar-dark mb-4">
-   <a class="navbar-brand" style="background-image: url('/assets/icons8-disk-32.png'); background-size: 32px 32px; width: 32px; height: 32px;"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse" bis_skin_checked="1">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/rejestracja">Rejestracja</a>
-        </li>
-    </ul>
-    <ul class="navbar-nav">
-    <li class="nav-item">
-          <a class="nav-link" href="/kontakt">Kontakt</a>
-        </li>
-    </ul>
-  </div>
-</nav>
-</div>
-	
-	<div class="container-fluid text-center">
-	<br></br>
-		<form th:action="@{/login}" method="post" class="login">
-			<div th:if="${param.error}">
-				<p class="text-danger">Wprowadzono złe dane</p>
-			</div>
-				<h1>Zaloguj się:</h1>
-				<br></br>
-					<p><input type="email" name="email" class="form-control"
-						placeholder="Podaj email" required autofocus /></p>
-				
-					<div class="password-wrapper">
-               <p> <input type="password" id="haslo" name="haslo" class="form-control" placeholder="Podaj hasło" required /></p>
-                <i class="password-toggle-icon fas fa-eye" onclick="pokazHaslo('haslo')"></i>
+
+<br></br>
+
+<main role="main" class="inner cover text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel">
+          <h1 class="cover-heading display-4 font-weight-bold" style="font-size: 58px; color: white">Witaj na TwojePliki.tech !</h1>
+          <br>
+          <p class="tekstglowna">Witaj na TwojePliki.tech - innowacyjnej platformie do przechowywania i sprawnego zarządzania plikami w chmurze. 
+          Niezależnie od tego, czy jesteś profesjonalistą, studentem czy pasjonatem, nasza usługa umożliwia łatwe przechowywanie, udostępnianie i synchronizację plików w bezpiecznym środowisku online. 
+          Dzięki zaawansowanym funkcjom organizacyjnym oraz wydajnym narzędziom udostępniania, Twoje pliki są zawsze pod kontrolą. 
+          Dołącz do naszej społeczności i doświadcz nowego wymiaru przechowywania plików na TwojePliki.tech! </p>       
+          <p class="tekstglowna" style="color: red; font-size:30px"><a href="/login"  style="color: red;">Zaloguj się</a> lub <a href="/rejestracja" style="color: red;">Zarejestruj się</a>!</p>
+          <br>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="panelwew">
+                <h2 class="paneleglowne">Przesyłanie</h2>
+                <p class="paneleglowne">Tutaj możesz łatwo przesyłać swoje pliki na TwojePliki.tech, gwarantując ich bezpieczne przechowywanie w chmurze.</p>
+              </div>
             </div>
-          		
-				<p>
-					<input type="submit" value="Zaloguj" class="btn btn-primary btn-block" />
-				</p>
-				<p><a class="nav-link" href="/rejestracja">Nie masz konta? Zarejestruj się!</a></p>
-		</form>
-		</div>
-		
-		<script type="text/javascript" src="js/Spr_Pok_Has.js"></script>
-		
+            <div class="col-md-4">
+              <div class="panelwew">
+                <h2 class="paneleglowne">Udostępnianie</h2>
+                <p class="paneleglowne">Dzięki naszym zaawansowanym narzędziom udostępniania, możesz bezpiecznie dzielić się swoimi plikami z innymi użytkownikami.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="panelwew">
+                <h2 class="paneleglowne">Usuwanie</h2>
+                <p class="paneleglowne">Zarządzaj swoimi plikami, usuwając niepotrzebne zasoby, zachowując jednocześnie kontrolę nad swoim kontem.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+  
 	<footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
     </footer>

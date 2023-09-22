@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Udana rejestracja</title>
+<title>Logowanie</title>
  <link rel="icon" href="assets/icons8-disk-32.png" type="image/png">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script type="text/javascript"
 	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/F12_PPM.js"></script>
@@ -59,9 +60,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/rejestracja">Rejestracja</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
     </ul>
     <ul class="navbar-nav">
     <li class="nav-item">
@@ -71,15 +69,33 @@
   </div>
 </nav>
 </div>
-
-	<div class="container text-center">
-		<h3>Pomyślnie Cię zarejestrowano!</h3>
-		<h4>
-			Zweryfikuj swoje konto aby sie zalogować! Wysłaliśmy z adresu <b>rejestracja@twojepliki.tech</b> na twój adres email wiadomość z weryfikacją konta.
-		</h4>
-	</div>
 	
-<footer class="footer">
+	<div class="container-fluid text-center">
+	<br></br>
+		<form th:action="@{/login}" method="post" class="login">
+			<div th:if="${param.error}">
+				<p class="text-danger">Wprowadzono złe dane</p>
+			</div>
+				<h1>Zaloguj się:</h1>
+				<br></br>
+					<p><input type="email" name="email" class="form-control"
+						placeholder="Podaj email" required autofocus /></p>
+				
+					<div class="password-wrapper">
+               <p> <input type="password" id="haslo" name="haslo" class="form-control" placeholder="Podaj hasło" required /></p>
+                <i class="password-toggle-icon fas fa-eye" onclick="pokazHaslo('haslo')"></i>
+            </div>
+          		
+				<p>
+					<input type="submit" value="Zaloguj" class="btn btn-primary btn-block" />
+				</p>
+				<p><a class="nav-link" href="/rejestracja">Nie masz konta? Zarejestruj się!</a></p>
+		</form>
+		</div>
+		
+		<script type="text/javascript" src="js/Spr_Pok_Has.js"></script>
+		
+	<footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
     </footer>
     

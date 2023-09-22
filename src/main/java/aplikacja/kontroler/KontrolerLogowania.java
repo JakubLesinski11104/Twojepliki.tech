@@ -1,6 +1,8 @@
 package aplikacja.kontroler;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
+
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -30,19 +32,19 @@ public class KontrolerLogowania {
 	private SerwisRejestracji Serwis_Logowania;
 
 	@GetMapping("/")
-
-	public String StronaLogowania() {
+	
+	public String Strona(Principal principal) {
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		if (auth != null && auth.isAuthenticated()) {
-			
-			return "redirect:/glowna";
-			
-		}
-		
-		return "index";
-
+	    if (principal != null) {
+	    	
+	        return "redirect:/glowna";
+	        
+	    } else {
+	    	
+	        return "index";
+	        
+	    }
+	    
 	}
 
 	@GetMapping("/glowna")
@@ -57,14 +59,21 @@ public class KontrolerLogowania {
 	
 	@GetMapping("/rejestracja")
 
-	public String Rejestracja(Model model) {
+	public String Rejestracja(Model model, Principal principal) {
 		
-		model.addAttribute("uzytkownik", new Uzytkownik());
-
-		return "rejestracja";
-
+		if (principal != null) {
+			
+	        return "redirect:/glowna";
+	        
+	    } else {
+	    	
+	    	model.addAttribute("uzytkownik", new Uzytkownik());
+	    	
+	        return "rejestracja";
+	        
+	    }
+		
 	}
-
 
 	@PostMapping("/proces_rejestracji")
 
@@ -116,10 +125,18 @@ public class KontrolerLogowania {
 	
 	@GetMapping("/login")
 
-	public String login() {
-
-		return "index";
-
+	public String login(Principal principal) {
+		
+		if (principal != null) {
+			
+	        return "redirect:/glowna";
+	        
+	    } else {
+	    	
+	        return "login";
+	        
+	    }
+		
 	}
 	
 	private String getURL(HttpServletRequest request) {

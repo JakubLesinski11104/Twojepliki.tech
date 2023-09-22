@@ -77,10 +77,6 @@ public class KonfiguracjaZabezpieczenSieciowych {
 
 				.requestMatchers("/glowna").authenticated()
 
-				.requestMatchers("/kontakt/JP").authenticated()
-
-				.requestMatchers("/kontakt/JL").authenticated()
-
 				.requestMatchers("/katalog").authenticated()
 
 				.requestMatchers("/usuwanie").authenticated()
