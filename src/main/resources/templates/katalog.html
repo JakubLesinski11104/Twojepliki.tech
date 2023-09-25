@@ -19,7 +19,7 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark mb-4">
-   <a class="navbar-brand" style="background-image: url('/assets/icons8-disk-32.png'); background-size: 32px 32px; width: 32px; height: 32px;"></a>
+  <a class="navbar-brand" style="background-image: url('/assets/icons8-disk-32.png'); background-size: 32px 32px; width: 32px; height: 32px;" href="/"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -45,30 +45,49 @@
 
 <!--Do dostosowania-->
 <div class="float-left">
-        <button id=podkatalogSidebar>Katalogi</button>
+    <button id="podkatalogSidebar">Katalogi</button>
 
-<div class="sidebarKatalog">
-    <a class="katalogSidebarZamknij" id="katalogSidebarZamknij">×</a>
-<br/><br/><br/>
-<ul id="podkatalogHiperlaczeLista"></ul>
+    <div class="sidebarKatalog">
+        <a class="katalogSidebarZamknij" id="katalogSidebarZamknij">×</a>
+        <br /><br /><br />
+        <ul id="podkatalogHiperlaczeLista"></ul>
 
- <button id="podktalogButton" class="btn btn-primary">Utwórz katalog</button>
-        <div id="podkatalogDiv" class="podkatalog" style="display: none;">      
-			<form id="podkatalogForm">
-				<input type="text" id="podkatalogInput" placeholder="Wprowadź nazwę katalogu" required>
-				<button type="submit" class="btn btn-primary">Zatwierdź</button><br/>		
-			</form>
-    	</div>
-    	<br/><br/>
-<button id="usunWysunForm" class="btn btn-primary">Usuń katalog</button>
-<div id="usunWysunDiv" style="display:none;">
-    <form id="podkatalogUsunForm">
-        <input type="text" id="podkatalogUsunInput" placeholder="Wprowadź nazwę katalogu" required>
-        <button type="submit" class="btn btn-primary">Zatwierdź</button>
-    </form>
+        
+          <div class="text-center mt-3">
+        <button id="podktalogButton" class="btn btn-primary btn-lg">Utwórz katalog</button>
+        <div id="podkatalogDiv" class="podkatalog" style="display: none;">
+        <br />
+        <hr>
+            <p class="text-center">Wprowadź nazwę nowego katalogu:</p>
+            <form id="podkatalogForm">
+                <input type="text" id="podkatalogInput" placeholder="Wprowadź nazwę katalogu" required>
+                <br /><br>
+                <button type="submit" class="btn btn-primary btn-lg">Zatwierdź</button><br />	
+                <hr>	
+            </form>
+        </div>
+    </div>
+            
+       
+        <div class="text-center mt-3">
+        <button id="usunWysunForm" class="btn btn-danger btn-lg">Usuń katalog</button>
+         <div id="usunWysunDiv"class="podkatalog" style="display: none;">
+         <br />
+          <hr>
+            <p class="text-center">Wprowadź nazwę katalogu do usunięcia:</p>
+            <form id="podkatalogUsunForm">
+           
+                <input type="text" id="podkatalogUsunInput" placeholder="Wprowadź nazwę katalogu" required>
+                <br /> <br>
+                <button type="submit" class="btn btn-danger btn-lg">Zatwierdź</button>
+                <hr>
+            </form>
+                </div>
+            
+        </div>
+    </div>
 </div>
-</div>
-</div>
+
 <!--Do dostosowania-->
 
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${ImieNazwisko}]]</b> </p>
@@ -100,7 +119,7 @@
 
 </br>
 
-     <button id="pobierz">Pobierz zaznaczone pliki</button>
+     <button  class="pobraniepliku" id="pobierz">Pobierz zaznaczone pliki</button>
      <hr />
     <div class="row" id="listaPlikow"></div>
  <hr />
