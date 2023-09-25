@@ -112,20 +112,23 @@ input.wiekszy {
 
 /* Notatnik */
 .toggle-button {
-	position: fixed;
-	top: 50%;
-	right: 0;
-	transform: translateY(-50%);
-	background-color: #E0FF00;
-	color: black;
-	padding: 20px 20px;
-	border-radius: 20px 0 0 20px;
-	z-index: 9999;
-	width: 100px;
-	height: 100px;
-	text-align: center;
-	line-height: 50px;
-	border: none;
+  position: fixed;
+  top: 20%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #E0FF00; 
+  font-size: 20px;
+  color: black; 
+  padding: 20px 20px;
+  border-radius: 20px 0 0 20px;
+  z-index: 9999;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  line-height: 0px; 
+  border: none;
+  cursor: pointer; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .vertical-btn-container {
@@ -206,6 +209,8 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 
 .custom-file-input {
 	display: none;
+	
+	
 }
 
 .file-display {
@@ -287,13 +292,17 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 }
 
 .hiperlaczaPodkatalogi {
-	background-color: navy;
-	margin-bottom: 5px;
-	margin-left: 30px;
+    background-color: gray;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    padding: 5px 10px; 
+    font-size: 14px; 
 }
 
 .hiperlaczaPodkatalogiDomowy {
-	background-color: green;
+	background-color: yellow;
+	font-weight:bold;
+	color:black;
 	margin-bottom: 5px;
 	margin-left: 10px;
 }
@@ -317,16 +326,17 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 	position: fixed;
 	top: 0;
 	left: -250px;
-	background-color: white;
+	background-color: #a2d5c6; 
 	overflow-x: hidden;
 	transition: 0.5s;
+color: white;
 }
 
 .sidebarKatalog a {
 	padding: 16px;
 	text-decoration: none;
 	font-size: 25px;
-	color: #818181;
+	color: white;
 	display: block;
 	transition: 0.3s;
 }
@@ -341,18 +351,25 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 }
 
 #podkatalogSidebar {
-	font-size: 16px;
-	cursor: pointer;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 10px;
-	border: none;
-	background-color: #4CAF50;
-	color: white;
-	border-radius: 5px;
-	margin-bottom: 10px;
+
+    position: fixed;
+    top: 20%;
+    left: 0;
+    transform: translateY(-60%);
+    background-color: #E0FF00;
+    font-size: 20px;
+    color: black;
+    padding: 20px 20px;
+    width: 110px;
+    height: 40px;
+    text-align: center;
+    line-height: 0px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
+
 
 .katalogSidebarZamknij {
 	font-size: 36px;
@@ -366,4 +383,80 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 .katalogSidebarZamknij:hover {
 	color: #f1f1f1;
 	cursor: pointer;
+}
+
+.sidebar {
+    background-color:#061c27; 
+}
+
+.headernot {
+	
+	font-size: 42px;
+	font-family: Verdana, bold;
+	color: white;
+	text-align: center;
+}
+
+.opisnot {
+	
+	font-size: 16px;
+	font-family: Verdana, sans-serif;
+	color: white;
+	text-align: center;
+}
+
+.panelwewnot {
+	background: #072431;
+	padding: 20px;
+	margin-bottom: 20px;
+	border-radius: 15px;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+.pobraniepliku {
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:16px;
+	padding:12px 12px;
+	
+	text-shadow:0px 1px 0px #283966;
+}
+.pobraniepliku:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+.pobraniepliku:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+.paneladminaP {
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:14px;
+	padding:5px 5px;
+	
+	text-shadow:0px 1px 0px #283966;
+}
+.paneladminaP:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+.paneladminaP:active {
+	position:relative;
+	top:1px;
 }
