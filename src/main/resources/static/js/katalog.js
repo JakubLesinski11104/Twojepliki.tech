@@ -36,7 +36,7 @@ async function fetchData() {
                         <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-                    <button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
+                    <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd 🔍</button>
                 </div>
             </div>
         </div>`;

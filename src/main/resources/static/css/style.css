@@ -26,11 +26,46 @@ body {
 }
 
 .btn-usun {
-	border-color: red !important;
+	box-shadow:inset 0px 1px 0px 0px #cf866c;
+	background:linear-gradient(to bottom, #d91539 5%, #bc3315 100%);
+	background-color:#d91539;
+	border-radius:3px;
+	border:1px solid #942911;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:12px;
+	padding:6px 12px;
+	text-decoration:none;
 }
 
 .btn-pobierz {
-	border-color: green !important;
+	 
+	box-shadow:inset 0px 1px 0px 0px #9acc85;
+	background-color:#25cc5f;
+	border:1px solid #3b6e22;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:12px;
+	padding:6px 12px;
+	text-decoration:none;
+
+}
+.btn-podglad {
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background-color:#33bdef;
+	border-radius:6px;
+	border:1px solid #057fd0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:12px;
+	padding:6px 12px;
+	text-decoration:none;
 }
 
 .btn-podfolder {
@@ -121,7 +156,7 @@ input.wiekszy {
   color: black; 
   padding: 20px 20px;
   border-radius: 20px 0 0 20px;
-  z-index: 9999;
+  z-index: 999;
   width: 100px;
   height: 40px;
   text-align: center;
@@ -129,6 +164,7 @@ input.wiekszy {
   border: none;
   cursor: pointer; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  
 }
 
 .vertical-btn-container {
@@ -152,6 +188,7 @@ input.wiekszy {
 	padding: 20px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	transition: right 0.3s ease;
+	z-index: 999;
 }
 
 .sidebar.show {
@@ -326,10 +363,11 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 	position: fixed;
 	top: 0;
 	left: -250px;
-	background-color: #a2d5c6; 
+	background: #072431;
 	overflow-x: hidden;
 	transition: 0.5s;
-color: white;
+    color: white;
+    z-index: 999;
 }
 
 .sidebarKatalog a {
@@ -368,6 +406,7 @@ color: white;
     cursor: pointer;
     text-align: left;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    
 }
 
 
@@ -461,4 +500,8 @@ color: white;
 .paneladminaP:active {
 	position:relative;
 	top:1px;
+}
+
+table {
+    background-color: #078594;
 }
