@@ -505,3 +505,20 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 table {
     background-color: #078594;
 }
+
+.a_tabela_plikow_uzytkownikow {
+	color:#25cc5f;
+}
+.inputAdmin {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inputAdmin input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center; 
+}

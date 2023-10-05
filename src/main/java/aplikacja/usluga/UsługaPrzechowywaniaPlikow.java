@@ -21,5 +21,10 @@ public interface UsługaPrzechowywaniaPlikow {
 	public Resource wyslijudostepnij(String filename);
 
 	public Stream<Path> wczytajAdmin();
+	
+	public boolean usunAdmin(String filename);
 
+	public Resource wyslijAdmin(String filename);
+	
+	public void zapiszAdmin(MultipartFile file);
 }

@@ -516,4 +516,78 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 		}
 
 	}
+	
+	@Override
+
+	public boolean usunAdmin(String filename) {
+
+		var username_folder = getPlikiDlaAdmina();
+
+		try {
+
+			Path file = username_folder.resolve(filename);
+
+			return Files.deleteIfExists(file);
+
+		} catch (IOException e) {
+
+			throw new RuntimeException("Blad: " + e.getMessage());
+
+		}
+
+	}
+	
+	@Override
+
+	public Resource wyslijAdmin(String filename) {
+
+		var username_folder = getPlikiDlaAdmina();
+
+		try {
+
+			Path file = username_folder.resolve(filename);
+
+			Resource resource = new UrlResource(file.toUri());
+
+			if (resource.exists() || resource.isReadable()) {
+
+				return resource;
+
+			} else {
+
+				throw new RuntimeException("Nie udalo sie wrzucic pliku.");
+
+			}
+
+		} catch (MalformedURLException e) {
+
+			throw new RuntimeException("Blad: " + e.getMessage());
+
+		}
+
+	}
+	
+	@Override
+
+	public void zapiszAdmin(MultipartFile file) {
+
+		var username_folder = getPlikiDlaAdmina();
+
+		try {
+
+			Files.copy(file.getInputStream(), username_folder.resolve(file.getOriginalFilename()));
+
+		} catch (Exception e) {
+
+			if (e instanceof FileAlreadyExistsException) {
+
+				throw new RuntimeException("Taki plik już istnieje");
+
+			}
+
+			throw new RuntimeException(e.getMessage());
+
+		}
+
+	}
 }

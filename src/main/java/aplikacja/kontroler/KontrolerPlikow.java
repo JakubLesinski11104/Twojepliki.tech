@@ -159,12 +159,62 @@ public class KontrolerPlikow {
 
 	public ResponseEntity<Resource> getPlikAdmin(@PathVariable String filename) {
 
-		Resource file = usługa_przechowywania.wyslij(filename);
+		Resource file = usługa_przechowywania.wyslijAdmin(filename);
 
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
 
 	}
+	
+	@DeleteMapping("/plikiAdmin/{filename:.+}")
 
+	public ResponseEntity<KomunikatOdpowiedzi> usunPlikAdmin(@PathVariable String filename) {
+
+		String message = "";
+
+		try {
+
+			boolean isttnieje = usługa_przechowywania.usunAdmin(filename);
+
+			if (isttnieje) {
+
+				message = "Usunieto plik: " + filename;
+
+				return ResponseEntity.status(HttpStatus.OK).body(new KomunikatOdpowiedzi(message));
+			}
+
+			message = "Plik nie istnieje";
+
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new KomunikatOdpowiedzi(message));
+
+		} catch (Exception e) {
+
+			message = "Nie mozna usunac: " + filename + ". Error: " + e.getMessage();
+
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new KomunikatOdpowiedzi(message));
+		}
+	}
+	
+	@PostMapping("/wyslijAdmin")
+
+	public ResponseEntity<KomunikatOdpowiedzi> wyslijPlikAdmin(@RequestParam MultipartFile file) {
+
+		String message = "";
+
+		try {
+
+			usługa_przechowywania.zapiszAdmin(file);
+
+			message = "Wrzucono plik: " + file.getOriginalFilename();
+
+			return ResponseEntity.status(HttpStatus.OK).body(new KomunikatOdpowiedzi(message));
+
+		} catch (Exception e) {
+
+			message = "Nie wrzucono pliku: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
+
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new KomunikatOdpowiedzi(message));
+		}
+	}
 }
