@@ -86,9 +86,9 @@ public class KontrolerLogowania {
 			return "rejestracja";
 		}
 		
-		if (uzytkownik.getUsername() == null || uzytkownik.getUsername().isEmpty() || !uzytkownik.getUsername().matches("^[a-zA-Z0-9]{6,}$")) {
+		if (uzytkownik.getUsername() == null || uzytkownik.getUsername().isEmpty() || !uzytkownik.getUsername().matches("^[a-zA-Z0-9]{5,}$")) {
 			
-			model.addAttribute("komunikat_username", "Nazwa uzytkownika musi zawierać mimimum 6 znaków i nie moze zawierać znaków specjalnych!");
+			model.addAttribute("komunikat_username", "Nazwa uzytkownika musi zawierać mimimum 5 znaków i nie moze zawierać znaków specjalnych!");
 			
 			return "rejestracja";
 			

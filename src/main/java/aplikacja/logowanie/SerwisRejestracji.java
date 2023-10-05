@@ -36,7 +36,7 @@ public class SerwisRejestracji {
 		uzytkownik.setHaslo(zakodowane_haslo);
 
 		String losowy_kod = RandomString.make(64);
-		uzytkownik.setKodWeyfikacyjny(losowy_kod);
+		uzytkownik.setKodWeryfikacyjny(losowy_kod);
 		uzytkownik.setEnabled(false);
 
 		repozytorium.save(uzytkownik);
@@ -70,7 +70,7 @@ public class SerwisRejestracji {
 		helperMime.setSubject(tematEmaila);
 
 		trescEmaila = trescEmaila.replace("[[name]]", uzytkownik.getPelneDane());
-		String weryfikacjaURL = URL + "/weryfikacja?kod=" + uzytkownik.getKodWeyfikacyjny();
+		String weryfikacjaURL = URL + "/weryfikacja?kod=" + uzytkownik.getKodWeryfikacyjny();
 
 		trescEmaila = trescEmaila.replace("[[URL]]", weryfikacjaURL);
 
@@ -80,13 +80,13 @@ public class SerwisRejestracji {
 
 	}
 
-	public boolean weryfikacja(String kod_weyfikacyjny) {
-		Uzytkownik uzytkownik = repozytorium.znajdzPoKodzieWeryfikacyjnym(kod_weyfikacyjny);
+	public boolean weryfikacja(String kod_weryfikacyjny) {
+		Uzytkownik uzytkownik = repozytorium.znajdzPoKodzieWeryfikacyjnym(kod_weryfikacyjny);
 
 		if (uzytkownik == null || uzytkownik.isEnabled()) {
 			return false;
 		} else {
-			uzytkownik.setKodWeyfikacyjny(null);
+			uzytkownik.setKodWeryfikacyjny(null);
 			uzytkownik.setEnabled(true);
 			repozytorium.save(uzytkownik);
 

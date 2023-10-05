@@ -30,8 +30,8 @@ public class Uzytkownik {
 	@Column(name = "nazwisko", nullable = false, length = 20)
 	private String nazwisko;
 
-	@Column(name = "kod_weyfikacyjny", length = 64)
-	private String kod_weyfikacyjny;
+	@Column(name = "kod_weryfikacyjny", length = 64)
+	private String kod_weryfikacyjny;
 
 	private boolean enabled;
 
@@ -83,12 +83,12 @@ public class Uzytkownik {
 		this.username = username;
 	}
 
-	public String getKodWeyfikacyjny() {
-		return kod_weyfikacyjny;
+	public String getKodWeryfikacyjny() {
+		return kod_weryfikacyjny;
 	}
 
-	public void setKodWeyfikacyjny(String kod_weyfikacyjny) {
-		this.kod_weyfikacyjny = kod_weyfikacyjny;
+	public void setKodWeryfikacyjny(String kod_weyrfikacyjny) {
+		this.kod_weryfikacyjny = kod_weyrfikacyjny;
 	}
 
 	public String getPelneDane() {
