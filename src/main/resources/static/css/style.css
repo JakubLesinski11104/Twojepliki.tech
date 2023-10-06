@@ -506,6 +506,13 @@ table {
     background-color: #078594;
 }
 
+.text-centerkat{
+	font-size: 14px;
+	font-family: Verdana, sans-serif;
+	color: white;
+	text-align: center;
+}
+
 .a_tabela_plikow_uzytkownikow {
 	color:#25cc5f;
 }
