@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
 
 html {
 	height: 100%;
@@ -92,21 +93,25 @@ table.custom-table {
 }
 
 .form-signup {
-	background-color: #E2F1F7;
-	border-radius: 20px;
+	background-color: #CDE4E7;
+	font-family: Verdana, sans-serif;
+	border-radius: 15px;
 	width: 90%;
-	padding: 20px;
+	padding: 15px;
 	margin-top: 150px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 .login {
 	max-width: 350px;
+	font-family: Verdana, sans-serif;
 	margin: 0 auto;
-	background-color: #E2F1F7;
-	border-radius: 20px;
+	background-color: #CDE4E7;
+	border-radius: 15px;
 	width: 90%;
-	padding: 30px;
+	padding: 35px;
 	margin-top: 150px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 .card-body {
@@ -512,20 +517,33 @@ table {
 	color: white;
 	text-align: center;
 }
-
-.a_tabela_plikow_uzytkownikow {
-	color:#25cc5f;
+.LogRejH{
+	font-family: Roboto, sans-serif; 
 }
-.inputAdmin {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+.zalogujButton{
+
+font-family: Roboto, sans-serif;
+font-weight: bold;
+font-size: 16px;
+color: #fff;
+background-color: #077b8a;
+padding: 10px 30px;
+border-radius: 20px;
+transition : 1000ms;
+transform: translateY(0);
+display: flex;
+flex-direction: row;
+align-items: center;
+cursor: pointer;
 }
 
-.inputAdmin input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    text-align: center; 
+.zalogujButton:hover{
+
+transition : 500ms;
+padding: 10px 20px;
+transform : translateY(-0px);
+background-color: #a2d5c6;
+color: #000000;
+
+
 }

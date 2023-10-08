@@ -48,14 +48,14 @@
 
 <div sec:authorize="!isAuthenticated()">
 <nav class="navbar navbar-expand-md navbar-dark mb-4">
-   <a class="navbar-brand" style="background-image: url('/assets/icons8-disk-32.png'); background-size: 32px 32px; width: 32px; height: 32px;"></a>
+   <a class="navbar-brand" style="background-image: url('/assets/icons8-disk-32.png'); background-size: 32px 32px; width: 32px; height: 32px;" href="/"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse" bis_skin_checked="1">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/login">Logowanie</a>
         </li>
     </ul>
     <ul class="navbar-nav">
@@ -68,13 +68,14 @@
 </div>
 
 	<div class="container text-center">
-		<br /><br />
+		
 		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}"
 			class="form-signup" method="post"
 			style="max-width: 400px; margin: 0 auto;">
 			<div>
-				<h1>Rejestracja</h1>
+				<h1 class="LogRejH">Rejestracja</h1>
 			</div>
+			<br>
 			<div class="m-3">
 				<div class="form-group row">
 					<label class="col-4 col-form-label">E-mail: </label>
@@ -140,16 +141,18 @@
 						<div id="hasloPowtorzonePowiadomienieBlad" style="color: red;"></div>
 					</div>
 				</div>
-				
+				<center>
 				Przy zarejestrowaniu zgadzasz się na <a href="/regulamin">regulamin</a>
 				<div><br />
-					<button type="submit" class="btn btn-primary btn-block"
+				
+					<button type="submit" class="zalogujButton"
 						onclick="sprawdzHaslo()">Zarejestruj</button>
 				</div>
+				</center>
 			</div>
 		</form>
 	</div>
-
+<br></br>
 <script type="text/javascript" src="js/Spr_Pok_Has.js">	</script>
 
 	<footer class="footer">

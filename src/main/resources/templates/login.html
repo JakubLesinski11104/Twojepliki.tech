@@ -69,12 +69,12 @@
 </div>
 	
 	<div class="container-fluid text-center">
-	<br></br>
+	
 		<form th:action="@{/login}" method="post" class="login">
 			<div th:if="${param.error}">
 				<p class="text-danger">Wprowadzono złe dane</p>
 			</div>
-				<h1>Zaloguj się:</h1>
+				<h1 class="LogRejH">Zaloguj się:</h1>
 				<br></br>
 					<p><input type="email" name="email" class="form-control"
 						placeholder="Podaj email" required autofocus /></p>
@@ -83,14 +83,18 @@
                <p> <input type="password" id="haslo" name="haslo" class="form-control" placeholder="Podaj hasło" required /></p>
                 <i class="password-toggle-icon fas fa-eye" onclick="pokazHaslo('haslo')"></i>
             </div>
-          		
+          		<center>
 				<p>
-					<input type="submit" value="Zaloguj" class="btn btn-primary btn-block" />
+				
+					<input type="submit" value="Zaloguj" class="zalogujButton" />
+					
 				</p>
+				</center>
 				<p><a class="nav-link" href="/rejestracja">Nie masz konta? Zarejestruj się!</a></p>
 		</form>
 		</div>
 		
+		<br></br>
 		<script type="text/javascript" src="js/Spr_Pok_Has.js"></script>
 		
 	<footer class="footer">
