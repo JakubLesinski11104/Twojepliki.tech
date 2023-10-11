@@ -67,24 +67,24 @@ public class KonfiguracjaZabezpieczenSieciowych {
 
 				.requestMatchers("/js/**", "/css/**").permitAll()
 
-				.requestMatchers("/Panel_Administtora").authenticated()
-
 				.requestMatchers("/pliki").authenticated()
 
 				.requestMatchers("/wyslij").authenticated()
 
 				.requestMatchers("/pliki/").authenticated()
 
-				.requestMatchers("/glowna").authenticated()
-
 				.requestMatchers("/katalog").authenticated()
-
-				.requestMatchers("/usuwanie").authenticated()
 
 				.requestMatchers("/udostepnijplik").authenticated()
 
 				.requestMatchers("/udostepnij").authenticated()
+				
+				.requestMatchers("/Panel_Administatora").authenticated()
 
+				.requestMatchers("/plikiAdmin").authenticated()
+				
+				.requestMatchers("/wyslijAdmin").authenticated()
+				
 				.anyRequest().permitAll()
 
 				.and()
@@ -92,7 +92,7 @@ public class KonfiguracjaZabezpieczenSieciowych {
 				.loginPage("/login")
 				.usernameParameter("email")
 				.passwordParameter("haslo")
-				.defaultSuccessUrl("/glowna").permitAll()
+				.defaultSuccessUrl("/").permitAll()
 
 				.and()
 				.logout()

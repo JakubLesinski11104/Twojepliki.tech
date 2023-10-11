@@ -110,7 +110,7 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	@GetMapping("/katalog")
 
 	public String katalog(Model model, HttpServletRequest request) {
-
+		
 		String username_folder = getUsernameFolder(request);
 
 		model.addAttribute("username_folder", username_folder);

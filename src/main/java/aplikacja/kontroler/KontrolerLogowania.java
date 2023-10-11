@@ -34,27 +34,9 @@ public class KontrolerLogowania {
 	@GetMapping("/")
 	
 	public String Strona(Principal principal) {
-		
-	    if (principal != null) {
-	    	
-	        return "redirect:/glowna";
-	        
-	    } else {
-	    	
-	        return "index";
-	        
-	    }
-	    
-	}
-
-	@GetMapping("/glowna")
-
-	public String StronaGlowna(Model model, HttpServletRequest request) {
-		
-		model.addAttribute("username", request.getUserPrincipal().getName());
-		
-		return "glowna";
-
+			    	
+		return "index";
+	          
 	}
 	
 	@GetMapping("/rejestracja")

@@ -511,6 +511,24 @@ table {
     background-color: #078594;
 }
 
+.a_tabela_plikow_uzytkownikow {
+	color:#25cc5f;
+}
+
+.inputAdmin {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inputAdmin input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center; 
+}
+
 .text-centerkat{
 	font-size: 14px;
 	font-family: Verdana, sans-serif;
@@ -544,6 +562,5 @@ padding: 10px 20px;
 transform : translateY(-0px);
 background-color: #a2d5c6;
 color: #000000;
-
 
 }

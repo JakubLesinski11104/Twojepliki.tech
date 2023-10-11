@@ -23,9 +23,11 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse" bis_skin_checked="1">
-    <ul class="navbar-nav mr-auto">
-     
+  	<div class="collapse navbar-collapse" id="navbarCollapse" bis_skin_checked="1">
+    <ul class="navbar-nav mr-auto">   
+    <div th:if="${username == 'admin'}" class="ml-auto">
+  	<a class="nav-link custom-link" href="/Panel_Administatora">Panel Administratora</a>
+	</div>  
       <li class="nav-item">
         <a class="nav-link" href="/katalog">Katalog Plików</a>
       </li>
@@ -41,7 +43,6 @@
   </div>
 </nav>
 
-<!--Do dostosowania-->
 <div class="float-left">
     <button id="podkatalogSidebar">Katalogi</button>
 
@@ -85,8 +86,6 @@
         </div>
     </div>
 </div>
-
-<!--Do dostosowania-->
 
 <p class="tekstkatalog">  Witaj <b style="font-weight: bold;">[[${ImieNazwisko}]]</b> </p>
 <p style="text-align: center;">Jesteś w: <b th:text="${username_folder}"></b></p>
