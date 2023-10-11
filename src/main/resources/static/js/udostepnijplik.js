@@ -36,7 +36,7 @@ async function fetchData() {
 	const container = document.getElementById("PlikiDoUdostepnienia");
 
 	data.forEach((plik) => {
-		if (plik.name === "Twoja_notatka.txt") {
+		if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
 			return;
 		}
 		const card = document.createElement("div");
@@ -47,12 +47,7 @@ async function fetchData() {
                          <p class="card-text">${plik.name}</p>
               <div class="d-flex justify-content-between align-items-center">
                   <button class="btn btn-primary btn-block" onclick="udostepnijPlik('${plik.url}', '${plik.name}')">Udostępnij</button>
-              </div>`: `
-           <div class="container text-center">
-					<p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
-					<div class="btn-group"></div>  
-					</div>
-					`}
+              </div>`: ``}
 				</div>
 			</div>
        `;
@@ -86,11 +81,7 @@ async function fetchData() {
 				<p class="card-text">${plik.name}</p>
 				<div class="d-flex justify-content-between align-items-center">
 					<button class="btn btn-primary btn-block" onclick="udostepnijPlik('${plik.url}', '${plik.name}')">Udostępnij</button>
-				</div>` : `
-				<div class="container text-center">
-					<p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
-					<div class="btn-group"></div>  
-				</div>`}
+				</div>` : ``}
 		</div>
 	</div>`;
 

@@ -36,7 +36,7 @@ async function fetchData() {
                         <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-                    <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd 🔍</button>
+                    <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd <img src="assets/podglad.png" alt="Podglad"></button>
                 </div>
             </div>
         </div>`;
@@ -76,15 +76,9 @@ async function fetchData() {
 					</div>
 					${isUdostepnioneFolder ? '' : `
 						<button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-						<button id="podglad" class="btn-sm btn-outline-secondary btn-pobierz" onclick="pokazPodglad()">Podgląd</button>
+                    <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd <img src="assets/podglad.png" alt="Podglad"></button>
 					`}
-				</div>` : `
-				<div class="container text-center">
-					<p style="text-align: center; font-size: 18px; margin: 0;">Katalog: <b>${plik.name}</b></p>
-					<div class="btn-group"></div>  
-					${isUdostepnioneFolder ? '' : `
-						<button id="usun_katalog" class="btn btn-sm btn-outline-secondary btn-usun" onclick="location.href='/usuwanie';">Usuń</button>
-					`}
+				</div>` : ``}
 				</div>`}
 		</div>
 	</div>`;
