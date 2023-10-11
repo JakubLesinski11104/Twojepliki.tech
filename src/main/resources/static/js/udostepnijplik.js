@@ -29,7 +29,7 @@ var nowaNazwaPlikuvar = nazwaPliku;
     });
 });
 
-
+/*Windows*/
 async function fetchData() {
 	const response = await fetch(url);
 	const data = await response.json();
@@ -57,6 +57,7 @@ async function fetchData() {
 }
 
 fetchData();
+/*Windows*/
 
 /*Linux
 async function fetchData() {
@@ -65,7 +66,7 @@ async function fetchData() {
 	const container = document.getElementById("PlikiDoUdostepnienia");
 
 	data.forEach((plik) => {
-		if (plik.name === "Twoja_notatka.txt") {
+		if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
 		return;
 	}
     

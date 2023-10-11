@@ -12,6 +12,7 @@ const podkatalogHiperlaczeUrl = 'https://localhost:443/pliki';
 
 let wyslanePliki = [];
 
+/*Windows*/
 async function fetchData() {
 	const response = await fetch(plikiurl);
 	const data = await response.json();
@@ -45,6 +46,7 @@ async function fetchData() {
 		wyslanePliki.push(plik.name);
 	});
 }
+/*Windows*/
 
 /*Linux
 async function fetchData() {
@@ -79,15 +81,14 @@ async function fetchData() {
                     <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd <img src="assets/podglad.png" alt="Podglad"></button>
 					`}
 				</div>` : ``}
-				</div>`}
-		</div>
+				</div>	
 	</div>`;
 
 	container.appendChild(card);
 	wyslanePliki.push(plik.name);
 });
 }
-*/
+Linux*/
 
 function pobierzPlik(url) {
 	const elementA = document.createElement('a');
