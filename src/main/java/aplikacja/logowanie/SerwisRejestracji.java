@@ -94,5 +94,44 @@ public class SerwisRejestracji {
 		}
 
 	}
+	
+	  public void wyslijEmailResetowaniaHasla(Uzytkownik uzytkownik, String siteURL)
+	            throws MessagingException, UnsupportedEncodingException {
 
+	        String adresUzytkownika = uzytkownik.getEmail();
+	        String adresWychodzacy = "obsluga@twojepliki.tech";
+	        String nazwaNadawcy = "Resetowanie hasła w serwisie twojepliki.tech";
+	        String tematEmaila = "Prośba o zresetowanie hasła";
+	        String trescEmaila = """
+	                Pan/Pani [[name]],<br>\
+	                <br>\
+	                Kliknij poniższy link, aby zresetować hasło:<br>\
+	                <h3><a href="[[URL]]" target="_self">ZRESETUJ HASŁO</a></h3>\
+	                <br>\
+	                Jeżeli to nie ty prosiłeś/prosiłaś o resetowanie hasła, zignoruj tę wiadomość.<br>\
+	                Jeśli potrzebujesz pomocy, skontaktuj się z: kontakt@twojepliki.tech <br>\
+	                Twojepliki.tech\
+	                """;
+
+	        MimeMessage wiadomoscEmail = NadawcaEmail.createMimeMessage();
+	        MimeMessageHelper helperMime = new MimeMessageHelper(wiadomoscEmail);
+
+	        helperMime.setFrom(adresWychodzacy, nazwaNadawcy);
+	        helperMime.setTo(adresUzytkownika);
+	        helperMime.setSubject(tematEmaila);
+
+	        trescEmaila = trescEmaila.replace("[[name]]", uzytkownik.getPelneDane());
+	        String resetHaslaURL = siteURL + "/reset-hasla?email=" + uzytkownik.getEmail();
+
+	        trescEmaila = trescEmaila.replace("[[URL]]", resetHaslaURL);
+
+	        helperMime.setText(trescEmaila, true);
+
+	        NadawcaEmail.send(wiadomoscEmail);
+
+	    }
+	  
+	  public Uzytkownik znajdzPoEmail(String email) {
+	        return repozytorium.znajdzPoEmail(email);
+	    }
 }

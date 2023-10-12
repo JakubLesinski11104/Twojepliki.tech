@@ -10,13 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import aplikacja.logowanie.RepozytoriumLogowania;
 import aplikacja.logowanie.SerwisRejestracji;
 import aplikacja.logowanie.Uzytkownik;
 
@@ -30,6 +33,12 @@ public class KontrolerLogowania {
 	@Autowired
 
 	private SerwisRejestracji Serwis_Logowania;
+	
+	@Autowired
+	private RepozytoriumLogowania repozytorium;
+	
+	@Autowired
+	private PasswordEncoder KoderHasla;
 
 	@GetMapping("/")
 	
@@ -142,4 +151,69 @@ public class KontrolerLogowania {
 			return "niepoprawna_weyfikacja";
 		}
 	}
+	
+	@GetMapping("/reset")
+    public String wyslijEmailResetowaniaHaslaForm(Model model) {
+        model.addAttribute("email", "");
+        return "reset-form";
+    }
+	
+
+    @PostMapping("/reset")
+    public String wyslijEmailResetowaniaHasla(@RequestParam("email") String email, Model model, HttpServletRequest request) {
+        Uzytkownik uzytkownik = Serwis_Logowania.znajdzPoEmail(email);
+
+        if (uzytkownik != null) {
+            try {
+            	Serwis_Logowania.wyslijEmailResetowaniaHasla(uzytkownik, getURL(request));
+            } catch (MessagingException | UnsupportedEncodingException e) {
+                // Obsłuż błąd wysyłania emaila
+                e.printStackTrace();
+                model.addAttribute("blad", "Wystąpił błąd podczas wysyłania emaila.");
+                return "reset-form";
+            }
+        } else {
+            model.addAttribute("blad", "Podany email nie istnieje w bazie danych.");
+            return "reset-form";
+        }
+
+        return "reset-sukces";
+    }
+    
+    @GetMapping("/reset-hasla")
+    public String resetHaslaForm(@RequestParam("email") String email, Model model) {
+        model.addAttribute("email", email);
+        return "reset-hasla";
+    }
+	
+	@PostMapping("/resetuj-haslo")
+	public String resetujHaslo(@RequestParam("email") String email, @RequestParam("haslo") String haslo, Model model) {
+		 System.out.println("Metoda resetujHaslo została wywołana.");
+		    System.out.println("Email: " + email);
+		    System.out.println("Wartość zmiennej email: " + email);
+
+		    System.out.println("Hasło: " + haslo);
+	    try {
+	        Uzytkownik uzytkownik = Serwis_Logowania.znajdzPoEmail(email);
+
+	        if (uzytkownik != null) {
+	            String zakodowane_haslo = KoderHasla.encode(haslo);
+	            uzytkownik.setHaslo(zakodowane_haslo);
+	            repozytorium.save(uzytkownik);
+
+	            System.out.println("Password updated successfully.");
+
+	            return "pomyslny-reset-hasla";
+	        } else {
+	            model.addAttribute("blad", "Podany email nie istnieje w bazie danych.");
+	            return "reset-hasla";
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("blad", "Wystąpił błąd podczas aktualizacji hasła.");
+	        return "reset-hasla";
+	    }
+	}
+	
+	
 }
