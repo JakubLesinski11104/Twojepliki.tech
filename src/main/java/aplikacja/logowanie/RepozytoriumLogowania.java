@@ -14,4 +14,7 @@ public interface RepozytoriumLogowania extends JpaRepository<Uzytkownik, Long> {
 	@Query("SELECT u FROM Uzytkownik u WHERE u.username = ?1")
     public Uzytkownik znajdzPoUsername(String username);
 	
+	@Query("SELECT u FROM Uzytkownik u WHERE u.resetToken = ?1")
+	public Uzytkownik znajdzPoTokenieResetowania(String token);
+	
 }

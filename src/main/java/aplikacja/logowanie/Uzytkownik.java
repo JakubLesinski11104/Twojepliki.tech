@@ -32,6 +32,9 @@ public class Uzytkownik {
 
 	@Column(name = "kod_weryfikacyjny", length = 64)
 	private String kod_weryfikacyjny;
+	
+	@Column(name = "reset_token", length = 64)
+	private String resetToken;
 
 	private boolean enabled;
 
@@ -101,5 +104,13 @@ public class Uzytkownik {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
 	}
 }

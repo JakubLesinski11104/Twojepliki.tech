@@ -33,6 +33,9 @@ public class KontrolerLogowania {
 	@Autowired
 
 	private SerwisRejestracji Serwis_Logowania;
+	
+	@Autowired
+	private RepozytoriumLogowania repozytorium;
 
 	@GetMapping("/")
 	
@@ -146,7 +149,69 @@ public class KontrolerLogowania {
 		}
 	}
 	
+	@GetMapping("/resetuj_haslo")
 	
+	public String resetujHaslo(Model model) {
+		
+	    model.addAttribute("uzytkownik", new Uzytkownik());
+	    
+	    return "resetuj_haslo";
+	    
+	}
+
+	@PostMapping("/resetuj_haslo")
 	
+	public String resetujHaslo(@ModelAttribute Uzytkownik uzytkownik, HttpServletRequest request) 
+	        throws UnsupportedEncodingException, MessagingException {
+		
+	    Uzytkownik istniejacyUzytkownik = repozytorium.znajdzPoEmail(uzytkownik.getEmail());
+	    
+	    if (istniejacyUzytkownik == null) {
+	    	
+	    	 return "blad_resetu";
+	    	 
+	    }
+	    
+	    Serwis_Logowania.generujTokenResetowania(istniejacyUzytkownik, getURL(request));
+	    
+	    return "wiadomosc_resetowania";
+	    
+	}
+
+	@GetMapping("/reset_hasla")
+	
+	public String stronaResetuHasla(@Param("token") String token, Model model) {
+		
+	    Uzytkownik uzytkownik = repozytorium.znajdzPoTokenieResetowania(token);
+	    
+	    if (uzytkownik == null) {
+	    	
+	         return "blad_resetu";
+	         
+	    }
+	    
+	    model.addAttribute("token", token);
+	    
+	    return "reset_hasla";
+	    
+	}
+
+	@PostMapping("/reset_hasla")
+	
+	public String resetHasla(@RequestParam String token, @RequestParam String haslo) {
+		
+	    boolean wynik = Serwis_Logowania.resetujHaslo(token, haslo);
+	    
+	    if (wynik) {
+	    	
+	        return "pomyslny_reset";
+	        
+	    } else {
+	    	
+	        return "blad_resetu";
+	        
+	    }
+	    
+	}
 	
 }
