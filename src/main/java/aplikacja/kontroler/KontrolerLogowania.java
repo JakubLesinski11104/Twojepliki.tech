@@ -8,9 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -67,14 +64,16 @@ public class KontrolerLogowania {
 
 	public String procesRejestracji(@ModelAttribute Uzytkownik uzytkownik, Model model, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 
-		if (uzytkownik.getEmail() == null || uzytkownik.getEmail().isEmpty() || !uzytkownik.getEmail().contains("@") || uzytkownik.getEmail().length() < 6) {
+		if (uzytkownik.getEmail() == null || uzytkownik.getEmail().isEmpty() || !uzytkownik.getEmail().contains("@") || uzytkownik.getEmail().length() < 6 
+				||  "kontakt@twojepliki.tech".equalsIgnoreCase(uzytkownik.getEmail()) || "obsluga@twojepliki.tech".equalsIgnoreCase(uzytkownik.getEmail())) {
 			
 			model.addAttribute("komunikat_email","Wprowadzony email musi zawierac minimum 6 znaków i musi zawierać @!");
 			
 			return "rejestracja";
 		}
 		
-		if (uzytkownik.getUsername() == null || uzytkownik.getUsername().isEmpty() || !uzytkownik.getUsername().matches("^[a-zA-Z0-9]{5,}$")) {
+		if (uzytkownik.getUsername() == null || uzytkownik.getUsername().isEmpty() || !uzytkownik.getUsername().matches("^[a-zA-Z0-9]{5,}$") 
+				|| "admin".equalsIgnoreCase(uzytkownik.getUsername())) {
 			
 			model.addAttribute("komunikat_username", "Nazwa uzytkownika musi zawierać mimimum 5 znaków i nie moze zawierać znaków specjalnych!");
 			
