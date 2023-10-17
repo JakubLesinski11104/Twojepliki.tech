@@ -45,8 +45,10 @@ async function fetchData() {
                         <div class="card-body mb-4">
                         ${!plik.url.endsWith('/') && (plik.url.includes('.') || plik.url.endsWith('/')) ? `
                          <p class="card-text">${plik.name}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                  <button class="btn btn-primary btn-block" onclick="udostepnijPlik('${plik.url}', '${plik.name}')">Udostępnij</button>
+              <div>
+               <center>
+                  <button class="udostepnijButton" onclick="udostepnijPlik('${plik.url}', '${plik.name}')">Udostępnij</button>
+                   </center>
               </div>`: ``}
 				</div>
 			</div>
@@ -80,8 +82,10 @@ async function fetchData() {
 		<div class="card-body mb-4">
 			${fileExtension !== '' ? `
 				<p class="card-text">${plik.name}</p>
-				<div class="d-flex justify-content-between align-items-center">
-					<button class="btn btn-primary btn-block" onclick="udostepnijPlik('${plik.url}', '${plik.name}')">Udostępnij</button>
+				<div>
+				<center>
+					<button class="udostepnijButton" onclick="udostepnijPlik('${plik.url}', '${plik.name}')">Udostępnij</button>
+					</center>
 				</div>` : ``}
 		</div>
 	</div>`;

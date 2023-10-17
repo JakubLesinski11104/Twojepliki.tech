@@ -564,3 +564,17 @@ background-color: #a2d5c6;
 color: #000000;
 
 }
+
+.udostepnijButton{
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background-color:#AA16D2;
+	border-radius:7px;
+	border:1px solid #057fd0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Roboto;
+	font-size:14px;
+	padding:7px 14px;
+	
+}
