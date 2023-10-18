@@ -13,80 +13,95 @@ const podkatalogHiperlaczeUrl = 'https://localhost:443/pliki';
 let wyslanePliki = [];
 
 /*Windows*/
-async function fetchData() {
-	const response = await fetch(plikiurl);
-	const data = await response.json();
-	const container = document.getElementById("listaPlikow");
+function fetchData() {
+    fetch(plikiurl)
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("listaPlikow");
 
-	data.forEach((plik) => {
-		if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
-			return;
-		}
-
-		const card = document.createElement("div");
-		card.className = "col-md-4 ";
-		card.innerHTML = `
-			<div class="card-body mb-4">
-				<p class="card-text">${plik.name}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
-                        <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
+            data.forEach(plik => {
+                if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
+                    return;
+                }
+                const rozmiarPliku = obliczRozmiarPlikuSync(plik.url);
+                const card = document.createElement("div");
+                card.className = "col-md-4 ";
+                card.innerHTML = `
+                    <div class="card-body mb-4">
+                        <p class="card-text">${plik.name}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
+                                <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
+                            <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd <img src="assets/podglad.png" alt="Podglad"></button>
+                        </div>
+                        <p class="card-text" style="font-size:14px;">Rozmiar pliku: <b>${rozmiarPliku}</b></p>
                     </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-                    <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd <img src="assets/podglad.png" alt="Podglad"></button>
-                </div>
-            </div>
-        </div>`;
+                </div>`;
 
-		container.appendChild(card);
-		wyslanePliki.push(plik.name);
-	});
+                container.appendChild(card);
+                wyslanePliki.push(plik.name);
+            });
+        })
+          .catch(error => console.error('Wystąpił błąd:', error));
 }
 /*Windows*/
 
 /*Linux
-async function fetchData() {
-	const response = await fetch(plikiurl);
-	const data = await response.json();
-	const container = document.getElementById("listaPlikow");
+function fetchData() {
+    fetch(plikiurl)
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("listaPlikow");
 
-	data.forEach((plik) => {
-	if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
-			return;
-		}
-    
- const fileNameParts = plik.name.split('.');
-	const fileExtension = fileNameParts.length > 1 ? fileNameParts[fileNameParts.length - 1] : '';
-		const isUdostepnioneFolder = plik.name === "Udostepnione";
-	const card = document.createElement("div");
-	card.className = "col-md-4 ";
-	card.innerHTML = `
-		<div class="card-body mb-4">
-		   ${fileExtension !== '' ? `
-				<p class="card-text">${plik.name}</p>
-				<div class="d-flex justify-content-between align-items-center">
-					<div class="btn-group">
-						<label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
-						<input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
-					</div>
-					<div class="btn-group">
-						<button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
-					</div>
-					${isUdostepnioneFolder ? '' : `
-						<button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
-                    <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd <img src="assets/podglad.png" alt="Podglad"></button>
-					`}
-				</div>` : ``}
-				</div>	
-	</div>`;
+            const promises = data.map(async (plik) => {
+                if (plik.name === "Twoja_notatka.txt" || !plik.name.includes('.')) {
+                    return;
+                }
 
-	container.appendChild(card);
-	wyslanePliki.push(plik.name);
-});
+                const fileNameParts = plik.name.split('.');
+                const fileExtension = fileNameParts.length > 1 ? fileNameParts[fileNameParts.length - 1] : '';
+                const isUdostepnioneFolder = plik.name === "Udostepnione";
+                const rozmiarPliku = obliczRozmiarPlikuSync(plik.url);
+
+                const card = document.createElement("div");
+                card.className = "col-md-4 ";
+                card.innerHTML = `
+                    <div class="card-body mb-4">
+                        ${fileExtension !== '' ? `
+                            <p class="card-text">${plik.name}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
+                                    <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary btn-pobierz" onclick="pobierzPlik('${plik.url}')">Pobierz</button>
+                                </div>
+                                ${isUdostepnioneFolder ? '' : `
+                                    <button type="button" class="btn btn-sm btn-outline-secondary btn-usun" onclick="usunPlik('${plik.name}')">Usuń</button>
+                                    <button id="podglad" class="btn-sm btn-outline-secondary btn-podglad" onclick="pokazPodglad()">Podgląd <img src="assets/podglad.png" alt="Podglad"></button>
+                                `}
+                            </div>
+                            <p class="card-text" style="font-size:14px;">Rozmiar pliku: <b>${rozmiarPliku}</b></p>
+                        ` : ``}
+                    </div>
+                </div>`;
+
+                container.appendChild(card);
+                wyslanePliki.push(plik.name);
+            });
+
+            return Promise.all(promises);
+        })
+        .catch(error => {
+            console.error("Wystąpił błąd podczas pobierania danych:", error);
+        });
 }
 Linux*/
 
@@ -105,6 +120,23 @@ function getObecnyCzas() {
 	const sekundy = data.getSeconds();
 	const czas = `${padZero(godzina)}.${padZero(minuty)}.${padZero(sekundy)}`;
 	return czas;
+}
+
+function obliczRozmiarPlikuSync(blobUrl) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('HEAD', blobUrl, false);
+    xhr.send(null);
+    const rozmiarWBajtach = parseInt(xhr.getResponseHeader('Content-Length'), 10);
+
+    if (rozmiarWBajtach < 1024) {
+        return rozmiarWBajtach + " B";
+    } else if (rozmiarWBajtach < 1024 * 1024) {
+        return (rozmiarWBajtach / 1024).toFixed(2) + " KB";
+    } else if (rozmiarWBajtach < 1024 * 1024 * 1024) {
+        return (rozmiarWBajtach / (1024 * 1024)).toFixed(2) + " MB";
+    } else {
+        return (rozmiarWBajtach / (1024 * 1024 * 1024)).toFixed(2) + " GB";
+    }
 }
 
 function padZero(number) {
