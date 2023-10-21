@@ -35,7 +35,7 @@ body {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Verdana;
+	font-family:Roboto;
 	font-size:12px;
 	padding:6px 12px;
 	
@@ -49,7 +49,7 @@ body {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Verdana;
+	font-family:Roboto;
 	font-size:12px;
 	padding:6px 12px;
 
@@ -63,7 +63,7 @@ body {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Verdana;
+	font-family:Roboto;
 	font-size:12px;
 	padding:6px 12px;
 
@@ -94,7 +94,7 @@ table.custom-table {
 
 .form-signup {
 	background-color: #CDE4E7;
-	font-family: Verdana, sans-serif;
+	font-family: Roboto;
 	border-radius: 15px;
 	width: 90%;
 	padding: 15px;
@@ -104,7 +104,7 @@ table.custom-table {
 
 .login {
 	max-width: 350px;
-	font-family: Verdana, sans-serif;
+	font-family: Roboto;
 	margin: 0 auto;
 	background-color: #CDE4E7;
 	border-radius: 15px;
@@ -140,13 +140,13 @@ input.wiekszy {
 
 .tekstglowna {
 	font-size: 18px;
-	font-family: Verdana, sans-serif;
+	font-family: Roboto;
 	color: white;
 }
 
 .tekstkatalog {
 	font-size: 32px;
-	font-family: Verdana, sans-serif;
+	font-family: Roboto;
 	text-align: center;
 }
 
@@ -334,7 +334,7 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 }
 
 .hiperlaczaPodkatalogi {
-    background-color: gray;
+    background-color:#1F51FF;
     margin-bottom: 5px;
     margin-left: 20px;
     padding: 5px 10px; 
@@ -342,11 +342,19 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 }
 
 .hiperlaczaPodkatalogiDomowy {
-	background-color: yellow;
+	background-color: #ffff00;
 	font-weight:bold;
 	color:black;
 	margin-bottom: 5px;
 	margin-left: 10px;
+}
+.hiperlaczaPodkatalogiDomowy:hover {
+	background-color:#ffff80;
+	color:black;
+}
+.hiperlaczaPodkatalogiDomowy:active {
+	position:relative;
+	top:1px;
 }
 
 #dzialanie_witryny {
@@ -436,7 +444,7 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 .headernot {
 	
 	font-size: 42px;
-	font-family: Verdana, bold;
+	font-family: Roboto, bold;
 	color: white;
 	text-align: center;
 }
@@ -444,7 +452,7 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 .opisnot {
 	
 	font-size: 16px;
-	font-family: Verdana, sans-serif;
+	font-family: Roboto;
 	color: white;
 	text-align: center;
 }
@@ -458,57 +466,36 @@ input[type="password"]:not(:focus)+.password-toggle-icon::before {
 }
 
 .pobraniepliku {
-	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
-	background-color:#7892c2;
+	background-color:#34eded;
 	border-radius:10px;
-	border:1px solid #4e6096;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
-	font-family:Verdana;
+	color:#000000;
+	font-family:Roboto;
 	font-size:16px;
-	padding:12px 12px;
-	
-	text-shadow:0px 1px 0px #283966;
+	font-weight:bold;
+	padding:4px 12px;
 }
-.pobraniepliku:hover {
-	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
-	background-color:#476e9e;
-}
-.pobraniepliku:active {
-	position:relative;
-	top:1px;
-}
+
 
 
 
 .paneladminaP {
-	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
-	background-color:#7892c2;
+	background-color:#34eded;
 	border-radius:10px;
-	border:1px solid #4e6096;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
-	font-family:Verdana;
-	font-size:14px;
-	padding:5px 5px;
+	color:#000000;
+	font-family:Roboto;
+	font-size:16px;
+	font-weight:bold;
+	padding:4px 12px;
 	
-	text-shadow:0px 1px 0px #283966;
-}
-.paneladminaP:hover {
-	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
-	background-color:#476e9e;
 }
 
-
-.paneladminaP:active {
-	position:relative;
-	top:1px;
-}
 
 table {
-    background-color: #078594;
+    background-color: #c2f9f9;
 }
 
 .a_tabela_plikow_uzytkownikow {
@@ -531,7 +518,7 @@ table {
 
 .text-centerkat{
 	font-size: 14px;
-	font-family: Verdana, sans-serif;
+	font-family: Roboto;
 	color: white;
 	text-align: center;
 }
@@ -577,4 +564,155 @@ color: #000000;
 	font-size:14px;
 	padding:7px 14px;
 	
+}
+
+.utworzkatalog {
+	background-color:#44c767;
+	border-radius:5px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Roboto;
+	font-size:20px;
+	padding:8px 10px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.utworzkatalog:hover {
+	background-color:#44c767;
+}
+.utworzkatalog:active {
+	position:relative;
+	top:1px;
+}
+.powrotnotatnik{
+	
+	background-color:red;
+	color:white;
+	padding:6px 12px;
+	border-radius:5px;
+	font-size:16px;
+	border:none;
+	
+}
+
+.PRegulamin {
+	background-color:#34eded;
+	border-radius:10px;
+	display:inline-block;
+	cursor:pointer;
+	color:black;
+	font-family:Roboto;
+	font-size:16px;
+	font-weight:bold;
+	padding:6px 14px;
+	
+}
+.PRegulamin:hover {
+	background-color:#34eded;
+}
+.PRegulamin:active {
+	position:relative;
+	top:1px;
+}
+.witryna {
+	background-color:#34eded;
+	border-radius:10px;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Roboto;
+	font-size:16px;
+	font-weight:bold;
+	padding:10px 14px;
+	
+}
+.witryna:hover {
+	background-color:#00c6c9;
+}
+.witryna:active {
+	position:relative;
+	top:1px;
+}
+.JLprzycisk{
+
+font-family: Roboto,;
+font-size: 18px;
+font-weight:bold;
+color: #fff;
+background: linear-gradient(90deg, #48cae4 0%, #0077b6 100%);
+padding: 10px 30px;
+border: none;
+box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+border-radius: 50px;
+display: flex;
+align-items: center;
+cursor: pointer;
+border: solid #000000 1px;
+
+}
+.JPprzycisk{
+
+font-family: Roboto;
+font-size: 18px;
+font-weight:bold;
+color: #fff;
+background: linear-gradient(270deg, #48cae4 0%, #0077b6 100%);
+padding: 10px 30px;
+border: none;
+box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+border-radius: 50px;
+display: flex;
+align-items: center;
+cursor: pointer;
+border: solid #000000 1px;
+}
+.resetblad {
+	max-width: 550px;
+	font-family: Roboto;
+	margin: 0 auto;
+	background-color: #CDE4E7;
+	border-radius: 15px;
+	width: 100%;
+	padding: 60px;
+	margin-top: 150px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+.resetweryfik {
+	max-width: 750px;
+	font-family: Roboto;
+	margin: 0 auto;
+	background-color: #CDE4E7;
+	border-radius: 15px;
+	width: 100%;
+	padding: 60px;
+	margin-top: 150px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.imiekatalog{
+	text-align: center;
+	font-family: Roboto;
+	font-size: 36px;
+	
+}
+
+.instrkatalog{
+	
+	text-align: center;
+	font-family: Roboto;
+	font-size: 16px;
+	
+}
+.btnwyslij2 {
+	background-color:#25cc5f;
+	border-radius:10px;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Roboto;
+	font-size:16px;
+	font-weight:bold;
+	padding:10px 14px;
 }

@@ -31,6 +31,7 @@ async function fetchData() {
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <label style="text-align:center; vertical-align:middle; font-size: 16px;" for="${plik.url}">&nbsp;</label>
+                       
                         <input style="text-align:center; vertical-align:middle" type="checkbox" class="wiekszy" id="${plik.url}" name="plik" value="${plik.url}">
                     </div>
                     <div class="btn-group">

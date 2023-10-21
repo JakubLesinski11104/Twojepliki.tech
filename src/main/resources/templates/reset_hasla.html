@@ -36,14 +36,16 @@
     </ul>
   </div>
 </nav>
-
-    <h1>Resetuj hasło</h1>
-   <form action="/reset_hasla" method="post">
+<div class="container-fluid text-center">
+<form action="/reset_hasla" method="post" class="login">
+    <h1 class="LogRejH">Resetuj hasło</h1>
+   
         <label>Nowe hasło: </label>
 <input type="password"  name="haslo" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$" title="Hasło musi zawierać minimum 6 znaków, w tym co najmniej jedną małą literę, jedną dużą literę oraz przynajmniej jedną cyfrę lub znak specjalny.">
 <input type="hidden" name="token" th:value="${token}">
 <button type="submit">Zresetuj hasło</button>
     </form>
+    </div>
     
      <footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
