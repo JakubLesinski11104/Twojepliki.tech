@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
+
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -36,6 +38,7 @@ import aplikacja.usluga.UsługaPrzechowywaniaPlikow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,11 +52,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 
-	@Autowired
-    private JavaMailSender javaMailSender;
 	
 	@Autowired
+	
 	private RepozytoriumLogowania loginRepo;
+	
+	@Autowired
+	
+	private JavaMailSender NadawcaEmail;
 
 	@GetMapping("/Panel_Administatora")
 
@@ -81,6 +87,7 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	private String plikAdmin;
 
 	@PostMapping("/Panel_Administatora")
+	
 	@ResponseBody
 
 	public String Panel_Administatora(@RequestParam String adminpliki) {
@@ -131,9 +138,11 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	}
 
 	private String podfolder_przechodzenie;
+	
 	private String podfolderUsun;
 
 	@PostMapping("/katalog")
+	
 	@ResponseBody
 
 	public String katalogPost(@RequestParam String pod_folder, HttpServletRequest request, @RequestParam String pod_folderUsun) {
@@ -202,6 +211,7 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 	private String udostepnijplik;
 
 	@PostMapping("/udostepnij")
+	
 	@ResponseBody
 
 	public String udostepnijplik(Model model, HttpServletRequest request, @RequestParam String udostepnij,@RequestParam String nowaNazwaPliku) {
@@ -220,6 +230,7 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 			model.addAttribute("ImieNazwisko", szczegolyUzytkownika.getImieNazwisko());
 			
 			model.addAttribute("username", szczegolyUzytkownika.getUsername());
+			
 	        username = szczegolyUzytkownika.getUsername();
 
 		}
@@ -227,29 +238,61 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 		udostepnijplik = udostepnij;
 		
 		try {
+			
 	        Uzytkownik uzytkownik = loginRepo.znajdzPoUsername(udostepnij);
 	        
 	        if (uzytkownik == null || uzytkownik.getEmail() == null || uzytkownik.getEmail().isEmpty()) {
+	        	
 	            return "błąd";
+	            
 	        }
+      
+	        String adresUzytkownika = uzytkownik.getEmail();
+			
+			String adresWychodzacy = "obsluga@twojepliki.tech";
+			
+			String nazwaNadawcy = "Udostępniono dla Ciebie plik w serwisie twojepliki.tech";
+						
+			String tematEmaila = "Udostępniono nowy plik!";
+			
+			String trescEmaila = """
+					<p>Witaj <b>[[email]]</b>!</p>
+					<p>Użytkownik <b>[[username]]</b> właśnie udostępnił dla Ciebie plik o nazwie: <b>[[nowaNazwaPliku]]</b>.</p>
+					<p>Znajdziesz go w swoim katalogu <b>Udostepnione</b>.</p>
+					<p>Dziękujemy za korzystanie z naszego serwisu!</p>
+					<p><b>Serwis Twojepliki.tech!</b></p>\
+					""";
 
-	        String emailUdo = uzytkownik.getEmail();
-	        SimpleMailMessage message = new SimpleMailMessage();
-	        message.setFrom("obsluga@twojepliki.tech");
-	        message.setTo(emailUdo);
-	        message.setSubject("Udostępnioniono nowy plik");
-	        message.setText("Użytkownik " + username + " udostępnił Ci plik: " + nowaNazwaPliku + "!");
-	        
-	        javaMailSender.send(message);
+			MimeMessage wiadomoscEmail = NadawcaEmail.createMimeMessage();
+			
+			MimeMessageHelper helperMime = new MimeMessageHelper(wiadomoscEmail);
+
+			helperMime.setFrom(adresWychodzacy, nazwaNadawcy);
+			
+			helperMime.setTo(adresUzytkownika);
+			
+			helperMime.setSubject(tematEmaila);
+
+			trescEmaila = trescEmaila.replace("[[email]]", uzytkownik.getEmail());
+			
+			trescEmaila = trescEmaila.replace("[[username]]", username);
+			
+			trescEmaila = trescEmaila.replace("[[nowaNazwaPliku]]", nowaNazwaPliku);
+
+			helperMime.setText(trescEmaila, true);
+
+			NadawcaEmail.send(wiadomoscEmail);
 
 	        return "udostepnij";
+	        
 	    } catch (Exception e) {
+	    	
 	        e.printStackTrace();
+	        
 	        return "error";
+	        
 	    }
 		
-	
-
 	}
 
 	public Path getUdostepnijUzytkownika() {

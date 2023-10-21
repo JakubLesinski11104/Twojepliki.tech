@@ -62,14 +62,13 @@ public class SerwisRejestracji {
 		String tematEmaila = "Prosimy o weryfikację rejestracji konta";
 		
 		String trescEmaila = """
-				Pan/Pani [[name]],<br>\
-				<br>\
-				Dziękujemy za zarejestowanie w naszym serwisie!<br>\
-				Kliknij poniższy link, aby zweryfikować swoją rejestrację:<br>\
-				<h3><a href="[[URL]]" target="_self">WERYFIKUJ</a></h3>\
-				<br>\
-				Jeżeli to nie ty się rejestrowałeś/rejestrowałaś to nie klikaj w link i skontaktuj się z: kontakt@twojepliki.tech <br>\
-				Twojepliki.tech\
+				<p>Witaj <b>[[email]]</b>!</p>
+				<p>Dziękujemy za zarejestowanie w serwisie Twojepliki.tech!</p>
+				<p>Kliknij poniższy link, aby zweryfikować swoje konto:</p>
+				<h3><a href="[[URL]]" target="_self">WERYFIKUJ</a></h3>	
+				<p>Jeśli nie rejestrowałeś/aś się w naszym serwisie, zignoruj ten e-mail.</p>
+				<p>Dziękujemy za korzystanie z naszego serwisu!</p>
+				<p><b>Serwis Twojepliki.tech!</b></p>\
 				""";
 
 		MimeMessage wiadomoscEmail = NadawcaEmail.createMimeMessage();
@@ -82,7 +81,7 @@ public class SerwisRejestracji {
 		
 		helperMime.setSubject(tematEmaila);
 
-		trescEmaila = trescEmaila.replace("[[name]]", uzytkownik.getPelneDane());
+		trescEmaila = trescEmaila.replace("[[email]]", uzytkownik.getEmail());
 		String weryfikacjaURL = URL + "/weryfikacja?kod=" + uzytkownik.getKodWeryfikacyjny();
 
 		trescEmaila = trescEmaila.replace("[[URL]]", weryfikacjaURL);
@@ -131,15 +130,20 @@ public class SerwisRejestracji {
 		
 		String doAdresu = uzytkownik.getEmail();
 		
-        String temat = "Prośba o resetowanie hasła";
+        String temat = "Prośba o zresetowanie hasła";
         
         String linkResetowania = siteURL + "/reset_hasla?token=" + uzytkownik.getResetToken();
         
-        String tresc = "<p>Witaj,</p>"
-                + "<p>Otrzymaliśmy prośbę o resetowanie Twojego hasła. Kliknij poniżej, aby zresetować hasło:</p>"
-                + "<p><a href=\"" + linkResetowania + "\">Resetuj moje hasło</a></p>"
-                + "<br>"
-                + "<p>Jeśli to nie Ty prosiłeś o resetowanie hasła, zignoruj ten e-mail.</p>";
+        String email = uzytkownik.getEmail();
+            
+        String tresc = "<p>Witaj, <b>" + email +"</b>!</p>"
+                + "<p>Otrzymaliśmy prośbę o zresetowanie Twojego hasła w serwisie Twojepliki.tech. </p>"        
+                + "<p>Kliknij poniżej, aby zresetować hasło:</p>"
+                + "<p><a href=\"" + linkResetowania + "\" target=\"_self\"><b>RESETUJ MOJE HASŁO</b></a></p>"          
+                + "<p>Jeśli nie wysyłałeś/aś prośby o resetowanie hasła, zignoruj ten e-mail.</p>"
+                +"<p>Dziękujemy za korzystanie z naszego serwisu!</p>"
+                +"<p><b>Serwis Twojepliki.tech!</b></p>";
+        
         
         MimeMessage wiadomosc = NadawcaEmail.createMimeMessage();
         
