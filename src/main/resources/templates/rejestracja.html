@@ -71,54 +71,56 @@
 		
 		<form th:action="@{/proces_rejestracji}" th:object="${uzytkownik}"
 			class="form-signup" method="post"
-			style="max-width: 400px; margin: 0 auto;">
+			style="max-width: 470px; margin: 0 auto;">
 			<div>
-				<h1 class="LogRejH">Rejestracja</h1>
+				<h1 class="LogRejH">Zarejestruj się:</h1>
 			</div>
 			<br>
 			<div class="m-3">
 				<div class="form-group row">
-					<label class="col-4 col-form-label">E-mail: </label>
+					<label class="col-4 col-form-label"><b>E-mail:</b> </label>
 					<div class="col-8">
 						<input type="email" th:field="*{email}" class="form-control"
-							title="Podaj email" required maxlength="40" />
+							title="Podaj adres email" placeholder="Podaj adres email" required maxlength="40" />
 						<p th:text="${komunikat_email}"></p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Imię: </label>
+					<label class="col-4 col-form-label"><b>Imię:</b></label>
 					<div class="col-8">
 						<input type="text" th:field="*{imie}" class="form-control"
-							title="Podaj swoje imię" required maxlength="15" />
+							title="Podaj swoje imię" placeholder="Podaj swoje imię" required maxlength="15" />
 						<p th:text="${komunikat_imie}"></p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Nazwisko: </label>
+					<label class="col-4 col-form-label"><b>Nazwisko:</b></label>
 					<div class="col-8">
 						<input type="text" th:field="*{nazwisko}" class="form-control"
-							title="Podaj swoje nazwisko" required maxlength="20" />
+							title="Podaj swoje nazwisko" placeholder="Podaj swoje nazwisko" required maxlength="20" />
 						<p th:text="${komunikat_nazwisko}"></p>
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Username: </label>
+					<label class="col-4 col-form-label"><b>Username:</b></label>
 					<div class="col-8">
 						<input type="text" th:field="*{username}" class="form-control"
-							title="Podaj nazwę użytkownika" pattern="[a-zA-Z0-9]+" required
+							title="Nazwa uzytkownika musi zawierać mimimum 5 znaków i nie moze zawierać znaków specjalnych!" 
+							placeholder="Podaj nazwę użytkownika" pattern="[a-zA-Z0-9]+" required
 							maxlength="20" />
 						<p th:text="${komunikat_username}"></p>
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Hasło: </label>
+					<label class="col-4 col-form-label"><b>Hasło:</b></label>
 					<div class="col-8">
 						<div class="password-wrapper">
 							<input type="password" id="haslo" th:field="*{haslo}"
-								class="form-control" required minlength="6" maxlength="20"
-								title="Hasło musi zawierać małą i dużą literę a także znak specjalny lub cyfrę" />
+								class="form-control" required minlength="5" maxlength="20"
+								title="Hasło musi zawierać mimimum 5 znaków, co najmniej jedną małą literę, jedną dużą literę, oraz znak specjalny lub cyfrę."
+								placeholder="Podaj hasło" />
 							<i class="password-toggle-icon fas fa-eye"
 								onclick="pokazHaslo('haslo')"></i>
 						</div>
@@ -128,12 +130,13 @@
 				</div>
 				
 				<div class="form-group row">
-					<label class="col-4 col-form-label">Powtórz hasło: </label>
+					<label class="col-4 col-form-label"><b>Powtórz hasło:</b></label>
 					<div class="col-8">
 						<div class="password-wrapper">
 							<input type="password" id="hasloPowtorzone" class="form-control"
-								title="Hasło musi zawierać małą i dużą literę a także znak specjalny lub cyfrę"
-								required minlength="6" maxlength="20" /> <i
+								title="Hasło musi zawierać mimimum 5 znaków, co najmniej jedną małą literę, jedną dużą literę, oraz znak specjalny lub cyfrę."
+								placeholder="Potwórz hasło"
+								required minlength="5" maxlength="20" /> <i
 								class="password-toggle-icon fas fa-eye"
 								onclick="pokazHaslo('hasloPowtorzone')"></i>
 						</div>
@@ -142,11 +145,11 @@
 					</div>
 				</div>
 				<center>
-				Przy zarejestrowaniu zgadzasz się na <a href="/regulamin">regulamin</a>
-				<div><br />
+				<p>Przy zarejestrowaniu zgadzasz się na <a href="/regulamin">regulamin</a>.</p>
+				<div>
 				
 					<button type="submit" class="zalogujButton"
-						onclick="sprawdzHaslo()">Zarejestruj</button>
+						>Zarejestruj</button>
 				</div>
 				</center>
 			</div>

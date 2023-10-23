@@ -83,7 +83,7 @@ public class KontrolerLogowania {
 
 		if (uzytkownik.getHaslo() == null || uzytkownik.getHaslo().isEmpty() || uzytkownik.getHaslo().length() < 6 || !uzytkownik.getHaslo().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*]).{6,}$")) {
 			
-			model.addAttribute("komunikat_haslo", "Hasło musi zawierać co najmniej jedną małą literę, jedną dużą literę, oraz znak specjalny lub cyfrę.");
+			model.addAttribute("komunikat_haslo", "Hasło musi zawierać mimimum 5 znaków, co najmniej jedną małą literę, jedną dużą literę, oraz znak specjalny lub cyfrę.");
 			
 			return "rejestracja";
 		
