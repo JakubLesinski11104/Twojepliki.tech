@@ -37,13 +37,19 @@
   </div>
 </nav>
 
-    <h1>Resetowanie hasła</h1>
+<div class="container-fluid text-center" >
+<form action="/resetuj_haslo" method="post" class="login">
+    <h1 class="LogRejH"><b>Resetowanie hasła</b></h1>
+ 
     <p>Wprowadź swój adres email, aby otrzymać link do resetowania hasła:</p>
-    <form action="/resetuj_haslo" method="post">
-        <label>Email: </label>
-        <input type="email" name="email" required>
-        <button type="submit">Wyślij link</button>
+
+        <input type="email" name="email" class="form-control" placeholder="Wpisz swój adres email" title="Wpisz swój adres email" required>
+        </br>
+        <center>
+        <button type="submit" class="zalogujButton">Wyślij link</button>
+        </center>
     </form>
+    </div>
     
     <footer class="footer">
        <p style="color: white; text-align: center;">© Copyright Jakub Lesiński & Jakub Piłkowski 2023</p>
