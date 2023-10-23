@@ -62,13 +62,54 @@ public class SerwisRejestracji {
 		String tematEmaila = "Prosimy o weryfikację rejestracji konta";
 		
 		String trescEmaila = """
-				<p>Witaj <b>[[email]]</b>!</p>
-				<p>Dziękujemy za zarejestowanie w serwisie Twojepliki.tech!</p>
-				<p>Kliknij poniższy link, aby zweryfikować swoje konto:</p>
-				<h3><a href="[[URL]]" target="_self">WERYFIKUJ</a></h3>	
-				<p>Jeśli nie rejestrowałeś/aś się w naszym serwisie, zignoruj ten e-mail.</p>
-				<p>Dziękujemy za korzystanie z naszego serwisu!</p>
-				<p><b>Serwis Twojepliki.tech!</b></p>\
+				
+				<center>
+<div class="window__content" style="padding: 15px 20px; background: #f4f5f5;">
+
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">Witaj, <b>[[email]]</b></p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">Dziękujemy za zarejestowanie w serwisie Twojepliki.tech!</p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">Kliknij poniższy link, aby zweryfikować swoje konto:</p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"><h3><a href="[[URL]]" target="_self">WERYFIKUJ</a></h3>	</p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">Jeśli nie rejestrowałeś/aś się w naszym serwisie, zignoruj ten e-mail.</p>
+
+
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"><b>Dziękujemy za korzystanie z naszego serwisu!</b>
+
+</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"><strong><span>Serwis</span></strong></p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"><span><span>twojepliki.tech</span></span></p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		Mail:
+		<a href="mailto:kontakt@twojepliki.tech" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a7676;">
+			<span>kontakt@twojepliki.tech</span>
+		</a>
+	</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		<a href="https://twojepliki.tech/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="text-decoration: none; color: #1a7676;">
+			<span>https://twojepliki.tech/</span>
+		</a>
+	</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		<img class="logo" src="https://i.postimg.cc/mgJtb0hD/icons8-disk-32.png" alt="LOGO" style="max-width: 150px; height: auto;">
+	</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		<strong><span>Twojepliki.tech</span></strong>
+	</p>
+	
+	
+
+</div>            
+</center>
+
 				""";
 
 		MimeMessage wiadomoscEmail = NadawcaEmail.createMimeMessage();
@@ -136,13 +177,39 @@ public class SerwisRejestracji {
         
         String email = uzytkownik.getEmail();
             
-        String tresc = "<p>Witaj, <b>" + email +"</b>!</p>"
-                + "<p>Otrzymaliśmy prośbę o zresetowanie Twojego hasła w serwisie Twojepliki.tech. </p>"        
-                + "<p>Kliknij poniżej, aby zresetować hasło:</p>"
-                + "<p><a href=\"" + linkResetowania + "\" target=\"_self\"><b>RESETUJ MOJE HASŁO</b></a></p>"          
-                + "<p>Jeśli nie wysyłałeś/aś prośby o resetowanie hasła, zignoruj ten e-mail.</p>"
-                +"<p>Dziękujemy za korzystanie z naszego serwisu!</p>"
-                +"<p><b>Serwis Twojepliki.tech!</b></p>";
+        String tresc = 
+        		"<center>"
+        		+"<div class=\"window__content\" style=\"padding: 15px 20px; background: #f4f5f5;\">"
+        		+"<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+"<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">Witaj, <b>" + email +"</b>!</p>"
+        		+ "<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+ "<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">Otrzymaliśmy prośbę o zresetowanie Twojego hasła w serwisie Twojepliki.tech.</p>"
+        		+ "<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+ "<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">Kliknij poniżej, aby zresetować hasło:</p>"
+        		+ "<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"><a href=\"" + linkResetowania + "\" target=\"_self\"><b>RESETUJ MOJE HASŁO</b></a></p>"
+        		+ "<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+ "<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">Jeśli nie wysyłałeś/aś prośby o resetowanie hasła, zignoruj ten e-mail.</p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"><b>Dziękujemy za korzystanie z naszego serwisu!</b></p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"><strong><span>Serwis</span></strong></p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"><span><span>twojepliki.tech</span></span></p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">"
+        		+ "		Mail:\r\n"
+        		+ "		<a href=\"mailto:kontakt@twojepliki.tech\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"text-decoration: none; color: #1a7676;\">"
+        		+ "			<span>kontakt@twojepliki.tech</span></a></p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">"
+        		+ "		<a href=\"https://twojepliki.tech/\" target=\"_blank\" rel=\"noopener noreferrer\" data-auth=\"NotApplicable\" style=\"text-decoration: none; color: #1a7676;\">"
+        		+ "			<span>https://twojepliki.tech/</span></a></p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">"
+        		+ "		<img class=\"logo\" src=\"https://i.postimg.cc/mgJtb0hD/icons8-disk-32.png\" alt=\"LOGO\" style=\"max-width: 150px; height: auto;\"></p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\"> </p>"
+        		+ "	<p style=\"font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;\">"
+        		+ "		<strong><span>Twojepliki.tech</span></strong></p>"
+        		+ "</div>   "
+        		+"</center>"
+     		;
         
         
         MimeMessage wiadomosc = NadawcaEmail.createMimeMessage();

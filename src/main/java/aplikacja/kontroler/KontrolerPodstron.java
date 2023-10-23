@@ -256,11 +256,53 @@ public class KontrolerPodstron implements UsługaPrzechowywaniaPlikow {
 			String tematEmaila = "Udostępniono nowy plik!";
 			
 			String trescEmaila = """
-					<p>Witaj <b>[[email]]</b>!</p>
-					<p>Użytkownik <b>[[username]]</b> właśnie udostępnił dla Ciebie plik o nazwie: <b>[[nowaNazwaPliku]]</b>.</p>
-					<p>Znajdziesz go w swoim katalogu <b>Udostepnione</b>.</p>
-					<p>Dziękujemy za korzystanie z naszego serwisu!</p>
-					<p><b>Serwis Twojepliki.tech!</b></p>\
+					<center>
+<div class="window__content" style="padding: 15px 20px; background: #f4f5f5;">
+
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">Witaj, <b>[[email]]</b></p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">Uzytkownik <b>[[username]]</b> właśnie udostępnił dla Ciebie plik o nazwie: <b>[[nowaNazwaPliku]]</b></p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">Znajdziesz go w swoim katalogu <b>Udostepnione</b>.</p>
+<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+
+</p>
+
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"><b>Dziękujemy za korzystanie z naszego serwisu!</b>
+
+</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"><strong><span>Serwis</span></strong></p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"><span><span>twojepliki.tech</span></span></p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		Mail:
+		<a href="mailto:kontakt@twojepliki.tech" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a7676;">
+			<span>kontakt@twojepliki.tech</span>
+		</a>
+	</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		<a href="https://twojepliki.tech/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="text-decoration: none; color: #1a7676;">
+			<span>https://twojepliki.tech/</span>
+		</a>
+	</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		<img class="logo" src="https://i.postimg.cc/mgJtb0hD/icons8-disk-32.png" alt="LOGO" style="max-width: 150px; height: auto;">
+	</p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;"> </p>
+	<p style="font-size: 10pt; font-family: Verdana, sans-serif, serif, EmojiFont; margin: 0; line-height: 1.3; color: #333333;">
+		<strong><span>Twojepliki.tech</span></strong>
+	</p>
+	
+	
+
+</div>            
+</center>
+					
+				
 					""";
 
 			MimeMessage wiadomoscEmail = NadawcaEmail.createMimeMessage();
