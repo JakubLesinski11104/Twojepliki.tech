@@ -53,9 +53,21 @@ function wyswietlPliki(pliki) {
 
 	pliki.forEach((plik) => {
 		const row = tbody.insertRow();
-
 		const nameCell = row.insertCell();
-		nameCell.textContent = plik.name;
+
+		if (!plik.name.includes('.')) {
+			const iconImg = document.createElement('img');
+			iconImg.src = 'assets/katalog.png';
+			iconImg.alt = 'Katalog';
+			iconImg.style.width = '25px';
+			iconImg.style.height = '25px';
+			iconImg.style.marginLeft = '10px';
+			nameCell.appendChild(iconImg);
+		}
+
+		const nameSpan = document.createElement('span');
+		nameSpan.textContent = plik.name;
+		nameCell.appendChild(nameSpan);
 
 		const urlCell = row.insertCell();
 		const link = document.createElement('a');
