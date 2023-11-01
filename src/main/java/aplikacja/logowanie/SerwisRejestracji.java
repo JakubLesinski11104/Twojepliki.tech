@@ -238,6 +238,11 @@ public class SerwisRejestracji {
 	        
 	    }
 	    
+	    if (noweHaslo == null || noweHaslo.isEmpty() || noweHaslo.length() < 6 || !noweHaslo.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*]).{6,}$")) {
+	    	
+	        return false;
+	    }
+	    
 	    String zakodowaneHaslo = KoderHasla.encode(noweHaslo);
 	    
 	    uzytkownik.setHaslo(zakodowaneHaslo);

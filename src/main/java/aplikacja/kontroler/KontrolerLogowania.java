@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import aplikacja.logowanie.RepozytoriumLogowania;
 import aplikacja.logowanie.SerwisRejestracji;
@@ -83,7 +84,7 @@ public class KontrolerLogowania {
 
 		if (uzytkownik.getHaslo() == null || uzytkownik.getHaslo().isEmpty() || uzytkownik.getHaslo().length() < 6 || !uzytkownik.getHaslo().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*]).{6,}$")) {
 			
-			model.addAttribute("komunikat_haslo", "Hasło musi zawierać mimimum 5 znaków, co najmniej jedną małą literę, jedną dużą literę, oraz znak specjalny lub cyfrę.");
+			model.addAttribute("komunikat_haslo", "Hasło musi zawierać mimimum 6 znaków, co najmniej jedną małą literę, jedną dużą literę, oraz znak specjalny lub cyfrę.");
 			
 			return "rejestracja";
 		
@@ -197,7 +198,7 @@ public class KontrolerLogowania {
 
 	@PostMapping("/reset_hasla")
 	
-	public String resetHasla(@RequestParam String token, @RequestParam String haslo) {
+	public String resetHasla(@RequestParam String token, @RequestParam String haslo, RedirectAttributes redirectAttributes) {
 		
 	    boolean wynik = Serwis_Logowania.resetujHaslo(token, haslo);
 	    
@@ -207,7 +208,9 @@ public class KontrolerLogowania {
 	        
 	    } else {
 	    	
-	        return "blad_resetu";
+	    	redirectAttributes.addFlashAttribute("komunikat_reset_hasla", "Hasło nie spełnia wymagań. Musi zawierać minimum 6 znaków, co najmniej jedną małą literę, jedną dużą literę oraz znak specjalny lub cyfrę.");
+	    	
+	        return "redirect:/reset_hasla?token=" + token;
 	        
 	    }
 	    

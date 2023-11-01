@@ -39,6 +39,7 @@
 
 <div class="container-fluid text-center">
 <form action="/reset_hasla" method="post" class="login">
+<p th:text="${komunikat_reset_hasla}" style="color:red;"></p>
     <h1 class="LogRejH"><b>Resetuj hasło</b></h1>
        <p>Podaj nowe hasło: </p>
 <input type="password"  name="haslo" class="form-control" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$" title="Hasło musi zawierać minimum 6 znaków, w tym co najmniej jedną małą literę, jedną dużą literę oraz przynajmniej jedną cyfrę lub znak specjalny." placeholder="Wpisz nowe hasło">
