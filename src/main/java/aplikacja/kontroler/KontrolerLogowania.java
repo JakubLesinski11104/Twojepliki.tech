@@ -167,7 +167,7 @@ public class KontrolerLogowania {
 	    
 	    if (istniejacyUzytkownik == null) {
 	    	
-	    	 return "blad_resetu";
+	    	 return "wiadomosc_resetowania";
 	    	 
 	    }
 	    
